@@ -126,6 +126,11 @@ git push -u origin main
     1) Setup "darkMode" in "const config: Config = {}" tag above "content" as : darkMode: "class"
     2) Setup "darkMode" in "theme:{extend:{}}" above "blackground" as : colors:{white, gray, blue,"dark-bg", "dark-secondary", "dark-tertiary", "blue-primary", "stroke-dark"}
 
+## Setup Frontend : Page
+
+1) Setup Dashboard page
+
+
 ### Setup Frontend : page.tsx
 
 1) Go to {page.tsx} in /src/app
@@ -171,4 +176,39 @@ git push -u origin main
       1) Setup "StoreProvider" tag as : <StoreProvider>
       2) Setup "AuthProvider" tag as : <AuthProvider>
       3) Calling "DashboardLayout" with "children" tag as : <DashboardLayout>{children}</DashboardLayout>
-8) Export default as : DashboardWrapper
+8) Export default as : DashboardWrapper  
+
+### Setup Frontend : layout.tsx
+
+1) Wrap up "children" tag with "dashboardWrapper" tag on "inter.className"
+
+### Setup Frontend : Dashboard elements "Navbar, Sidebar, Main content"
+
+1) Create "(components) folder in /client/src/app directory
+   ***Create "components" folder with parenthesis because we don't want to setup pages with assembly page together***
+
+#### Setup Frontend : Dashboard with "Navbar"
+
+1) Create "Navbar" folder in /client/src/app/(components) directory
+2) Create {index.tsx} file in "Navbar" folder
+3) Create template as : tsrafce
+4) Remove "type Props" and argument "props:Props"
+5) Changing function name from "index" name to : Navbar
+6) Create "div" with "className" in "return()" function as : "flex items-center justify-between bg-white px-4 py-3 dark:bg-black"
+7) Create "isSidebarCollapsed" state as : useAppSelector((state) => state.global.isSidebarCollapsed,)
+
+##### Setup Frontend : Dashboard with "Navbar-Search Bar"
+
+1) Create "div" with "className" as : "flex items-center gap-8"
+2) Create "Not isSidebarCollapsed" function as : {!isSidebarCollapsed ? null : ()
+   1) Create "button" with "onClick" funciton as : () => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
+   2) Create "Menu"  with "className" as : "h-8 w-8 dark:text-white"
+3) Create "div" with "className" as : elative flex h-min w-[200px]"
+4) Import "Search" from "lucide-react"
+5) Create "Search" with "className" as : "absolute left-[4px] top-1/2 mr-2 h-5 w-5 -translate-y-1/2 transform cursor-pointer dark:text-white"
+6) Create "input" with "className" as : "w-full rounded border-none bg-gray-100 p-2 pl-8 placeholder-gray-500 focus:border-transparent focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-white"
+   1) Create "type" as : "search"
+   2) Create "placeholder" as : "Search..."
+
+
+Time stamp : 00:21:33

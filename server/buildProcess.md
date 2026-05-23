@@ -127,7 +127,14 @@ git push -u origin main
     2) Setup "darkMode" in "theme:{extend:{}}" above "blackground" as : colors:{white, gray, blue,"dark-bg", "dark-secondary", "dark-tertiary", "blue-primary", "stroke-dark"}
 15) Install "redux tools" as : npm i react-redux@9.1.2 @reduxjs/toolkit@2.2.7 redux-persist@6.0.0 dotenv@16.4.5
 16) Create {redux.tsx} in /client/src/app
-17) Copy all code from EDRoh's File or 
+17) Copy all code from EDRoh's File.
+
+## Setup Frontend : Setup environment file
+
+1) Create {.env.local} file in /client directory
+2) Create "NEXT_PUBLIC_API_BASE_URL" for "Backend" as : http://localhost:8000
+3) Create "NEXT_PUBLIC_COGNITO_USER_POOL_ID" as : "YOUR_USER_POOL_ID"
+4) Create "NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID" as : "YOUR_USER_POOL_CLIENT_ID"
 
 ## Setup Frontend : Page
 
@@ -183,6 +190,93 @@ git push -u origin main
 ### Setup Frontend : layout.tsx
 
 1) Wrap up "children" tag with "dashboardWrapper" tag on "inter.className"
+
+### Setup Frontend : Setup States : isDarkMode and isSidebarCollapsed
+
+***Setup extension name as ".tsx" for the componenets***
+
+1) Create "state" folder in /client/src/
+2) Create {index.ts} file in /client/src/state
+3) Import "createSlice, PayloadAction" from @reduxjs/toolkit
+4) Export "initialStateTypes" interface with
+   1) Setup "isSidebarCollapsed" as : boolean
+   2) Setup "isDarkMode" as : boolean
+5) Create "iinitialState" for "initialStateTypes" with 
+   1) Setup "isSidebarCollapsed" as : false
+   2) Setup "isDarkMode" as : false
+6) Export "globalSlice" for : createSlice({})
+   1) Setup "name" as : "global"
+   2) Setup "initialState" as : initialState
+   3) Setup "reducers" funcitons for :
+      1) Create "setIsSidebarCollapsed" fucniton with  : (state, action: PayloadAction<boolean>) => {}
+         1) Setup state for "isSidebarCollapsed" as : action.payload
+      2) Create "setIsDarkMode" function with : (state, action: PayloadAction<boolean>) => {}
+         1) Setup state for "isDarkMode" as : action.payload
+7) Export "setIsSidebarCollapsed, setIsDarkMode" as : globalSlice.actions
+8) Export default as : globalSlice.reducer
+
+### Setup Frontend : Setup API
+
+1) Create {api.ts} file in  /client/src/state
+2) Import "createApi, fetchBaseQuery" from @reduxjs/toolkit/query/react
+3) Import "fetchAuthSession, getCurrentUser" from aws-amplify/auth
+4) Export "Project" interface with
+   1) Setup "id" as : number
+   2) Setup "name" as : string
+   3) Setup "description" as : string
+   4) Setup "startDate?" as : string
+   5) Setup "endDate?" as : string
+5) Export "Priority" enum with
+   1) Setup "Urgent" as : Urgent
+   2) Setup "High" as : "High"
+   3) Setup "Medium" as : "Medium"
+   4) Setup "Low" as : "Low"
+   5) Setup "Backlog" as : "Backlog"
+6) Export "Status" enum with
+   1) Setup "ToDo" as : "To Do"
+   2) Setup "WorkInProgress" as : "Work In Progress"
+   3) Setup "UnderReview" as : "Under Review"
+   4) Setup "Completed" as : "Completed"
+7) Export "User" interface with
+   1) Setup "userId?" as : number
+   2) Setup "username" as : string
+   3) Setup "email" as : string
+   4) Setup "profilePictureUrl?" as : string
+   5) Setup "cognitoId?" as : string
+   6) Setup "teamId?" as : number
+8) Export "Attachment" interface with
+   1) Setup "id" as : number
+   2) Setup "fileURL" as : string
+   3) Setup "fileName" as : string
+   4) Setup "taskId" as : number
+   5) Setup "uploadedById" as : number
+9) Export "Task" interface with
+   1) Setup "id" as : number
+   2) Setup "title" as : string
+   3) Setup "description?" as : string
+   4) Setup "status?" as : Status
+   5) Setup "priority?" as : Priority
+   6) Setup "tags?" as : string
+   7) Setup "startDate?" as : string
+   8) Setup "dueDate?" as : string
+   9) Setup "points?" as : number
+   10) Setup "projectId" as : number
+   11) Setup "authorUserId?" as : number
+   12) Setup "assignedUserId?" as : number
+   13) Setup "author?" as : User
+   14) Setup "assignee" as : User
+   15) Setup "comments?" as : Comment[]
+   16) Setup "attachments?" as : Attachment[]
+10) Export "SearchResults" interface with
+    1) Setup "tasks?" as : Task[]
+    2) Setup "projects?" as : Project[]
+    3) Setup "users?" as : User[]
+11) Export "SearchResults" interface with
+    1) Setup "teamId" as : number
+    2) Setup "teamName" as : string
+    3) Setup "productOwnerUserId?" as : number
+    4) Setup "projectManagerUserId?" as : number
+
 
 ### Setup Frontend : Dashboard elements "Navbar, Sidebar, Main content"
 
@@ -395,6 +489,30 @@ git push -u origin main
       2) Create "icon" with "className" as : "h-6 w-6 text-gray-800 dark:text-gray-100"
       3) Create "span" with "className" as : {`font-medium text-gray-800 dark:text-gray-100`}
       4) Setup "span-text" as : {label}
+
+#### Setup Fronted : Dashboard with "Redux Toolkit" tools
+
+1) Create {redux.tsx} in /client/src/app directory
+2) Create "template" as : tsrafc
+3) Remove "types Props" and "props: Props"
+4) Import "useRef" from react
+5) Import "TypedUseSelectorHook, useDispatch, useSelector, Provider" from react-redux
+6) Import "combineReducers, configureStore" from @reduxjs/toolkit
+7) Import "setupListeners" from @reduxjs/toolkit/query
+8) Import "globalReducer" from @/state
+9) Import "api" from @/state/api
+
+##### Setup Frontend : Dashboard with "Redux Toolkit" - Redux Store
+
+1) Create "rootReducer" as : combineReducers({})
+   1) Setup "global" as : globalReducer
+   2) Setup "api.reducerPath" as : api.reducer
+2) Export "makeStore" function as : makeStore = () => {}
+   1) Return value as : configureStore({})
+   2) Setup "reducer" as :
+   3) Setup 
+
+
 
 
 Time stamp : 00:44:13

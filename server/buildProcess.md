@@ -119,17 +119,19 @@ git push -u origin main
 10) Install tools package : npm i @mui/material@5.16.6 @emotion/react@11.13.0 @emotion/styled@11.13.0 lucide-react@0.424.0 date-fns@3.6.0 axios@1.7.3 recharts@2.12.7 react-dnd@16.0.1 react-dnd-html5-backend@16.0.1 gantt-task-react@0.3.9                                                             ...According to EdRoh version
 11) Install "Dependency" package : npm i -D @types/node@20.14.14 @types/uuid@10.0.0 @types/numeral@2.0.5                                                                                  ...According to EdRoh version
 12) Install "Dependency" package : npm i -D prettier@3.3.3 prettier-plugin-tailwindcss@0.6.5 tailwind-merge@2.4.0
-***Tools must used as : EDRoh's Version to prevent any error*** 
+***Tools must used as : EDRoh's Version to prevent any error***
 13) Create {.prettierrc} file in client folder
     1) Adding "plugins" tag as : {"plugins": ["prettier-plugin-tailwindcss"]}
 14) Go to {tailwind.config.ts} file setup "color" tag as
     1) Setup "darkMode" in "const config: Config = {}" tag above "content" as : darkMode: "class"
     2) Setup "darkMode" in "theme:{extend:{}}" above "blackground" as : colors:{white, gray, blue,"dark-bg", "dark-secondary", "dark-tertiary", "blue-primary", "stroke-dark"}
+15) Install "redux tools" as : npm i react-redux@9.1.2 @reduxjs/toolkit@2.2.7 redux-persist@6.0.0 dotenv@16.4.5
+16) Create {redux.tsx} in /client/src/app
+17) Copy all code from EDRoh's File or 
 
 ## Setup Frontend : Page
 
 1) Setup Dashboard page
-
 
 ### Setup Frontend : page.tsx
 
@@ -141,13 +143,13 @@ git push -u origin main
 ### Setup Frontend : globals.css
 
 1) Adding "@tailwind" tags as : base, components, utilities
-2) Setup "root" as : *, *::before, *::after {box-sizing: border-box;}
+2) Setup "root" as : *,*::before, *::after {box-sizing: border-box;}
 3) Setup "html" and "body" tag
 4) Setup "#root" for app{} as : height: 100%, width: 100%, @apply text-sm, @apply bg-white, @apply dark:bg-black
 5) Setup "timeline" style with :
 6) Setup "scollbar" with :
 
-### Setup Frontend : dashBoardWrapper.tsx
+### Setup Frontend : dashBoardWrapper.tsx (Completed process)
 
 1) Create {dashboardWrapper.tsx} file in /client/src/app directory
 2) Create template as : tsrafce
@@ -166,16 +168,16 @@ git push -u origin main
    4) Create "useEffect" function as : () => {if(isDarkMode){...}else{...}}
    5) Create "return" funciton with
       1) Create "div" with "className" tag as : "flex min-h-screen w-full bg-gray-50 text-gray-900"
-      2) Create "sidebar" tag as : <Sidebar/>
+      2) Create "sidebar" tag as : Sidebar
       3) Create "main" with "className" tag as : `flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${isSidebarCollapsed ? "" : "md:pl-64"}`
-      4) Create "navbar" tag as : <Navbar />
+      4) Create "navbar" tag as : Navbar
       5) Calling "children" as : {children}
 7) Create "DashboardWrapper" function with
    1) Assign "children" argument as :({ children }: { children: React.ReactNode }) => {return(..)}
    2) Create "return" function with
-      1) Setup "StoreProvider" tag as : <StoreProvider>
-      2) Setup "AuthProvider" tag as : <AuthProvider>
-      3) Calling "DashboardLayout" with "children" tag as : <DashboardLayout>{children}</DashboardLayout>
+      1) Setup "StoreProvider" tag as : StoreProvider
+      2) Setup "AuthProvider" tag as : AuthProvider
+      3) Setup "DashboardLayout" for : {children}
 8) Export default as : DashboardWrapper  
 
 ### Setup Frontend : layout.tsx
@@ -197,10 +199,10 @@ git push -u origin main
 6) Create "div" with "className" in "return()" function as : "flex items-center justify-between bg-white px-4 py-3 dark:bg-black"
 7) Create "isSidebarCollapsed" state as : useAppSelector((state) => state.global.isSidebarCollapsed,)
 
-##### Setup Frontend : Dashboard with "Navbar-Search Bar"
+##### Setup Frontend : Dashboard with "Navbar-Search Bar" in return function
 
 1) Create "div" with "className" as : "flex items-center gap-8"
-2) Create "Not isSidebarCollapsed" function as : {!isSidebarCollapsed ? null : ()
+2) Create "Not isSidebarCollapsed" function as : {!isSidebarCollapsed ? null : ()}
    1) Create "button" with "onClick" funciton as : () => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
    2) Create "Menu"  with "className" as : "h-8 w-8 dark:text-white"
 3) Create "div" with "className" as : elative flex h-min w-[200px]"
@@ -210,5 +212,189 @@ git push -u origin main
    1) Create "type" as : "search"
    2) Create "placeholder" as : "Search..."
 
+##### Setup Frontend : Dashboard with "Navbar-Icon(Right side)" in return function
 
-Time stamp : 00:21:33
+1) Create "div" with "className" as : "flex items-center"
+2) Create "button" with
+   1) Create "onClick" function as : () => dispatch(setIsDarkMode(!isDarkMode))
+   2) Create "className" with "ternary" function as : {isDarkMode ? `rounded p-2 dark:hover:bg-gray-700` : `rounded p-2 hover:bg-gray-100`}
+3) Create "isDarkMode" with "sun/moon" with
+   1) Create "Sun" with "className" as : "h-6 w-6 cursor-pointer dark:text-white"
+   2) Create "Moon" with "className" as : "h-6 w-6 cursor-pointer dark:text-white"
+4) Create "Link" with
+   1) Setup "href" as : "/settings"
+   2) Create "className" as "isDarkMode" ternary function as : { isDarkMode ? `h-min w-min rounded p-2 dark:hover:bg-gray-700` : `h-min w-min rounded p-2 hover:bg-gray-100`}
+   3) Create "Setting" with "className" as : "h-6 w-6 cursor-pointer dark:text-white"
+5) Create "div" with "className" for "vertical line" as : "ml-2 mr-5 hidden min-h-[2em] w-[0.1rem] bg-gray-200 md:inline-block"
+6) Create "div" with "className" as : "hidden items-center justify-between md:flex"
+   1) Create "div" with "className" as : "align-center flex h-9 w-9 justify-center"
+   2) Create "ternary" funciton as ==> !!currentUserDetails?.profilePictureUrl ? (image tag): (User tag)
+   3) Create "Image" tag with
+      1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${currentUserDetails?.profilePictureUrl}`}
+      2) Setup "alt" with : {currentUserDetails?.username || "User Profile Picture"}
+      3) Setup "width" and "height" as : 100 and 50
+      4) Create "className" as : "h-full rounded-full object-cover"
+   4) Create "User" with "className" as : "h-6 w-6 cursor-pointer self-center rounded-full dark:text-white"
+   5) Create "span" with "className" as : "mx-3 text-gray-800 dark:text-white"
+   6) Setup "username" details as : {currentUserDetails?.username}
+   7) Create "button" with "className" as : "hidden rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block"
+   8) Create "onClick" funciton for "button" as : {handleSignOut}
+   9) Create "text" for "button" as : Sign Out
+
+#### Setup Frontend : Dashboard with "Sidebar"
+
+1) Create "Sidebar" folder in /client/src/app/(components) directory
+2) Create {index.tsx} file in "Sidebar" folder
+3) Create template as : tsrafce
+4) Remove "type Props" and argument "props:Props"
+5) Create "use client" on top of file
+6) Import "useAppDispatch, useAppSelector" from @/app/redux
+7) Import "setIsSidebarCollapsed" from @/state
+8) Import "useGetAuthUserQuery, useGetProjectsQuery" from @/state/api
+9) Import "signOut" from aws-amplify/auth
+10) Import "AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X" from lucide-react
+11) Import "Image" from next/image
+12) Import "Link" from next/link
+13) Import { usePathname } from "next/navigation"
+14) Import "React, {useState}" from react
+15) Create "showProjects, setShowProjects" with : useState(true)
+16) Create "showPriority, setShowPriority" with : useState(true)
+17) Create "data:projects" as : useGetProjectsQuery()
+18) Create "dispatch" as : useAppDispatch()
+19) Create "isSidebarCollapsed" as : useAppSelector((state) => state.global.isSidebarCollapsed)
+20) Create "data: currentUser" as : useGetAuthUserQuery({})
+21) Create "handleSignOut" as : async () => {}
+    1) Setup "Try" as : await signOut()
+    2) Setup "catch(error)" as : console.error("Error signing out: ", error)
+22) Create if-condition with "!currentUser" as : return null
+23) Create "currentUserDetails" as : currentUser?.userDetails
+24) Create template string with "sidebarClassNames" as : `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`
+25) Create return function with :
+    1) Create "div" with "className" as : {sidebarClassNames}
+    2) Create "div" with "className" as : "flex h-[100%] w-full flex-col justify-start"
+26) Create "div" with "className" as : "z-10 mt-32 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 dark:bg-black md:hidden"
+27) Create "div" with "className" as : "flex w-full items-center"
+28) Create "div" with "className" as : "align-center flex h-9 w-9 justify-center"
+29) Create "!!currentUserDetails" ternary funciton as : !!currentUserDetails?.profilePictureUrl ? (<image/>):(User)
+    1) Create "Image" with
+        1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${currentUserDetails?.profilePictureUrl}`}
+        2) Setup "alt" as : {currentUserDetails?.username || "User Profile Picture"}
+        3) Setup "width" and "height" as : 100 and 50
+        4) Create "className" as : "h-full rounded-full object-cover"
+    2) Create "User" with "className" as : "h-6 w-6 cursor-pointer self-center rounded-full dark:text-white"
+30) Create "span" with "className" as : "mx-3 text-gray-800 dark:text-white"
+31) Create "span-currentUserDetails" as : {currentUserDetails?.username}
+32) Create "button" with "className" as : "self-start rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block"
+    1) Create "onClick" funciton as : {handleSignOut}
+    2) Create "text-button" as : Sign out
+33) Export default as : Sidebar
+
+##### Setup Frontend : Dashbord with "Sidebar" - Top Logo
+
+1) Create "div" with "className" as : "z-50 flex min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black"
+2) Create "div" with "className" as : "text-xl font-bold text-gray-800 dark:text-white"
+   1) Create "Text" as : EDLIST
+3) Create ternary function for button as : isSidebarCollapsed ? null : ()
+   1) Create "button" with "className" as : "py-3"
+   2) Create "onClick" function as : () => {dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))}
+   3) Create "X" with "className" as : "h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white"
+
+##### Setup Frontend : Dashbord with "Sidebar" -TEAM
+
+1) Create "div" with "className" as : "flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700"
+2) Create "Image" tag with
+   1) Setup "src" as : <https://pm-s3-images.s3.us-east-2.amazonaws.com/logo.png>
+   2) Setup "alt" as : "Logo"
+   3) Setup "width and height" as : 40 and 40
+   4) Create "public" folder in /client
+   5) Place "image" or "logo.png" to /client/public
+3) Create "h3" with "className" as : "text-md font-bold tracking-wide dark:text-gray-200"
+4) Setup "Text" as : EDROH TEAM
+5) Create "div" with "className" as : "mt-1 flex items-start gap-2"
+6) Create "LockIcon" with "className" as : "mt-[0.1rem] h-3 w-3 text-gray-500 dark:text-gray-400"
+7) Create "p" with "className" as : "text-xs text-gray-500"
+   1) Setup "paragraph" as : Private
+
+##### Setup Frontend : Dashbord with "Sidebar" -Navbar Links
+
+1) Create "nav" with "className" as : "z-10 w-full"
+2) Create "SidebarLink" for "Home" with
+   1) Setup "icon" as : {Home}
+   2) Setup "label" as : "Home"
+   3) Setup "href" as : "/"
+3) Create "SidebarLink" for "Briefcase" with
+   1) Setup "icon" as : {Briefcase}
+   2) Setup "label" as : "Timeline"
+   3) Setup "href" as : "/timeline"
+4) Create "SidebarLink" for "Search" with
+   1) Setup "icon" as : {Search}
+   2) Setup "label" as : "Search"
+   3) Setup "href" as : "/search"
+5) Create "SidebarLink" for "Setting" with
+   1) Setup "icon" as : {Setting}
+   2) Setup "label" as : "Setting"
+   3) Setup "href" as : "/setting"
+6) Create "SidebarLink" for "User" with
+   1) Setup "icon" as : {User}
+   2) Setup "label" as : "Users"
+   3) Setup "href" as : "/users"
+7) Create "SidebarLink" for "Users" with
+   1) Setup "icon" as : {Users}
+   2) Setup "label" as : "Teams"
+   3) Setup "href" as : "/teams"
+
+##### Setup Frontend : Dashbord with "Sidebar" -Priorities Links
+
+1) Create "button" with
+   1) Create "onClick" funciton as : () => setShowPriority((prev) => !prev)
+   2) Create "className" as : "flex w-full items-center justify-between px-8 py-3 text-gray-500"
+   3) Create "span" with "className" as : ""
+      1) Setup "span-text" as : Priority
+   4) Create "ternary" funciton as : {showPriority ?():()}
+      1) Setup "ChevronUp" with "className" as : "h-5 w-5"
+      2) Setup "ChevronDown" with "className" as : "h-5 w-5"
+2) Create "showPriority" with
+   1) Setup "empty" tag for "SidebarLink" as : <></>
+   2) Create "SidebarLink" for "AlertCircle" with
+      1) Setup "icon" as : AlertCircle
+      2) Setup "label" as : "Urgent"
+      3) Setup "href" as : "/priority/urgent"
+   3) Create "SidebarLink" for "ShieldAlert" with
+      1) Setup "icon" as : ShieldAlert
+      2) Setup "label" as : "High"
+      3) Setup "href" as : "/priority/high"
+   4) Create "SidebarLink" for "AlertTriangle" with
+      1) Setup "icon" as : AlertTriangle
+      2) Setup "label" as : "Medium"
+      3) Setup "href" as : "/priority/medium"
+   5) Create "SidebarLink" for "AlertOctagon" with
+      1) Setup "icon" as : AlertOctagon
+      2) Setup "label" as : "Low"
+      3) Setup "href" as : "/priority/low"
+   6) Create "SidebarLink" for "Layer3" with
+      1) Setup "icon" as : Layer3
+      2) Setup "label" as : "Backlog"
+      3) Setup "href" as : "/priority/backlog"
+
+##### Setup Frontend : Dashboard with "SidebarLink
+
+1) Create "SidebarLinkProps" interface with
+   1) Setup "href" as : string
+   2) Setup "icon" as : LucideIcon
+   3) Setup "label" as : string
+2) Create "SidebarLink" function with
+   1) Setup "parameters" pass through "SidebarLinkProps" as : href, icon: Icon, label
+3) Create "pathname" as : usePathname()
+4) Create "isActive" as : pathname === href || (pathname === "/" && href === "/dashboard")
+5) Create "return" value with
+   1) Create "Link" with "href" as : {href}
+   2) Create "Link" with "className" as : "w-full"
+   3) Create "div" with "className" as : {`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-700 ${isActive ? "bg-gray-100 text-white dark:bg-gray-600" : ""} justify-start px-8 py-3`}
+   4) Setup "isActive" with
+      1) Create "div" with "className" as : "absolute left-0 top-0 h-[100%] w-[5px] bg-blue-200"
+      2) Create "icon" with "className" as : "h-6 w-6 text-gray-800 dark:text-gray-100"
+      3) Create "span" with "className" as : {`font-medium text-gray-800 dark:text-gray-100`}
+      4) Setup "span-text" as : {label}
+
+
+Time stamp : 00:44:13

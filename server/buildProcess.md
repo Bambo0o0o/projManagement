@@ -276,7 +276,76 @@ git push -u origin main
     2) Setup "teamName" as : string
     3) Setup "productOwnerUserId?" as : number
     4) Setup "projectManagerUserId?" as : number
+12) Create "api" body as : api = createApi({Setup API-Body})
+13) Export "APIs" for "useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery, useGetUsersQuery, useGetTeamsQuery, useGetTasksByUserQuery, useGetAuthUserQuery" as : api
 
+#### Setup Frontend : Setup API-Body
+
+1) Create "baseQuery" as : fetchBaseQuery({})
+2) Setup "baseUrl" as : process.env.NEXT_PUBLIC_API_BASE_URL
+3) Setup "prepareHeaders" function as : async (headers) => {}
+   1) Setup "session" as : await fetchAuthSession()
+   2) Setup "accessToken" as : session.tokens ?? {}
+   3) Setup "accessToken" with if-conditon as : headers.set("Authorization", `Bearer ${accessToken}`)
+   4) Setup "return" value as : headers
+4) Setup "reducerPath" as : "api"
+5) Setup "tagTypes" as : ["Projects", "Tasks", "Users", "Teams"]
+6) Setup "endPoints" funciton as : (build) => ({})
+   1) Setup "getAuthUser" as : build.query({})
+   2) Setup "queryFn" as : async (_, _queryApi, _extraoptions, fetchWithBQ) => {try{}catch (error:any){return{error:error.message || "Could not fetch user data"}}}
+      1) Setup "user" as : await getCurrentUser()
+      2) Setup "session" as : await fetchAuthSession()
+      3) Setup if-conditon with "!session" as : throw new Error("No session found")
+      4) Setup "userSub" as : session
+      5) Setup "accessToken" as : session.tokens ?? {}
+      6) Setup "userDetailsResponse" as : await fetchWithBQ(`users/${userSub}`)
+      7) Setup "userDetails" as : userDetailsResponse.data as User
+      8) Setup "return" value as : data: { user, userSub, userDetails }
+   3) Setup "getProjects" as : build.query<Project[], void>({})
+      1) Setup "query" as : () => "projects"
+      2) Setup "providerTags" as : ["Projects"]
+   4) Setup "createProject" as : build.mutation<Project, Partial<Project>>({})
+      1) Setup "query" as : (project) => ({})
+         1) Setup "url" as : "projects"
+         2) Setup "method" as : "POST"
+         3) Setup "body" as : project
+      2) Setup "invalidatesTags" as : ["Projects"]
+   5) Setup "getTasks" as : build.query<Task[], { projectId: number }>({})
+      1) Setup "query" as : ({ projectId }) => `tasks?projectId=${projectId}`
+      2) Setup "providesTags" as : (result) => result ? result.map() : [{ type:}]
+         1) Setup "result.map" as : ({ id }) => ({ type: "Tasks" as const, id })
+         2) Setup "type" as : "Tasks" as const
+   6) Setup "getTasksByUser" as : build.query<Task[], number>({})
+      1) Setup "query" as : (userId) => `tasks/user/${userId}`
+      2) Setup "providesTags" as : (result, error, userId) => result ? result.map() : [{ type:}]
+         1) Setup "result.map" as : ({ id }) => ({ type: "Tasks", id })
+         2) Setup "type" as : "Tasks", id: userId
+   7) Setup "createTask" as : build.mutation<Task, Partial<Task>>({})
+      1) Setup "query" as : (task) => ({})
+         1) Setup "url" as : "tasks"
+         2) Setup "method" as : "POST"
+         3) Setup "body" as : task
+      2) Setup "invalidatesTags" as : ["Tasks"]
+   8) Setup "updateTaskStatus" as : build.mutation<Task, { taskId: number; status: string }>({})
+      1) Setup "query" as : ({ taskId, status }) => ({})
+         1) Setup "url" as :`tasks/${taskId}/status`
+         2) Setup "method" as : "PATCH"
+         3) Setup "body" as : { status }
+      2) Setup "invalidatesTags" as : (result, error, { taskId }) => [{ type: "Tasks", id: taskId }]
+   9) Setup "getUsers" as : build.query<User[], void>({})
+      1) Setup "query" as : () => "users"
+      2) Setup "providerTags" as : ["Users"]
+   10) Setup "getTeams" as : build.query<Team[], void>({})
+       1) Setup "query" as : () => "teams"
+       2) Setup "providerTags" as : ["ProTeamsjects"]
+   11) Setup "search" as : build.query<SearchResults, string>({})
+       1) Setup "query" as : (query) => `search?query=${query}`
+
+   ***Back to check and completed "dashboardWrapper.tsx"***
+
+   ***Another logic to "recheck" we cannot adding "use client" in "layout.tsx" that why we have to add it on "dashbaordWrapper.tsx" instead***
+
+   ***Another logic to "make more flexible configuration code" we seperate function "dashboardLaout" from "dashboardWrapper" to be more agility and easier to handling more complicate code by : const dashboardWrapper (dashboardLayout)***
 
 ### Setup Frontend : Dashboard elements "Navbar, Sidebar, Main content"
 
@@ -293,7 +362,7 @@ git push -u origin main
 6) Create "div" with "className" in "return()" function as : "flex items-center justify-between bg-white px-4 py-3 dark:bg-black"
 7) Create "isSidebarCollapsed" state as : useAppSelector((state) => state.global.isSidebarCollapsed,)
 
-##### Setup Frontend : Dashboard with "Navbar-Search Bar" in return function
+##### Setup Frontend : Dashboard with "Navbar-Search Bar" in return() function
 
 1) Create "div" with "className" as : "flex items-center gap-8"
 2) Create "Not isSidebarCollapsed" function as : {!isSidebarCollapsed ? null : ()}
@@ -306,7 +375,7 @@ git push -u origin main
    1) Create "type" as : "search"
    2) Create "placeholder" as : "Search..."
 
-##### Setup Frontend : Dashboard with "Navbar-Icon(Right side)" in return function
+##### Setup Frontend : Dashboard with "Navbar-Setting & Navbar-isDarkmode" Icon(Right side) in return() function
 
 1) Create "div" with "className" as : "flex items-center"
 2) Create "button" with
@@ -515,4 +584,4 @@ git push -u origin main
 
 
 
-Time stamp : 00:44:13
+Time stamp : 01:00:20

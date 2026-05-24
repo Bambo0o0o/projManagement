@@ -590,23 +590,73 @@ git push -u origin main
 2) Create "template" as : tsrafc
 3) Remove "types Props" and "props: Props"
 4) Import "useRef" from react
-5) Import "TypedUseSelectorHook, useDispatch, useSelector, Provider" from react-redux
-6) Import "combineReducers, configureStore" from @reduxjs/toolkit
-7) Import "setupListeners" from @reduxjs/toolkit/query
-8) Import "globalReducer" from @/state
-9) Import "api" from @/state/api
+5) Import "combineReducers, configureStore" from @reduxjs/toolkit
+6) Import "TypedUseSelectorHook, useDispatch, useSelector, Provider" from react-redux
+7) Import "globalReducer" from @/state
+8) Import "api" from @/state/api
+9) Import "setupListeners" from @reduxjs/toolkit/query
+10) Import "persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER from redux-persist
+11) Import "PersistGate" from redux-persist/integration/react
+12) Import "createWebStorage" from redux-persist/lib/storage/createWebStorage
+
+##### Setup Frontend : Dashboard with "Redux Toolkit" - Redux Persistence
+
+1) Create "createNoopStorage" function with
+   1) Create "return" value with : getItem(), setItem(), removeItem()
+   2) Setup "getItem" with
+      1) Setup "key" as : any
+      2) Setup "return" value as : Promise.resolve(null)
+   3) Setup "setItem" with
+      1) Setup "key" as : any
+      2) Setup "value" as : any
+      3) Setup "return" value as : Promise.resolve(value)
+   4) Setup "removeItem" with
+      1) Setup "key" as : any
+      2) Setup "return" value as : Promise.resolve()
+2) Create "storage" with ternary fucntion as : typeof window === "undefined"
+   1) Setup "?" result as : createNoopStorage()
+   2) Setup ":" result as : createWebStorage("local")
+3) Create "persistConfig" datas with
+   1) Setup "key" as : "root"
+   2) Setup "storage" as : storage
+   3) Setup "whitelist" as : ["global"]
+4) Create "rootReducer" as : combineReducers({})
+   1) Setup "global" as : globalReducer
+   2) Setup "api.reducerPath" as : api.reducer
+5) Create "persistedReducer" as : persistReducer(persistConfig, rootReducer)
 
 ##### Setup Frontend : Dashboard with "Redux Toolkit" - Redux Store
 
-1) Create "rootReducer" as : combineReducers({})
-   1) Setup "global" as : globalReducer
-   2) Setup "api.reducerPath" as : api.reducer
-2) Export "makeStore" function as : makeStore = () => {}
+1) Export "makeStore" function as : makeStore = () => {}
    1) Return value as : configureStore({})
-   2) Setup "reducer" as :
-   3) Setup 
+   2) Setup "reducer" as : persistedReducer
+   3) Setup "middleware" for "getDefault" as : getDefault({}).concat(api.middleware)
+      1) Setup "serializableCheck" as : {ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]}
 
+##### Setup Frontend : Dashboard with "Redux Toolkit" - Redux Types
 
+1) Export "AppStore" type as : ReturnType<typeof makeStore>
+2) Export "RootState" type as : ReturnType<AppStore["getState"]>
+3) Export "AppDispatch" type as : AppStore["dispatch"]
+4) Export "useAppDispatch" const as : () => useDispatch<AppDispatch>()
+5) Export "useAppSelector" const as : TypedUseSelectorHook<RootState> = useSelector
 
+##### Setup Frontend : Dashboard with "Redux Toolkit" - Provider
 
-Time stamp : 01:00:20
+1) Export default fuction "StoreProvider" as : StoreProvider({children}:{children: React.ReactNode})
+2) Create "storeRef" as : useRef<AppStore>()
+3) Create if-condition with "!storeRef.current" return : storeRef.current = makeStore() and setupListeners(storeRef.current.dispatch)
+4) Create "persistor" as : persistStore(storeRef.current)
+5) Create "Provider" tag with "store" as : store={storeRef.current}
+6) Create "PersistGate" tag with
+   1) Setup "loading" as : null
+   2) Setup "persistor" as : {persistor}
+7) Create "PersistGate-text" as : {children}
+
+## Setup Backend : Database using Postgres
+
+***Data structure : <https://lucid.app/lucidchart/877dec2c-db89-4f7b-9ce0-80ce88b6ee37/edit?invitationId=inv_541da4a8-8372-4969-864c-3fd30a6588f3&page=0_0#>***
+
+1) 
+
+Time stamp : 01:35:09

@@ -434,6 +434,7 @@ git push -u origin main
 23) Create if-condition with "!currentUser" as : return null
     1) Create "currentUserDetails" as : currentUser?.userDetails
 24) Create template string with "sidebarClassNames" as : `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`
+   ***To adding "isCollapsed" on sidebar :  ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}***
 25) Create return function with :
     1) Create "div" with "className" as : {sidebarClassNames}
     2) Create "div" with "className" as : "flex h-[100%] w-full flex-col justify-start"
@@ -463,6 +464,7 @@ git push -u origin main
    1) Create "button" with "className" as : "py-3"
    2) Create "onClick" function as : () => {dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))}
    3) Create "X" with "className" as : "h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white"
+   ***Setup "X" or "Burger" icon to active collapsed function on sidebar***
 
 ##### Setup Frontend : Dashbord with "Sidebar" -TEAM
 

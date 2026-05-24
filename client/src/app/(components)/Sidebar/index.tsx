@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Home, LockIcon, LucideIcon } from "lucide-react";
+import { Home, LockIcon, LucideIcon, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
+import { setIsSidebarCollapsed } from "@/state";
 
 const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setShowPriority] = useState(true);
 
+  // Setup isCollapsed on Sidebar
+  const dispatch = useAppDispatch();
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed,
+  );
+
+  // Adding function to Collapsed on : "w-0 hidden" : "w-64"
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
-    transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white w-64
+    transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}
   `;
   return (
     <div className={sidebarClassNames}>
@@ -20,6 +28,17 @@ const Sidebar = () => {
           <div className="text-xl font-bold text-gray-800 dark:text-white">
             B-Tech
           </div>
+          {/* Adding Collapsed Icon and Function to Active collapsing on Sidebar */}
+          {isSidebarCollapsed ? null : (
+            <button
+              className="py-3"
+              onClick={() => {
+                dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+              }}
+            >
+              <X className="h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white" />
+            </button>
+          )}
         </div>
         {/* Team Section */}
         <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
@@ -53,20 +72,12 @@ interface SidebarLinkProps {
   href: string;
   icon: LucideIcon;
   label: string;
-  // isCollapsed:boolean
 }
 
 const SidebarLink = ({ href, icon: Icon, label }: SidebarLinkProps) => {
   const pathname = usePathname();
   const isActive =
     pathname === href || (pathname === "/" && href === "/dashboard");
-
-  // Adding more : Not existed in complete code
-  const screenWidth = window.innerWidth;
-  const dispatch = useAppDispatch();
-  const isSidebarCollapsed = useAppSelector(
-    (state) => state.global.isSidebarCollapsed,
-  );
 
   return (
     <Link href={href} className="w-full">

@@ -23,6 +23,7 @@
 17) Code auto formate : Shift + Alt + F
 18) Move menu to top : right click under menu bar --> select "Activity Bar Position" --> Top or Default
 19) Active shortkey on each tools : ctl+shift+p
+20) Edit multiple line : alt + left click on each line
 
 ## Project Time Stamp
 
@@ -365,7 +366,7 @@ git push -u origin main
 ##### Setup Frontend : Dashboard with "Navbar-Search Bar" in return() function
 
 1) Create "div" with "className" as : "flex items-center gap-8"
-2) Create "Not isSidebarCollapsed" function as : {!isSidebarCollapsed ? null : ()}
+2) Create "!isSidebarCollapsed" function as : {!isSidebarCollapsed ? null : ()}
    1) Create "button" with "onClick" funciton as : () => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
    2) Create "Menu"  with "className" as : "h-8 w-8 dark:text-white"
 3) Create "div" with "className" as : elative flex h-min w-[200px]"
@@ -411,26 +412,27 @@ git push -u origin main
 3) Create template as : tsrafce
 4) Remove "type Props" and argument "props:Props"
 5) Create "use client" on top of file
-6) Import "useAppDispatch, useAppSelector" from @/app/redux
-7) Import "setIsSidebarCollapsed" from @/state
-8) Import "useGetAuthUserQuery, useGetProjectsQuery" from @/state/api
-9) Import "signOut" from aws-amplify/auth
-10) Import "AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X" from lucide-react
-11) Import "Image" from next/image
-12) Import "Link" from next/link
-13) Import { usePathname } from "next/navigation"
-14) Import "React, {useState}" from react
-15) Create "showProjects, setShowProjects" with : useState(true)
-16) Create "showPriority, setShowPriority" with : useState(true)
-17) Create "data:projects" as : useGetProjectsQuery()
-18) Create "dispatch" as : useAppDispatch()
-19) Create "isSidebarCollapsed" as : useAppSelector((state) => state.global.isSidebarCollapsed)
-20) Create "data: currentUser" as : useGetAuthUserQuery({})
-21) Create "handleSignOut" as : async () => {}
+6) Rename function from "index" to : "Sidebar"
+7) Import "useAppDispatch, useAppSelector" from @/app/redux
+8) Import "setIsSidebarCollapsed" from @/state
+9) Import "useGetAuthUserQuery, useGetProjectsQuery" from @/state/api
+10) Import "signOut" from aws-amplify/auth
+11) Import "AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X" from lucide-react
+12) Import "Image" from next/image
+13) Import "Link" from next/link
+14) Import { usePathname } from "next/navigation"
+15) Import "React, {useState}" from react
+16) Create "showProjects, setShowProjects" with : useState(true)
+17) Create "showPriority, setShowPriority" with : useState(true)
+18) Create "data:projects" as : useGetProjectsQuery()
+19) Create "dispatch" as : useAppDispatch()
+20) Create "isSidebarCollapsed" as : useAppSelector((state) => state.global.isSidebarCollapsed)
+21) Create "data: currentUser" as : useGetAuthUserQuery({})
+22) Create "handleSignOut" as : async () => {}
     1) Setup "Try" as : await signOut()
     2) Setup "catch(error)" as : console.error("Error signing out: ", error)
-22) Create if-condition with "!currentUser" as : return null
-23) Create "currentUserDetails" as : currentUser?.userDetails
+23) Create if-condition with "!currentUser" as : return null
+    1) Create "currentUserDetails" as : currentUser?.userDetails
 24) Create template string with "sidebarClassNames" as : `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`
 25) Create return function with :
     1) Create "div" with "className" as : {sidebarClassNames}
@@ -506,6 +508,27 @@ git push -u origin main
    2) Setup "label" as : "Teams"
    3) Setup "href" as : "/teams"
 
+##### Setup Frontend : Dashbord with "Sidebar" -Projects Links
+
+1) Create "button" with
+   1) Create "onClick" funciton as : () => setShowProjects((prev) => !prev)
+   2) Create "className" as : "flex w-full items-center justify-between px-8 py-3 text-gray-500"
+   3) Create "span" with "className" as : ""
+      1) Setup "span-text" as : Projects
+   4) Create "ternary" funciton as : {showProjects ?():()}
+      1) Setup "ChevronUp" with "className" as : "h-5 w-5"
+      2) Setup "ChevronDown" with "className" as : "h-5 w-5
+
+##### Setup Frontend : Dashbord with "Sidebar" -Projects Lists
+
+1) Create "showProjects" with 
+   1) Create "projects?.map" as : (project) => ()
+   2) Create "SidebarLink" with
+      1) Setup "key" as : {project.id}
+      2) Setup "icon" as : {Briefcase}
+      3) Setup "label" as : {project.name}
+      4) Setup "href" link as : `/projects/${project.id}`
+
 ##### Setup Frontend : Dashbord with "Sidebar" -Priorities Links
 
 1) Create "button" with
@@ -539,7 +562,7 @@ git push -u origin main
       2) Setup "label" as : "Backlog"
       3) Setup "href" as : "/priority/backlog"
 
-##### Setup Frontend : Dashboard with "SidebarLink
+##### Setup Frontend : Dashboard with "SidebarLink-SidebarLinkProps"
 
 1) Create "SidebarLinkProps" interface with
    1) Setup "href" as : string

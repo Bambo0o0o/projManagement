@@ -482,7 +482,7 @@ git push -u origin main
 7) Create "p" with "className" as : "text-xs text-gray-500"
    1) Setup "paragraph" as : Private
 
-##### Setup Frontend : Dashbord with "Sidebar" -Navbar Links
+##### Setup Frontend : Dashbord with "Sidebar" -Menu Links
 
 1) Create "nav" with "className" as : "z-10 w-full"
 2) Create "SidebarLink" for "Home" with
@@ -523,7 +523,7 @@ git push -u origin main
 
 ##### Setup Frontend : Dashbord with "Sidebar" -Projects Lists
 
-1) Create "showProjects" with 
+1) Create "showProjects" with
    1) Create "projects?.map" as : (project) => ()
    2) Create "SidebarLink" with
       1) Setup "key" as : {project.id}

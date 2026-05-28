@@ -6,8 +6,8 @@
 
 1) ***Open command guide : ctrl+space***
 2) In intellisence list we can automatic import tools by : ctrl + click on keyword
-3) Run client : npm run dev
-4) Run server :  npm run dev
+3) **Run client : npm run dev**
+4) **Run server :  npm run dev**
 5) Turn on console.log() by highlight word : ctrl + alt + l
 6) Move multiple lines left (outdent) : Shift + Tab
 7) Move multiple lines right (indent) : Tab
@@ -24,6 +24,8 @@
 18) Move menu to top : right click under menu bar --> select "Activity Bar Position" --> Top or Default
 19) Active shortkey on each tools : ctl+shift+p
 20) Edit multiple line : alt + left click on each line
+
+***Using Postman version 11.86.5 more stable don't delete history file***
 
 ## Project Time Stamp
 
@@ -653,10 +655,218 @@ git push -u origin main
    2) Setup "persistor" as : {persistor}
 7) Create "PersistGate-text" as : {children}
 
-## Setup Backend : Database using Postgres
+## Setup Database : Setup Database using Postgres
 
 ***Data structure : <https://lucid.app/lucidchart/877dec2c-db89-4f7b-9ce0-80ce88b6ee37/edit?invitationId=inv_541da4a8-8372-4969-864c-3fd30a6588f3&page=0_0#>***
 
-1) 
+1) Install PostgresSQL : <https://www.postgresql.org/download/>
+2) Install PGAdmin4(PostgresSQL interface) : <https://www.pgadmin.org/download/>
+3) Open PGAdmin :
+   1) On left side "Servers" menu : Right Click --> Register menu --> Server
+   2) On "General" tab as "Name" create-server : projManagement and keep others default
+   3) On "Connection" tab with
+      1) On "Hostname/address" create : localhost
+      2) On "Port" create : 5432
+      3) On "Password" create : "927sAph25@*" or "anything"
+      4) On "Others" keep : defaults
+   4) Click "save" to create database
+4) Right click on "Database" on server name was we created
+   1) On "General" tab  as "Database" create-database : projectmanagement
+   2) On "Others" keep : defaults
+   3) Click "save" to create database name
+   ***# Postgres format : postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE?schema=public***
+5) Create {.env} file in /server directory 
+   1) Create "database" as : DATABASE_URL="postgresql://postgres:927sAph25@*@localhost:5432/postgres?schema=public""***
+   2) Create "PORT" as : PORT=8000
+6) Check "datas" which upload to database by :
+   1) Click on "database-name"
+   2) Click on "Schemas"
+   3) Click on "Tables"
 
-Time stamp : 01:35:09
+## Setup Backend : Create Server Directory and Tools
+
+1) Create "server" folder in /projManagement
+2) Setup "server" tools with
+   1) Go to terminal and server directory : cd server
+   2) Create "package.json" file as : npm init -y
+   ***Mostly tools version must align with "EDRoh version" to be fine when following workshop***
+3) Install "Dependency" tools : npm i -D ts-node@10.9.2 typescript@5.5.4 @types/node@22.4.0
+4) Install "tsconfig.json" file : npx tsc --init
+5) Configurate "tsconfig.json" file with
+   1) Go to "Modules" tag
+   2) Change "module" to be : "NodeNext"
+   3) Uncomment "moduleResolution" and setup to be : "NodeNext"
+   ***Official tag must be : "NodeNext" cannot be "nodenaext"***
+   4) Adding "types" as : ["node"]
+   5) Uncomment "resolveJsonModule" and setup to be : true
+   6) Uncomment "outDir" and setup to be : "./dist"
+   7) Go to outside "compilerOption" adding : , "include":["src/**/*", "src/data/**/*.json", "prisma/**/*"]
+6) Install "prisma" as : npm i prisma@5.17.0 @prisma/client@5.18.0
+7) Setup "prisma" tools for server : npx prisma init
+8) **Copy folder "seedData" place in "prisma" folder : <https://github.com/ed-roh/project-management>**
+9) Create {seed.ts} in "prisma" folder, Then copy code from EdRoh to here 
+   ***Used "seed.ts" to upload data to database***
+10) Check VsCode extension need to install "prisma" from "prisma.io"
+11) Copy data "schema.prisma" from "EDRoh" to our project file or : Create following below
+
+## Setup Backend : Create Schema for PostgreSQL
+
+1) Setup Models for : User, Team, Project, ProjectTeam, Task, TaskAssignment, Attachment and Comment
+
+### Setup Backend : Create Schema for PostgreSQL - User
+
+1) Create "userId" with "Int" type as : @id @default(autoincrement())
+2) Create "cognitoId" with "String" type as : @unique
+3) Create "username" with "String" type as : @unique
+4) Create "profilePictureUrl" with "String?"
+5) Create "teamId" with "Int?"
+6) Create "authoredTasks" with "Task[]" as : @relation("TaskAuthor")
+7) Create "assignedTasks" with ""Task[]" as : @relation("TaskAssignee")
+8) Create "taskAssignments" with "TaskAssignment[]"
+9) Create "attachments" with "Attachment[]"
+10) Create "comments" with "Comment[]"
+11) Create "team" with "Team?" as : @relation(fields: [teamId], references: [id])
+
+### Setup Backend : Create Schema for PostgreSQL - Team
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "teamName" with "String"
+3) Create "productOwnerUserId" with "Int?"
+4) Create "projectManagerUserId" with "Int?"
+5) Create "projectTeams" with "ProjectTeam[]"
+6) Create "user" with "User[]"
+
+### Setup Backend : Create Schema for PostgreSQL - Project
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "name" with "String"
+3) Create "description" with "String?"
+4) Create "startDate" with "DateTime?"
+5) Create "endDate" with "DateTime?"
+6) Create "tasks" with "Task[]"
+7) Create "projectTeams" with "ProjectTeam[]"
+
+### Setup Backend : Create Schema for PostgreSQL - ProjectTeam
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "teamId" with "Int"
+3) Create "projectId" with "Int"
+4) Create "team" with "Team" as : @relation(fields: [teamId], references: [id])
+5) Create "project" with "Project" as : @relation(fields: [projectId], references: [id])
+
+### Setup Backend : Create Schema for PostgreSQL - Task
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "title" with "String"
+3) Create "description" with "String?"
+4) Create "status" with "String?"
+5) Create "priority" with "String?"
+6) Create "tags" with "String?"
+7) Create "startDate" with "DateTime?"
+8) Create "dueDate" with "DateTime?"
+9) Create "points" with "Int?"
+10) Create "projectId" with "Int"
+11) Create "authorUserId" with "Int"
+12) Create "assignedUserId" with "Int?"
+13) Create "project" with "Project" as : @relation(fields: [projectId], references: [id])
+14) Create "auther" with "User" as : @relation("TaskAuthor", fields: [authorUserId], references: [userId])
+15) Create "assignee" with "User?" as : @relation("TaskAssignee", fields: [assignedUserId], references: [userId])
+16) Create "taskAssignments" with "TaskAssignment[]"
+17) Create "attachments" with "Attachment[]"
+18) Create "comments" with "Comment[]"
+
+### Setup Backend : Create Schema for PostgreSQL - TaskAssignment
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "userId" with "Int"
+3) Create "taskId" with "Int"
+4) Create "user" with "User" as : @relation(fields: [userId], references: [userId])
+5) Create "task" with "Task" as : @relation(fields: [taskId], references: [id])
+
+### Setup Backend : Create Schema for PostgreSQL - Attachment
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "fileURL" with "String"
+3) Create "fileName" with "String?"
+4) Create "taskId" with "Int"
+5) Create "uploadedById" with "Int"
+6) Create "task" with "Task" as : @relation(fields: [taskId], references: [id])
+7) Create "uploadedBy" with "User" as : @relation(fields: [uploadedById], references: [userId])
+
+### Setup Backend : Create Schema for PostgreSQL - Comment
+
+1) Create "id" with "Int" type as : @id @default(autoincrement())
+2) Create "text" with "String"
+3) Create "taskId" with "Int"
+4) Create "userId" with "Int"
+5) Create "task" with "Task" as : @relation(fields: [taskId], references: [id])
+6) Create "user" with "User" as : @relation(fields: [userId], references: [userId])
+
+### Setup Backend : To upload data to database
+
+1) Create "prisma" connect to database as : npx prisma generate
+2) Initial "prisma" connecting as : npx prisma migrate dev --name init
+   1) Need to reset "public" schema at "localhost:5432" and "All data will be lost" : Yes
+   2) After "Your database is now in sync with your schema" and "Generated Prisma Client"
+   3) Addinge "scripts" to "package.json" as : "seed": "ts-node prisma/seed.ts"
+   4) Update data from seed to database : npm run seed
+
+## Setup Backend : Install main backend tools as "express, body-parser, cors, dotenv, helmet, morgan and Dependency tools"
+
+1) Install "main-backend" tools as : npm i express body-parser cors dotenv helmet morgan
+2) Install "dependency" tools as : npm i -D rimraf concurrently nodemon @types/cors @types/express @types/morgan @types/node
+
+### Setup Backend : Setup tools for server
+
+1) Create "src" folder in /server directory
+2) Create {index.ts}  file in /server/src directory
+3) Import "main" tools :
+   1) Import "express" from express
+   2) Import "dotenv" from dotenv
+   3) Import "bodyParser" from body-parser
+   4) Import "cors" from cors
+   5) Import "helmet" from helmet
+   6) Import "morgan" from morgan
+4) Import "ROUTES" tools :
+   1) Import "projectRoutes" from ./routes/projectRoutes
+   2) Import "taskRoutes" from ./routes/taskRoutes
+   3) Import "searchRoutes" from ./routes/searchRoutes
+   4) Import "userRoutes" from ./routes/userRoutes
+   5) Import "teamRoutes" from ./routes/teamRoutes
+5) Configuration each tools
+   1) Configurate "dotenv" as : dotenv.config()
+   2) Create "app" as : express()
+   3) Create "app.use()" for : express.json()
+   4) Create "app.use()" for : helmet()
+   5) Create "app.use()" for : helmet.crossOriginResourcePolicy({ policy: "cross-origin" })
+   6) Create "app.use()" for : morgan("common")
+   7) Create "app.use()" for : bodyParser.json()
+   8) Create "app.use()" for : bodyParser.urlencoded({ extended: false })
+   9) Create "app.use()" for : cors()
+6) Confifuration each "Routes"
+   1) Create "/" home routes as : app.get("/", (req, res) => {})
+      1) Setup "res.send()" as : "This is home route"
+   2) Create "projects" route as : app.use("/projects", projectRoutes)
+   3) Create "tasks" route as : app.use("/tasks", taskRoutes)
+   4) Create "search" route as : app.use("/search", searchRoutes)
+   5) Create "users" route as : app.use("/users", userRoutes)
+   6) Create "teams" route as : app.use("/teams", teamRoutes)
+7) Setup connection to "Server-PORT" with
+   1) Setup "port" as : Number(process.env.PORT) || 3000
+   2) Create "return" port value as : app.listen(port, "0.0.0.0", () => {})
+   3) Logging "conneted to server" success as : console.log(`Server running on part ${port}`)
+8) Write "script" to run SERVER
+   1) Go to {package.json} file
+   2) Under "scripts" tag adding "build, start, dev" tags between "test" and "seed"
+      1) Adding "build" below "test" as : "rimraf dist && npx tsc"
+      2) Adding "start" below "build" as : "npm run build && node dist/index.js"
+      3) Adding "dev" below "start" as : "npm run build && concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts\""
+9) Test server connection as : npm run dev
+    ***After run first server connection, It will automatic creat "dist" folder in our /server directory***
+10) Testing Server connect to backend and database fine on "server-terminal" as : curl localhost:8000
+    ***It will return "This is home route" on "server-terminal"
+11) To testing server connection also can used "Postman" application by
+    1) On "GET" tag type : localhost:8000
+    2) It will return : "This is home route" too
+
+Time stamp : 02:13:00

@@ -279,7 +279,7 @@ git push -u origin main
     2) Setup "teamName" as : string
     3) Setup "productOwnerUserId?" as : number
     4) Setup "projectManagerUserId?" as : number
-12) Create "api" body as : api = createApi({Setup API-Body})
+12) Create "api" body as : api = createApi({Setup API-Body}) **Go to Setup API-Body**
 13) Export "APIs" for "useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery, useGetUsersQuery, useGetTeamsQuery, useGetTasksByUserQuery, useGetAuthUserQuery" as : api
 
 #### Setup Frontend : Setup API-Body
@@ -294,54 +294,54 @@ git push -u origin main
 4) Setup "reducerPath" as : "api"
 5) Setup "tagTypes" as : ["Projects", "Tasks", "Users", "Teams"]
 6) Setup "endPoints" funciton as : (build) => ({})
-   1) Setup "getAuthUser" as : build.query({})
-   2) Setup "queryFn" as : async (_, _queryApi, _extraoptions, fetchWithBQ) => {try{}catch (error:any){return{error:error.message || "Could not fetch user data"}}}
-      1) Setup "user" as : await getCurrentUser()
-      2) Setup "session" as : await fetchAuthSession()
-      3) Setup if-conditon with "!session" as : throw new Error("No session found")
-      4) Setup "userSub" as : session
-      5) Setup "accessToken" as : session.tokens ?? {}
-      6) Setup "userDetailsResponse" as : await fetchWithBQ(`users/${userSub}`)
-      7) Setup "userDetails" as : userDetailsResponse.data as User
-      8) Setup "return" value as : data: { user, userSub, userDetails }
-   3) Setup "getProjects" as : build.query<Project[], void>({})
+   1) Setup "**getAuthUser**" as : build.query({})
+      1) Setup "queryFn" as : async (_, _queryApi, _extraoptions, fetchWithBQ) => {try{}catch (error:any){return{error:error.message || "Could not fetch user data"}}}
+      2) Setup "user" as : await getCurrentUser()
+      3) Setup "session" as : await fetchAuthSession()
+      4) Setup if-conditon with "!session" as : throw new Error("No session found")
+      5) Setup "userSub" as : session
+      6) Setup "accessToken" as : session.tokens ?? {}
+      7) Setup "userDetailsResponse" as : await fetchWithBQ(`users/${userSub}`)
+      8) Setup "userDetails" as : userDetailsResponse.data as User
+      9) Setup "return" value as : data: { user, userSub, userDetails }
+   2) Setup "**getProjects**" as : build.query<Project[], void>({})
       1) Setup "query" as : () => "projects"
       2) Setup "providerTags" as : ["Projects"]
-   4) Setup "createProject" as : build.mutation<Project, Partial<Project>>({})
+   3) Setup "**createProject**" as : build.mutation<Project, Partial<Project>>({})
       1) Setup "query" as : (project) => ({})
          1) Setup "url" as : "projects"
          2) Setup "method" as : "POST"
          3) Setup "body" as : project
       2) Setup "invalidatesTags" as : ["Projects"]
-   5) Setup "getTasks" as : build.query<Task[], { projectId: number }>({})
+   4) Setup "**getTasks**" as : build.query<Task[], { projectId: number }>({})
       1) Setup "query" as : ({ projectId }) => `tasks?projectId=${projectId}`
       2) Setup "providesTags" as : (result) => result ? result.map() : [{ type:}]
          1) Setup "result.map" as : ({ id }) => ({ type: "Tasks" as const, id })
          2) Setup "type" as : "Tasks" as const
-   6) Setup "getTasksByUser" as : build.query<Task[], number>({})
+   5) Setup "**getTasksByUser**" as : build.query<Task[], number>({})
       1) Setup "query" as : (userId) => `tasks/user/${userId}`
       2) Setup "providesTags" as : (result, error, userId) => result ? result.map() : [{ type:}]
          1) Setup "result.map" as : ({ id }) => ({ type: "Tasks", id })
          2) Setup "type" as : "Tasks", id: userId
-   7) Setup "createTask" as : build.mutation<Task, Partial<Task>>({})
+   6) Setup "**createTask**" as : build.mutation<Task, Partial<Task>>({})
       1) Setup "query" as : (task) => ({})
          1) Setup "url" as : "tasks"
          2) Setup "method" as : "POST"
          3) Setup "body" as : task
       2) Setup "invalidatesTags" as : ["Tasks"]
-   8) Setup "updateTaskStatus" as : build.mutation<Task, { taskId: number; status: string }>({})
+   7) Setup "**updateTaskStatus**" as : build.mutation<Task, { taskId: number; status: string }>({})
       1) Setup "query" as : ({ taskId, status }) => ({})
          1) Setup "url" as :`tasks/${taskId}/status`
          2) Setup "method" as : "PATCH"
          3) Setup "body" as : { status }
       2) Setup "invalidatesTags" as : (result, error, { taskId }) => [{ type: "Tasks", id: taskId }]
-   9) Setup "getUsers" as : build.query<User[], void>({})
+   8) Setup "**getUsers**" as : build.query<User[], void>({})
       1) Setup "query" as : () => "users"
       2) Setup "providerTags" as : ["Users"]
-   10) Setup "getTeams" as : build.query<Team[], void>({})
+   9) Setup "**getTeams**" as : build.query<Team[], void>({})
        1) Setup "query" as : () => "teams"
        2) Setup "providerTags" as : ["ProTeamsjects"]
-   11) Setup "search" as : build.query<SearchResults, string>({})
+   10) Setup "**search**" as : build.query<SearchResults, string>({})
        1) Setup "query" as : (query) => `search?query=${query}`
 
    ***Back to check and completed "dashboardWrapper.tsx"***
@@ -1036,5 +1036,10 @@ git push -u origin main
    ***The result will change "status" to be : "Work In Progress"***
    5) Check on "PostgreSQL" by : refresh on "task" menu
    6) On "PostgreSQL" click on table will return "status" to be : "Work In Progress" too
+   ***On taskController we include : author, assignee, comments, attachments, So it have to add them on task too***
 
-Time stamp : 02:41:41
+
+Time stamp : 02:46:45
+
+***Setup Frontend : Setup Export Interface as above Line 226-281***
+

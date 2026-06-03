@@ -1045,4 +1045,18 @@ Time stamp : 02:46:45
 #### Setup Frontend : Wrap-Up setup
 
 1) Go to {api.ts} adding : getProject and createProject
-2) Adding : getTasks, createTask
+2) Adding : getTasks, createTask, updateTaskStatus
+
+#### Setup Frontend : Setup Projects page
+
+1) Create "projects" folder in /client/src/app directory
+2) Create "[id]" folder in /client/src/app/projects directory **To handling projectId**
+3) Create {page.tsx} in /client/src/app/projects/[id] directory
+   1) Create template as : tsrafce
+   2) Change "type Props" tag and there argument
+   3) Create "use client" on top of {page.tsx} file
+
+***************************************Seriously****************************************
+***Move (components) folder to outside app folder then change name to be : components***
+*******************************************x********************************************
+

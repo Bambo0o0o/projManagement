@@ -802,7 +802,7 @@ git push -u origin main
 5) Create "task" with "Task" as : @relation(fields: [taskId], references: [id])
 6) Create "user" with "User" as : @relation(fields: [userId], references: [userId])
 
-### Setup Backend : To upload data to database
+### Setup Backend : To upload datas to database ***UPLOAD_DATA***
 
 1) Create "prisma" connect to database as : npx prisma generate
 2) Initial "prisma" connecting as : npx prisma migrate dev --name init
@@ -816,7 +816,7 @@ git push -u origin main
 1) Install "main-backend" tools as : npm i express body-parser cors dotenv helmet morgan
 2) Install "dependency" tools as : npm i -D rimraf concurrently nodemon @types/cors @types/express @types/morgan @types/node
 
-### Setup Backend : Setup tools for server
+### Setup Backend : Setup tools for server(Complete)
 
 1) Create "src" folder in /server directory
 2) Create {index.ts}  file in /server/src directory
@@ -867,6 +867,149 @@ git push -u origin main
     ***It will return "This is home route" on "server-terminal"
 11) To testing server connection also can used "Postman" application by
     1) On "GET" tag type : localhost:8000
-    2) It will return : "This is home route" too
+    2) It will return : "This is home route"
 
-Time stamp : 02:13:00
+## Setup Backend : Controllers and Routes
+
+### Setup Backend : Setup projectControllers with "getProjects and createProjects"
+
+1) Create "controllers" folder in /server/src
+2) Create {projectController.ts} in /server/src/controllers directory
+3) Import controllers tools
+   1) Import "Request and Response" from express
+   2) Import "PrismaClient" from @prisma/client
+   3) Create "prisma" as : new PrismaClient()
+4) Create "export-getProjects" as : async():Promise<void>=>{try{const projects...}catch(error:any){res...}}
+   1) Create "req and res" as : Request, Response
+   2) Create "projects" as : await prisma.project.findMany()
+   3) Setup "response" projects as : res.json(projects)
+   4) Setup "catch-error" as : error: any
+      1) Setup "res.status() as : 500
+      2) Setup "res.json({message : ..}) as : `Error retrieving projects: ${error.message}`
+5) Create "export-createProjects" as : async():Promise<void>=>{try{const projects...}catch(error:any){res...}}
+   1) Create "req and res" as : Request, Response
+   2) Create "name, description, startDate, endDate" as : req.body
+   3) Create "newProject" as : await prisma.project.create({})
+      1) Setup "data" as : "name, description, startDate, endDate"
+   4) Setup "response-status" for "newProject" as : res.status(201).json(newProject)
+   5) Setup "catch-error" as : error: any
+      1) Setup "res.status() as : 500
+      2) Setup "res.json({message : ..}) as : `Error creating a project: ${error.message}`
+
+### Setup Backend : Setup projectRouter(complete)
+
+1) Create "routes" in /server/src directory
+2) Create {projectRoutes.ts} file in /server/src/routes directory
+3) Import "routes" tools
+   1) Import "Router" from express
+   2) Import "createProject and getProjects" from "../controllers/projectController"
+4) Create "router" function as : Router()
+5) Create "get-router" as : router.get("/", getProjects)
+6) Create "post-router" as : router.post("/", createProject)
+7) Export default "router"
+8) Checking {index.ts} in /server/src was import and configured : projectRoutes
+9) Test server can fetching data from database on "server" terminal as : curl localhost:8000/projects
+10) Test "create project" by "POSTMAN" with "blank information"
+    1) Change command from "GET to POST" will get message : Error creating a project
+    2) This "ERROR" come from we didn't create any fields of schema as : "name, description, startDate, endDate"
+    3) Setup again with "Body-Raw" as :
+       1) Setup "name" as : "newProject"
+       2) Setup "description" as : "This is a new project"
+       3) Setup "startDate" as : "2023-01-01T00:00:00Z"
+       4) Setup "endDate" as : "2023-12-31T00:00:00Z"
+       5) Will get error on "PostgreSQL" from ***ID didn't setup***
+    ***PostgreSQL format to Count up "ID" : SELECT setval(pg_get_serial_sequence('"[DATA_MODEL_NAME_HERE]"','id'),coalesce(max(id)+1,1),false) FROM "[DATA_MODEL_NAME_HERE]";***
+    ***Default last ID is 10 when running code it will change to : n=n+1 from 10 to 10+1 = 11***
+    4) Manual setup "query" on PostgreSQL for "project" table (ON Query tag) as : SELECT setval(pg_get_serial_sequence('"Project"','id'),coalesce(max(id)+1,1),false) FROM "Project";
+    5) Try to send data again will return : {"id":11,"name":"newProject","description":"This is a new Project","startDate":"2023-01-01T00:00:00.000Z","endDate":"2023-12-31T00:00:00.000Z"}
+    6) Checking on "PostgreSQL" By refresh and "re-query" will see : newProject schema with ID 11
+
+### Setup Backend : Setup taskController(Complete)
+
+1) Create {taskController.ts} in /server/src/controllers directory
+2) Import controllers tools
+   1) Import "Request and Response" from express
+   2) Import "PrismaClient" from @prisma/client
+   3) Create "prisma" as : new PrismaClient()
+3) Create "***export-getTask***" as : async():Promise<void>=>{const{}try{const tasks...}catch(error:any){res...}}
+   1) Create "projectId" as : req.query
+   2) Create "tasks" as : await prisma.task.findMany()
+      1) Setup "where" as :  projectId: Number(projectId)
+      2) Setup "include" with
+         1) Setup "author" as : true
+         2) Setup "assignee" as : true
+         3) Setup "comments" as : true
+         4) Setup "attachments" as : true
+   3) Setup "response" task as : res.json(tasks)
+   4) Setup "catch-error" as : error: any
+      1) Setup "res.status() as : 500
+      2) Setup "res.json({message : ..}) as : `Error retrieving tasks: ${error.message}`
+4) Create "***export-createTask***" as : async():Promise<void>=>{const{}try{const newTasks...}catch(error:any){res...}}
+   1) Create "req and res" as : Request, Response
+   2) Create "title, description, status, priority, tags, startDate, dueDate, points, projectId, authorUserId, assignUserId" as : req.body
+   3) Create "newTask" as : await prisma.task.create({})
+      1) Setup "data" as :  {title, description, status, priority, tags, startDate, dueDate, points, projectId, authorUserId, assignUserId}
+   4) Setup "response-status" for "newTask" as : res.status(201).json(newTask)
+   5) Setup "catch-error" as : error: any
+      1) Setup "res.status() as : 500
+      2) Setup "res.json({message : ..}) as : `Error creating a task: ${error.message}`
+5) Create "***export-updateTaskStatus***" as : async():Promise<void>=>{const{}try{const updatedTask...}catch(error:any){res...}}
+   1) Create "req and res" as : Request, Response
+   2) Create "taskId" as : req.params
+   3) Create "status" as : req.body
+   4) Create "updatedTask" as : await prisma.task.update({})
+      1) Setup "where" as :  {id: Number(taskId)}
+      2) Setup "data" as : {status: status}
+   5) Setup "response" for "updatedTask" as : res.json(updatedTask)
+   6) Setup "catch-error" as : error: any
+      1) Setup "res.status() as : 500
+      2) Setup "res.json({message : ..}) as : `Error updating task: ${error.message}`
+6) Create "***export-getUserTasks***" as : async():Promise<void>=>{const{}try{const tasks...}catch(error:any){res...}}
+   1) Create "req and res" as : Request, Response
+   2) Create "userId" as : req.params
+   3) Create "tasks" as : await prisma.task.findMany({})
+      1) Setup "where" as :  {OR:[{ authorUserId: Number(userId) },{ assignedUserId: Number(userId) }]}
+      2) Setup "include" with
+         1) Setup "author" as : true
+         2) Setup "assignee" as : true
+   4) Setup "response" for "tasks" as : res.json(tasks)
+   5) Setup "catch-error" as : error: any
+      1) Setup "res.status() as : 500
+      2) Setup "res.json({message : ..}) as : `Error retrieving user's tasks: ${error.message}`
+
+### Setup Backend : Setup taskRoutes(Complete)
+
+1) Create {taskRoutes.ts} in /server/src/routes
+2) Setup "Router" for task
+   1) Import "Router" from express
+   2) Import "createTask, getTasks, getUserTasks, updateTaskStatus" from ../controllers/taskController
+3) Create "router" as : Router()
+4) Setup "router" with
+   1) Setup "get" for "getTasks" as : router.get("/", getTasks)
+   2) Setup "post" for "createTask" as : router.post("/", createTask)
+   3) Setup "[patch]" for "updateTaskStatus" as : router.patch("/:taskId/status", updateTaskStatus)
+   4) Setup "get" for "getUserTasks" as : router.get("/user/:userId", getUserTasks)
+5) Export default router
+6) Test "GET" Task by "POSTMAN" as :
+   1) Setup "Params" with : Key = projectId and Value = 1
+   2) Click send
+   ***This will return all tasks which associated with "projectId = 1"***
+7) Test "POST" Task by "POSTMAN" as :
+   1) Go to "body" and "raw" and place on area code
+      {
+        "title": "New Task",
+        "description": "task description",
+        "status": "To Do",
+        "priority": "High",
+        "tags": "Deployment",
+        "startDate": "2023-02-20T00:00:00.000Z",
+        "dueDate": "2023-06-20T00:00:00.000Z",
+        "points": null,
+        "projectId": 1,
+        "authorUserId": 2,
+        "assignedUserId": 4
+      }
+   2) Do the same as "project" to generate "ID" with "n=n+1" on "PGADMIN4" by query method as : SELECT setval(pg_get_serial_sequence('"Task"','id'),coalesce(max(id)+1,1),false) FROM "Task"
+   3) Click send
+   ***This will return all tasks which associated with "ID = 41" : Meant it was added new task on database ***
+Time stamp : 02:41:41

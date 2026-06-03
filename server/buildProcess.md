@@ -931,7 +931,11 @@ git push -u origin main
    1) Import "Request and Response" from express
    2) Import "PrismaClient" from @prisma/client
    3) Create "prisma" as : new PrismaClient()
-3) Create "***export-getTask***" as : async():Promise<void>=>{const{}try{const tasks...}catch(error:any){res...}}
+3) Create "tasks" function as : getTasks, createTask, updateTaskStatus, getUserTasks
+
+#### Setup Backend : Setup taskController - GETTASK
+
+1) Create "***export-getTask***" as : async():Promise<void>=>{const{}try{const tasks...}catch(error:any){res...}}
    1) Create "projectId" as : req.query
    2) Create "tasks" as : await prisma.task.findMany()
       1) Setup "where" as :  projectId: Number(projectId)
@@ -944,7 +948,10 @@ git push -u origin main
    4) Setup "catch-error" as : error: any
       1) Setup "res.status() as : 500
       2) Setup "res.json({message : ..}) as : `Error retrieving tasks: ${error.message}`
-4) Create "***export-createTask***" as : async():Promise<void>=>{const{}try{const newTasks...}catch(error:any){res...}}
+
+#### Setup Backend : Setup taskController - CREATTASK
+
+1) Create "***export-createTask***" as : async():Promise<void>=>{const{}try{const newTasks...}catch(error:any){res...}}
    1) Create "req and res" as : Request, Response
    2) Create "title, description, status, priority, tags, startDate, dueDate, points, projectId, authorUserId, assignUserId" as : req.body
    3) Create "newTask" as : await prisma.task.create({})
@@ -953,7 +960,10 @@ git push -u origin main
    5) Setup "catch-error" as : error: any
       1) Setup "res.status() as : 500
       2) Setup "res.json({message : ..}) as : `Error creating a task: ${error.message}`
-5) Create "***export-updateTaskStatus***" as : async():Promise<void>=>{const{}try{const updatedTask...}catch(error:any){res...}}
+
+#### Setup Backend : Setup taskController - UPDATETASK
+
+1) Create "***export-updateTaskStatus***" as : async():Promise<void>=>{const{}try{const updatedTask...}catch(error:any){res...}}
    1) Create "req and res" as : Request, Response
    2) Create "taskId" as : req.params
    3) Create "status" as : req.body
@@ -964,7 +974,10 @@ git push -u origin main
    6) Setup "catch-error" as : error: any
       1) Setup "res.status() as : 500
       2) Setup "res.json({message : ..}) as : `Error updating task: ${error.message}`
-6) Create "***export-getUserTasks***" as : async():Promise<void>=>{const{}try{const tasks...}catch(error:any){res...}}
+
+#### Setup Backend : Setup taskController - GETUSERTASK
+
+1) Create "***export-getUserTasks***" as : async():Promise<void>=>{const{}try{const tasks...}catch(error:any){res...}}
    1) Create "req and res" as : Request, Response
    2) Create "userId" as : req.params
    3) Create "tasks" as : await prisma.task.findMany({})
@@ -1012,4 +1025,16 @@ git push -u origin main
    2) Do the same as "project" to generate "ID" with "n=n+1" on "PGADMIN4" by query method as : SELECT setval(pg_get_serial_sequence('"Task"','id'),coalesce(max(id)+1,1),false) FROM "Task"
    3) Click send
    ***This will return all tasks which associated with "ID = 41" : Meant it was added new task on database ***
+8) Test "PATCH" Task by "POSTMAN" as :
+   1) Go to "body" and "raw" and place on area code
+      {
+        "status": "Work In Progress"
+      }
+   2) Setup "KEY and VALUE" as : taskId and 41 as lastest created
+   3) Change "URL" to : http://localhost:8000/tasks/41/status
+   4) Click send
+   ***The result will change "status" to be : "Work In Progress"***
+   5) Check on "PostgreSQL" by : refresh on "task" menu
+   6) On "PostgreSQL" click on table will return "status" to be : "Work In Progress" too
+
 Time stamp : 02:41:41

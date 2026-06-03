@@ -280,7 +280,6 @@ git push -u origin main
     3) Setup "productOwnerUserId?" as : number
     4) Setup "projectManagerUserId?" as : number
 12) Create "api" body as : api = createApi({Setup API-Body}) **Go to Setup API-Body**
-13) Export "APIs" for "useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery, useGetUsersQuery, useGetTeamsQuery, useGetTasksByUserQuery, useGetAuthUserQuery" as : api
 
 #### Setup Frontend : Setup API-Body
 
@@ -343,6 +342,7 @@ git push -u origin main
        2) Setup "providerTags" as : ["ProTeamsjects"]
    10) Setup "**search**" as : build.query<SearchResults, string>({})
        1) Setup "query" as : (query) => `search?query=${query}`
+   11) Export "APIs" for "useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery, useGetUsersQuery, useGetTeamsQuery, useGetTasksByUserQuery, useGetAuthUserQuery" as : api
 
    ***Back to check and completed "dashboardWrapper.tsx"***
 
@@ -1038,8 +1038,11 @@ git push -u origin main
    6) On "PostgreSQL" click on table will return "status" to be : "Work In Progress" too
    ***On taskController we include : author, assignee, comments, attachments, So it have to add them on task too***
 
-
 Time stamp : 02:46:45
 
-***Setup Frontend : Setup Export Interface as above Line 226-281***
+***Setup Frontend : Setup Export Interface as above Line 226-281 (Complete process coding)***
 
+#### Setup Frontend : Wrap-Up setup
+
+1) Go to {api.ts} adding : getProject and createProject
+2) Adding : getTasks, createTask

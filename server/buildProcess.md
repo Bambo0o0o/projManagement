@@ -281,7 +281,7 @@ git push -u origin main
     4) Setup "projectManagerUserId?" as : number
 12) Create "api" body as : api = createApi({Setup API-Body}) **Go to Setup API-Body**
 
-#### Setup Frontend : Setup API-Body
+#### Setup Frontend : Setup API-Body(Complete)
 
 1) Create "baseQuery" as : fetchBaseQuery({})
 2) Setup "baseUrl" as : process.env.NEXT_PUBLIC_API_BASE_URL
@@ -407,7 +407,7 @@ git push -u origin main
    8) Create "onClick" funciton for "button" as : {handleSignOut}
    9) Create "text" for "button" as : Sign Out
 
-#### Setup Frontend : Dashboard with "Sidebar"
+#### Setup Frontend : Dashboard with "Sidebar" (Complete)
 
 1) Create "Sidebar" folder in /client/src/app/(components) directory
 2) Create {index.tsx} file in "Sidebar" folder
@@ -484,37 +484,37 @@ git push -u origin main
 7) Create "p" with "className" as : "text-xs text-gray-500"
    1) Setup "paragraph" as : Private
 
-##### Setup Frontend : Dashbord with "Sidebar" -Menu Links
+##### Setup Frontend : Dashbord with "Sidebar" -Navbar Links
 
 1) Create "nav" with "className" as : "z-10 w-full"
-2) Create "SidebarLink" for "Home" with
+2) Create "SidebarLink" for "**Home**" with
    1) Setup "icon" as : {Home}
    2) Setup "label" as : "Home"
    3) Setup "href" as : "/"
-3) Create "SidebarLink" for "Briefcase" with
+3) Create "SidebarLink" for "**Briefcase**" with
    1) Setup "icon" as : {Briefcase}
    2) Setup "label" as : "Timeline"
    3) Setup "href" as : "/timeline"
-4) Create "SidebarLink" for "Search" with
+4) Create "SidebarLink" for "**Search**" with
    1) Setup "icon" as : {Search}
    2) Setup "label" as : "Search"
    3) Setup "href" as : "/search"
-5) Create "SidebarLink" for "Setting" with
+5) Create "SidebarLink" for "**Setting**" with
    1) Setup "icon" as : {Setting}
    2) Setup "label" as : "Setting"
    3) Setup "href" as : "/setting"
-6) Create "SidebarLink" for "User" with
+6) Create "SidebarLink" for "**User**" with
    1) Setup "icon" as : {User}
    2) Setup "label" as : "Users"
    3) Setup "href" as : "/users"
-7) Create "SidebarLink" for "Users" with
+7) Create "SidebarLink" for "**Users**" with
    1) Setup "icon" as : {Users}
    2) Setup "label" as : "Teams"
    3) Setup "href" as : "/teams"
 
 ##### Setup Frontend : Dashbord with "Sidebar" -Projects Links
 
-1) Create "button" with
+1) Create "**button**" with
    1) Create "onClick" funciton as : () => setShowProjects((prev) => !prev)
    2) Create "className" as : "flex w-full items-center justify-between px-8 py-3 text-gray-500"
    3) Create "span" with "className" as : ""
@@ -523,9 +523,11 @@ git push -u origin main
       1) Setup "ChevronUp" with "className" as : "h-5 w-5"
       2) Setup "ChevronDown" with "className" as : "h-5 w-5
 
-##### Setup Frontend : Dashbord with "Sidebar" -Projects Lists
+##### Setup Frontend : Dashbord with "Sidebar" -Projects Lists (Show list to Sidebar menu)
 
-1) Create "showProjects" with
+***To Fetching data to Project menu list***
+
+1) Create "**showProjects**" with
    1) Create "projects?.map" as : (project) => ()
    2) Create "SidebarLink" with
       1) Setup "key" as : {project.id}
@@ -535,7 +537,7 @@ git push -u origin main
 
 ##### Setup Frontend : Dashbord with "Sidebar" -Priorities Links
 
-1) Create "button" with
+1) Create "**button**" with
    1) Create "onClick" funciton as : () => setShowPriority((prev) => !prev)
    2) Create "className" as : "flex w-full items-center justify-between px-8 py-3 text-gray-500"
    3) Create "span" with "className" as : ""
@@ -1047,16 +1049,141 @@ Time stamp : 02:46:45
 1) Go to {api.ts} adding : getProject and createProject
 2) Adding : getTasks, createTask, updateTaskStatus
 
-#### Setup Frontend : Setup Projects page
+#### Setup Frontend : Setup Projects page (Complete)
+
+***************************************  Seriously ****************************************
+***Move (components) folder to outside app folder then change name to be : components******
+***Change routes for "Navbar" and "Sidebar" in {dashboardWrapper.tsx} to @/components/..***
+******************************************* x *********************************************
 
 1) Create "projects" folder in /client/src/app directory
 2) Create "[id]" folder in /client/src/app/projects directory **To handling projectId**
 3) Create {page.tsx} in /client/src/app/projects/[id] directory
    1) Create template as : tsrafce
-   2) Change "type Props" tag and there argument
+   2) Change "page" name to "Project" name
    3) Create "use client" on top of {page.tsx} file
+   4) Adding "type Props" with "id" as : params: { id: string }
+   5) Setup "Import" with
+      1) Import "React and {useState}" from react
+      2) Import "ProjectHeader" from @/app/projects/ProjectHeader
+      3) Import "Board" from ../BoardView
+      4) Import "List" from ../ListView
+      5) Import "Timeline" from ../TimelineView
+      6) Import "Table" from ../TableView
+      7) Import "ModalNewTask" from @/components/ModalNewTask
+   6) Change "props" in "project" argument to : {params}
+   7) Setup "id" as : params
+   8) Setup "activeTab, setActiveTab" as : useState("Board")
+   9) Setup "isModalNewTaskOpen, setIsModalNewTaskOpen" as : useState(false)
+   10) Create "div" tag in return function
+       1) Create "ModalNewTask" with
+          1) Setup "isOpen" as : {isModalNewTaskOpen}
+          2) Setup "onClose" as : {() => setIsModalNewTaskOpen(false)}
+          3) Setup "id" as : {id}
+       2) Create "ProjectHeader" with
+          1) Setup "activeTab" as : {activeTab}
+          2) Setup "setActiveTab" as : {setActiveTab}
+       3) Create "activeTab" for "**Board**" with
+          1) Setup "id" as : {id}
+          2) Setup "setIsModalNewTaskOpen" as : {setIsModalNewTaskOpen}
+       4) Create "activeTab" for "**List**" with
+          1) Setup "id" as : {id}
+          2) Setup "setIsModalNewTaskOpen" as : {setIsModalNewTaskOpen}
+       5) Create "activeTab" for "**Timeline**" with
+          1) Setup "id" as : {id}
+          2) Setup "setIsModalNewTaskOpen" as : {setIsModalNewTaskOpen}
+       6) Create "activeTab" for "**Table**" with
+          1) Setup "id" as : {id}
+          2) Setup "setIsModalNewTaskOpen" as : {setIsModalNewTaskOpen}
+4) Test run "client" as : npm run dev
 
-***************************************Seriously****************************************
-***Move (components) folder to outside app folder then change name to be : components***
-*******************************************x********************************************
+#### Setup Frontend : Setup Projects - projectHeader (Show Project's Header name as dynamics)
 
+1) Create {ProjectHeader.tsx} in /client/src/projects directory
+2) Create "template" as : tsrafce
+3) Change name to : ProjectHeader
+4) Create "type Props" with
+   1) Setup "activeTab" as : string
+   2) Setup "setActiveTab" as : (tabName: string) => void
+***Back to adding code on "Projects List" to show list of project on Sidebar menu***
+5) Import tools with
+   1) Import "Header" with @/components/Header
+   2) Import "Clock, Filter, Grid3x3, List, PlusSquare, Share2, Table," from lucide-react
+   3) Import "React, {useState}" from react
+   4) Import "ModalNewProject" from ./ModalNewProject
+6) Create "argument" for "ProjectHeader" function as : {activeTab, setActiveTab }: Props
+   1) Create "isModalNewProjectOpen, setIsModalNewProjectOpen" as : useState(false)
+   2) Create "return" value with
+      1) Create "div" with "className" as : "px-4 xl:px-6"
+      2) Create "ModalNewProject" tag with
+         1) Setup "isOpen" as : {isModalNewProjectOpen}
+         2) Setup "onClose" as : {() => setIsModalNewProjectOpen(false)}
+      3) Create "div' with "className" as : "pb-6 pt-6 lg:pb-4 lg:pt-8"
+      4) Create "Header" tag with
+         1) Setup "name" as : "Product Design Development"
+         2) Setup "buttonComponent" with "button" tag
+            1) Setup "className" as : "flex items-center rounded-md bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+            2) Setup "onClick" as : {() => setIsModalNewProjectOpen(true)}
+            3) Create "PlusSquare" tag with "className" as : "mr-2 h-5 w-5"
+            4) Setup "button" text as : New Boards
+
+##### Setup Frontend : Setup Projects - projectHeader with TABS section
+
+1) Setup "TABS" section with
+   1) Create "div" with "className" as : "flex flex-wrap-reverse gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:items-center"
+   2) Create "div" with "className" as : "flex flex-1 items-center gap-2 md:gap-4"
+      1) Create "TabButton" for "**Board**" with
+         1) Setup "name" as : "Board"
+         2) Setup "icon" as : {<Grid3x3 className="h-5 w-5" />}
+         3) Setup "setActiveTab" as : {setActiveTab}
+         4) Setup "activeTab" as : {activeTab}
+      2) Create "TabButton" for "**List**" with
+         1) Setup "name" as : "List"
+         2) Setup "icon" as : {<List className="h-5 w-5" />}
+         3) Setup "setActiveTab" as : {setActiveTab}
+         4) Setup "activeTab" as : {activeTab}
+      3) Create "TabButton" for "**Timeline**" with
+         1) Setup "name" as : "Timeline"
+         2) Setup "icon" as : {<Clock className="h-5 w-5" />}
+         3) Setup "setActiveTab" as : {setActiveTab}
+         4) Setup "activeTab" as : {activeTab}
+      4) Create "TabButton" for "**Table**" with
+         1) Setup "name" as : "Table"
+         2) Setup "icon" as : {<Table className="h-5 w-5" />}
+         3) Setup "setActiveTab" as : {setActiveTab}
+         4) Setup "activeTab" as : {activeTab}
+   3) Create "div" with "className" as : "flex items-center gap-2"
+   4) Create "button" tag with "className" as : "text-gray-500 hover:text-gray-600 dark:text-neutral-500 dark:hover:text-gray-300"
+      1) Create "Filter" tag with "className" as : "h-5 w-5"
+   5) Create "button" tag with "className" as : "text-gray-500 hover:text-gray-600 dark:text-neutral-500 dark:hover:text-gray-300"
+      1) Create "Share2" tag with "className" as : "h-5 w-5"
+   6) Create "div" with "className" as : "relative"
+   7) Create "input" tag with
+      1) Setup "type" as : "text"
+      2) Setup "placeholder" as : "Search Task"
+      3) Setup "className" as : "rounded-md border py-1 pl-10 pr-4 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+   8) Create "Grid3x3" tag with "className" as : "absolute left-3 top-2 h-4 w-4 text-gray-400 dark:text-neutral-500"
+
+#### Setup Frontend : Setup Projects - projectHeader for TabButtonProps
+
+1) Create "type-TabButtonProps" with
+   1) Setup "name" as : string
+   2) Setup "icon" as : React.ReactNode
+   3) Setup "setActiveTab" as : (tabName: string) => void
+   4) Setup "activeTab" as : string
+2) Create "TabButton" function with
+   1) Setup "argument" as : { name, icon, setActiveTab, activeTab }: TabButtonProps
+   2) Setup "isActive" as : activeTab === name
+3) Create "return" function with
+   1) Create "button" tag with "className" as : {`relative flex items-center gap-2 px-1 py-2 text-gray-500 after:absolute after:-bottom-[9px] after:left-0 after:h-[1px] after:w-full hover:text-blue-600 dark:text-neutral-500 dark:hover:text-white sm:px-2 lg:px-4 ${
+        isActive ? "text-blue-600 after:bg-blue-600 dark:text-white" : ""
+      }`}
+      1) Setup "onClick" as : {() => setActiveTab(name)}
+      2) Setup "icon" as : {icon}
+      3) Setup "name" as : {name}
+4) Export defualt as : ProjectHeader
+
+
+
+
+Time Stamp : 03:12:20

@@ -1,20 +1,43 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X } from "lucide-react";
+import {
+  AlertCircle,
+  AlertOctagon,
+  AlertTriangle,
+  Briefcase,
+  ChevronDown,
+  ChevronUp,
+  Home,
+  Layers3,
+  LockIcon,
+  LucideIcon,
+  Search,
+  Settings,
+  ShieldAlert,
+  User,
+  Users,
+  X,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
+import { useGetProjectsQuery } from "@/state/api";
 
 const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setShowPriority] = useState(true);
+
+  // Fetching Data to Show on "Project menu"
+  const { data: projects } = useGetProjectsQuery();
 
   // Setup isCollapsed on Sidebar
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
   );
+ 
+
 
   // Adding function to Collapsed on : "w-0 hidden" : "w-64"
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
@@ -76,7 +99,15 @@ const Sidebar = () => {
           )}
         </button>
         {/* Project List Section */}
-
+        {showProjects &&
+          projects?.map((project) => (
+            <SidebarLink
+              key={project.id}
+              icon={Briefcase}
+              label={project.name}
+              href={`/projects/${project.id}`}
+            />
+          ))}
 
         {/* Projects Priorities Section */}
         <button
@@ -116,7 +147,6 @@ const Sidebar = () => {
             />
           </>
         )}
-
       </div>
     </div>
   );

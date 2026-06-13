@@ -1097,7 +1097,7 @@ Time stamp : 02:46:45
           2) Setup "setIsModalNewTaskOpen" as : {setIsModalNewTaskOpen}
 4) Test run "client" as : npm run dev
 
-#### Setup Frontend : Setup Projects - projectHeader (Show Project's Header name as dynamics)
+#### Setup Frontend : Setup Projects - projectHeader (Show Project's Header name as dynamics)- Complete
 
 1) Create {ProjectHeader.tsx} in /client/src/projects directory
 2) Create "template" as : tsrafce
@@ -1113,7 +1113,7 @@ Time stamp : 02:46:45
    4) Import "ModalNewProject" from ./ModalNewProject
 6) Create "argument" for "ProjectHeader" function as : {activeTab, setActiveTab }: Props
    1) Create "isModalNewProjectOpen, setIsModalNewProjectOpen" as : useState(false)
-   2) Create "return" value with
+   2) Create "return" function with
       1) Create "div" with "className" as : "px-4 xl:px-6"
       2) Create "ModalNewProject" tag with
          1) Setup "isOpen" as : {isModalNewProjectOpen}
@@ -1127,7 +1127,7 @@ Time stamp : 02:46:45
             3) Create "PlusSquare" tag with "className" as : "mr-2 h-5 w-5"
             4) Setup "button" text as : New Boards
 
-##### Setup Frontend : Setup Projects - projectHeader with TABS section
+##### Setup Frontend : Setup Projects - projectHeader with TABS section(Complete)
 
 1) Setup "TABS" section with
    1) Create "div" with "className" as : "flex flex-wrap-reverse gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:items-center"
@@ -1164,7 +1164,7 @@ Time stamp : 02:46:45
       3) Setup "className" as : "rounded-md border py-1 pl-10 pr-4 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
    8) Create "Grid3x3" tag with "className" as : "absolute left-3 top-2 h-4 w-4 text-gray-400 dark:text-neutral-500"
 
-#### Setup Frontend : Setup Projects - projectHeader for TabButtonProps
+##### Setup Frontend : Setup Projects - projectHeader with TabButton section (Complete)
 
 1) Create "type-TabButtonProps" with
    1) Setup "name" as : string
@@ -1183,7 +1183,23 @@ Time stamp : 02:46:45
       3) Setup "name" as : {name}
 4) Export defualt as : ProjectHeader
 
+#### Setup Frontend : Template for "Header" (Complete)
+
+1) Create "Header" folder in /client/src/components directory
+2) Create {index.tsx} in /client/src/components directory
+3) Create "template" as : tsrafce
+4) Change function name from "index" to "Header"
+5) Create "Props" parameters with
+   1) Setup "name" as : string
+   2) Setup "buttonComponent?" as : any
+   3) Setup "isSmallText?" as : boolean
+6) Create argument for "Header" function as : { name, buttonComponent, isSmallText = false }: Props
+7) Create "return" function with
+   1) Create "div" with "className" as : "mb-5 flex w-full items-center justify-between"
+   2) Create "h1" tag with "className" as : {`${isSmallText ? "text-lg" : "text-2xl"} font-semibold dark:text-white`}
+   3) Create "Header-Text" with dynamic argument as : {name}
+   4) Create dynamic button name as : {buttonComponent}
+8) Export default as : Header
 
 
-
-Time Stamp : 03:12:20
+Time Stamp : 03:14:38

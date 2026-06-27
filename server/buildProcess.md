@@ -1049,7 +1049,7 @@ Time stamp : 02:46:45
 1) Go to {api.ts} adding : getProject and createProject
 2) Adding : getTasks, createTask, updateTaskStatus
 
-#### Setup Frontend : Setup Projects page (Complete)
+#### Setup Frontend : Setup Projects[id] page (Complete)
 
 ***************************************  Seriously ****************************************
 ***Move (components) folder to outside app folder then change name to be : components******
@@ -1107,7 +1107,7 @@ Time stamp : 02:46:45
    2) Setup "setActiveTab" as : (tabName: string) => void
 ***Back to adding code on "Projects List" to show list of project on Sidebar menu***
 5) Import tools with
-   1) Import "Header" with @/components/Header
+   1) Import "Header" from @/components/Header
    2) Import "Clock, Filter, Grid3x3, List, PlusSquare, Share2, Table," from lucide-react
    3) Import "React, {useState}" from react
    4) Import "ModalNewProject" from ./ModalNewProject
@@ -1201,5 +1201,180 @@ Time stamp : 02:46:45
    4) Create dynamic button name as : {buttonComponent}
 8) Export default as : Header
 
+#### Setup Frontend : Setup Project - BoardViews mains (complete)
 
-Time Stamp : 03:14:38
+1) Create "BoardView" folder in /client/src/app/projects
+2) Create {index.tsx} in /client/src/app/projects/BoardView
+3) Create template : tsrafce
+4) Change function name from "index" to BoardView
+5) Import tools with
+   1) Import "useGetTasksQuery, useUpdateTaskStatusMutation" from @/state/api
+   2) Import "React" from react
+   3) Import "DndProvider, useDrag, useDrop" from react-dnd
+   4) Import "HTML5Backend" from react-dnd-html5-backend
+   5) Import "Task as TaskType" from @/state/api
+   6) Import "EllipsisVertical, MessageSquareMore, Plus" from lucide-react
+   7) Import "format" from date-fns
+   8) Import "Image" from next/image
+6) Create "Props" parameters with
+   1) Setup "id" as : string
+   2) Setup "setIsModalNewTaskOpen" as : (isOpen: boolean) => void
+7) Create array of text with "taskStatus" as : ["To Do", "Work In Progress", "Under Review", "Completed"]
+8) Create argument for "BoardView" function as : { id, setIsModalNewTaskOpen }: BoardProps
+9) Create "data: tasks, isLoading, error," as : useGetTasksQuery({ projectId: Number(id) })
+10) Create "[updateTaskStatus]" as : useUpdateTaskStatusMutation()
+11) Create "moveTask" as : (taskId: number, toStatus: string) => {}
+    1) Create return "updateTaskStatus" as : { taskId, status: toStatus }
+12) Create if-condition for "isLoading" as :  <div>Loading...</div>
+13) Create if-condition for "error" as : <div>An error occurred while fetching tasks</div>
+14) Create return function as :
+    1) Create "DndProvider" tag with backend as : {HTML5Backend}
+    2) Create "div" with "className" as : "grid grid-cols-1 gap-4 p-4 md:grid-cols-2 xl:grid-cols-4"
+    3) Create "taskStatus.map" function with "status" argument
+    4) Create "TaskColumn" tag with
+       1) Setup "key" as : {status}
+       2) Setup "status" as : {status}
+       3) Setup "task" as : {tasks || []}
+       4) Setup "moveTask" as : {moveTask}
+       5) Setup "setIsModalNewTaskOpen" as : {setIsModalNewTaskOpen}
+15) Export default as : BoardView
+
+##### Setup Frontend : Setup Project - BoardViews with TaskColumn(complete)
+
+1) Create "type-Props" parameters with
+   1) Setup "status" as : string
+   2) Setup "tasks" as : TaskType[]
+   3) Setup "moveTask" as : (taskId:number, toStatus: string) => void
+   4) Setup "setIsModalNewTaskOpen" as : (isOpen: boolean) => void
+2) Create "TaskColumn" function with argument as : {status, tasks, moveTask, setIsModalNewTaskOpen,}: TaskColumnProps
+3) Create "{ isOver }, drop" as : useDrop(() => ({})) function
+   1) Setup "accept" as : "task"
+   2) Setup "drop" as : (item: { id: number }) => moveTask(item.id, status)
+   3) Setup "collect" as : (monitor: any) => ({})
+      1) Setup "isOver" as : !!monitor.isOver()
+4) Create "tasksCount" as : tasks.filter((task) => task.status === status).length
+5) Create "statusColor: any" with
+   1) Setup "To Do" as : #2563EB
+   2) Setup "Work In Progress" as : #059669
+   3) Setup "Under Review" as : #D97706
+   4) Setup "Completed" as : #000000
+6) Create "return" function with
+   1) Create "div" with
+      1) Setup "ref" function as : {(instance) => {drop(instance);}}
+      2) Setup "className" as : {`sl:py-4 rounded-lg py-2 xl:px-2 ${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""}`}
+   2) Create "div" with "className" as : "mb-3 flex w-full"
+   3) Create "div" with
+      1) Setup "className" as : {`w-2 !bg-[${statusColor[status]}] rounded-s-lg`}
+      2) Setup "style" as : {{ backgroundColor: statusColor[status] }}
+   4) Create "div" with "className" as : "flex w-full items-center justify-between rounded-e-lg bg-white px-5 py-4 dark:bg-dark-secondary"
+   5) Create "h3" with "className" as : "flex items-center text-lg font-semibold dark:text-white"
+      1) Setup "text" as : {status}{" "}
+      2) Create "span" with "className" as : "ml-2 inline-block rounded-full bg-gray-200 p-1 text-center text-sm leading-none dark:bg-dark-tertiary"
+      3) Setup "style" as : {{ width: "1.5rem", height: "1.5rem" }}
+      4) Setup "text" as : {tasksCount}
+   6) Create "div" with "className" as : "flex items-center gap-1"
+   7) Create "button" with "className" as : "flex h-6 w-5 items-center justify-center dark:text-neutral-500"
+      1) Create "EllipsisVertical" with "size" : 26
+   8) Create "button" with "className" as : "flex h-6 w-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white"
+      1) Create "onClick" function as : {() => setIsModalNewTaskOpen(true)}
+      2) Create "Plus" with "size" : 16
+   9) Create "tasks" with
+      1) Setup "tasks.filter" with argument funciton as : (task) => task.status === status
+      2) Setup "tasks.map" with argument funciton as : (<Task key={task.id} task={task} />)
+
+##### Setup Frontend : Setup Project - BoardViews with Task(complete)
+
+1) Create "type-Props" as : task: TaskType
+2) Create "Task" funciton with argument as : { task }: TaskProps
+3) Create "{ isDragging }, drag" as : useDrag(() => ({})) function
+   1) Setup "type" as : task
+   2) Setup "item" as : { id: task.id }
+   3) Setup "collect" as : (monitor: any) => ({})
+      1) Setup "isDragging" as : !!monitor.isDragging()
+4) Create "taskTagsSplit" as : task.tags ? task.tags.split(",") : [];
+5) Create "formattedStartDate" with condition as : task.startDate
+   ? format(new Date(task.startDate), "P")
+   : ""
+6) Create "formattedDueDate" with condition as : task.dueDate
+   ? format(new Date(task.dueDate), "P")
+   : ""
+7) Create "numberOfComments" as : (task.comments && task.comments.length) || 0
+8) Create "PriorityTag" function as : ({ priority }: { priority: TaskType["priority"] }) => ()
+   1) Create "div" with "className" as : {`rounded-full px-2 py-1 text-xs font-semibold ${priority === "Urgent".....}`}
+   2) Setup condition for ""Urgent" with :
+   ? "bg-red-200 text-red-700"
+   : priority === "High"
+   ? "bg-yellow-200 text-yellow-700"
+   : priority === "Medium"
+   ? "bg-green-200 text-green-700"
+   : priority === "Low"
+   ? "bg-blue-200 text-blue-700"
+   : "bg-gray-200 text-gray-700"
+9) Setup "text" as : {priority}
+10) Create "return" function with
+    1) Create "div" with "ref" function as : {(instance) => {drag(instance);}}
+    2) Create "className" for "div" as : `mb-4 rounded-md bg-white shadow dark:bg-dark-secondary ${isDragging..}`}
+    3) Create "isDragging" conditon as :
+    ? "opacity-50"
+    : "opacity-100"
+    4) Create "task.attachments" as : task.attachments && task.attachments.length > 0 && (<Image...>)
+    5) Create "Image" tag with :
+       1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
+       2) Setup "alt" as : {task.attachments[0].fileName}
+       3) Setup "width" as : {400}
+       4) Setup "height" as : {200}
+       5) Setup "className" as : "h-auto w-full rounded-t-md"
+    6) Create "div" with "className" as : "p-4 md:p-6"
+       1) Create "div" with "className" as : "flex items-start justify-between"
+          1) Create "div" with "className" as : "flex flex-1 flex-wrap items-center gap-2"
+          2) Setup "task.priority" with : && <PriorityTag priority={task.priority} />
+          3) Create "div" with "className" as : "flex gap-2"
+          4) Create "taskTagsSplit.map" function with "tag" argument as : {taskTagsSplit.map((tag) => ())}
+             1) Create "div" with "key" as : {tag}
+             2) Create "div" with "className" as : "rounded-full bg-blue-100 px-2 py-1 text-xs"
+             3) Create "tag" as : {" "}
+             4) Create "tag" as : {tag}
+          5) Create "button" with "className" as : "flex h-6 w-4 flex-shrink-0 items-center justify-center dark:text-neutral-500"
+             1) Create "EllipsisVertical" tag with "size" as : {26}
+       2) Create "div" with "className" as : "my-3 flex justify-between"
+          1) Create "h4" tag with "className" as : "text-md font-bold dark:text-white"
+          2) Setup "h4" text as : {task.title}
+          3) Create "typeof" with "task.points" as : "number" && ()
+             1) Create "div" with "className" as : "text-xs font-semibold dark:text-white"
+             2) Setup "task.points" as : {task.points} pts
+       3) Create "div" with "className" as : "text-xs text-gray-500 dark:text-neutral-500"
+          1) Setup "formattedStartDate" as : && <span>{formattedStartDate} - </span>
+          2) Setup "formattedDueDate" as : && <span>{formattedDueDate}</span>
+       4) Create "p" tag with "className" as : "text-sm text-gray-600 dark:text-neutral-500"
+          1) Setup "p" tag as : {task.description}
+       5) Create "div" with "className" as : "mt-4 border-t border-gray-200 dark:border-stroke-dark"
+
+##### Setup Frontend : Setup Project - BoardViews with Task-User(complete)
+
+1) Create "div" with "className" as : "mt-3 flex items-center justify-between"
+2) Create "div" with "className" as : "flex -space-x-[6px] overflow-hidden"
+   1) Create "task.assignee" tag with
+      1) Create "Image" tag with
+      2) Setup "key" as : {task.assignee.userId}
+      3) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.assignee.profilePictureUrl!}`}
+      4) Setup "alt" as : {task.assignee.username}
+      5) Setup "width" as : {30}
+      6) Setup "height" as : {30}
+      7) Setup "className" as : "h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+   2) Create "task.author" tag with
+      1) Create "Image" tag with
+      2) Setup "key" as : {task.author.userId}
+      3) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.author.profilePictureUrl!}`}
+      4) Setup "alt" as : {task.author.username}
+      5) Setup "width" as : {30}
+      6) Setup "height" as : {30}
+      7) Setup "className" as : "h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+3) Create "div" with "className" as : "flex items-center text-gray-500 dark:text-neutral-500"
+   1) Create "MessageSquareMore" tag with "size" as : {20}
+   2) Create "span" with "className" as : "ml-1 text-sm dark:text-neutral-400"
+      1) Setup "span" value as : {numberOfComments}
+
+
+
+
+Time Stamp : 03:28:35

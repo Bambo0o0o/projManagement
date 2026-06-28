@@ -31,6 +31,7 @@ const BoardView = ({ id, setIsModalNewTaskOpen }: BoardProps) => {
   if (error) return <div>An error occurred while fetching tasks</div>;
 
   return (
+    // DRAG and DROP Section 
     <DndProvider backend={HTML5Backend}>
       <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 xl:grid-cols-4">
         {taskStatus.map((status) => (
@@ -178,7 +179,7 @@ const Task = ({ task }: TaskProps) => {
     >
       {task.attachments && task.attachments.length > 0 && (
         <Image
-          src={``}
+          src={`/${task.attachments[0].fileURL}`}
           // src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
           alt={task.attachments[0].fileName}
           width={400}
@@ -187,6 +188,7 @@ const Task = ({ task }: TaskProps) => {
         />
       )}
 
+      {/* STYLING PAGE */}
       <div className="p-4 md:p-6">
         <div className="flex items-start justify-between">
           <div className="flex flex-1 flex-wrap items-center gap-2">
@@ -221,9 +223,11 @@ const Task = ({ task }: TaskProps) => {
           {formattedStartDate && <span>{formattedStartDate} - </span>}
           {formattedDueDate && <span>{formattedDueDate}</span>}
         </div>
+
         <p className="text-sm text-gray-600 dark:text-neutral-500">
           {task.description}
         </p>
+
         <div className="mt-4 border-t border-gray-200 dark:border-stroke-dark" />
 
         {/* USERS Section */}
@@ -232,7 +236,7 @@ const Task = ({ task }: TaskProps) => {
             {task.assignee && (
               <Image
                 key={task.assignee.userId}
-                src={``}
+                src={`/${task.assignee.profilePictureUrl!}`}
                 // src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.assignee.profilePictureUrl!}`}
                 alt={task.assignee.username}
                 width={30}
@@ -243,7 +247,7 @@ const Task = ({ task }: TaskProps) => {
             {task.author && (
               <Image
                 key={task.author.userId}
-                src={``}
+                src={`/${task.author.profilePictureUrl!}`}
                 // src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.author.profilePictureUrl!}`}
                 alt={task.author.username}
                 width={30}

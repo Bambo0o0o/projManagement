@@ -1351,6 +1351,8 @@ Time stamp : 02:46:45
 
 ##### Setup Frontend : Setup Project - BoardViews with Task-User(complete)
 
+***To Show Picture on Local : Copy files from EdRoh Public directory to our Public directory and save page***
+
 1) Create "div" with "className" as : "mt-3 flex items-center justify-between"
 2) Create "div" with "className" as : "flex -space-x-[6px] overflow-hidden"
    1) Create "task.assignee" tag with
@@ -1377,4 +1379,4 @@ Time stamp : 02:46:45
 
 
 
-Time Stamp : 03:28:35
+Time Stamp : 03:57:18

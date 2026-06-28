@@ -1227,7 +1227,7 @@ Time stamp : 02:46:45
     1) Create return "updateTaskStatus" as : { taskId, status: toStatus }
 12) Create if-condition for "isLoading" as :  <div>Loading...</div>
 13) Create if-condition for "error" as : <div>An error occurred while fetching tasks</div>
-14) Create return function as :
+14) Create return function with :
     1) Create "DndProvider" tag with backend as : {HTML5Backend}
     2) Create "div" with "className" as : "grid grid-cols-1 gap-4 p-4 md:grid-cols-2 xl:grid-cols-4"
     3) Create "taskStatus.map" function with "status" argument
@@ -1376,7 +1376,52 @@ Time stamp : 02:46:45
    2) Create "span" with "className" as : "ml-1 text-sm dark:text-neutral-400"
       1) Setup "span" value as : {numberOfComments}
 
+#### Setup Frontend : Setup Project - ListViews main (Complete)
+
+1) Create "ListView" folder in /client/src/app/projects
+2) Create {index.tsx} in /client/src/app/projects/ListView
+3) Create template : tsrafce
+4) Change function name from "index" to ListView
+5) Import tools with :
+   1) Import "Header" from @/components/Header
+   2) Import "TaskCard" from @/components/TaskCard
+   3) Import "Task, useGetTasksQuery" from @/state/api
+   4) Import "React" from react
+6) Create "Props" parameters with
+   1) Setup "id" as : string
+   2) Setup "setIsModalNewTaskOpen" as : (isOpen: boolean) => void
+7) Create "ListView" function with
+   1) Create argument for "ListView" function as : { id, setIsModalNewTaskOpen }: Props
+   2) Create "data: tasks, isLoading, error," as : useGetTasksQuery({ projectId: Number(id) })
+   3) Create if-condition for "isLoading" as : <div>Loading...</div>
+   4) Create if-condition for "error" as : <div>An error occurred while fetching tasks</div>
+8) Create return function with :
+   1) Create "div" with "className" as : "px-4 pb-8 xl:px-6"
+   2) Create "div" with "className" as : "pt-5"
+   3) Create "Header" tag with
+      1) Setup "name" as : "List"
+      2) Setup "buttonComponent" with
+         1) Create "button" tag
+         2) Create "className" as : "flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+         3) Create "onClick" funciton as : {() => setIsModalNewTaskOpen(true)}
+         4) Setup "button-text" as : Add Task
+      3) Setup "Header-text" as : isSmallText
+   4) Create "div" with "className" as : "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+   5) Create "tasks?.map" with "task: Task" argument as : <TaskCard key={task.id} task={task} />
+9) Export default as : ListView
+
+#### Setup Frontend : Setup components - TaskCard
+
+1) Create "TaskCard" folder in /client/src/components
+2) Create {index.tsx} in  /client/src/components/TaskCard
+3) Create template : tsrafce
+4) Change function name from "index" to TaskCard
+5) Import tools with :
 
 
 
-Time Stamp : 03:57:18
+
+
+
+
+Time Stamp : 04:15:18

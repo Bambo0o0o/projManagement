@@ -1410,17 +1410,44 @@ Time stamp : 02:46:45
    5) Create "tasks?.map" with "task: Task" argument as : <TaskCard key={task.id} task={task} />
 9) Export default as : ListView
 
-#### Setup Frontend : Setup components - TaskCard
+#### Setup Frontend : Setup components - TaskCard (Complete)
 
 1) Create "TaskCard" folder in /client/src/components
 2) Create {index.tsx} in  /client/src/components/TaskCard
 3) Create template : tsrafce
 4) Change function name from "index" to TaskCard
 5) Import tools with :
-
-
-
-
+   1) Import "Task" from @/state/api
+   2) Import "format" from date-fns
+   3) Import "Image" from next/image
+   4) Import "React" from react
+6) Create "Props" parameters with :
+   1) Setup "task" as : Task
+7) Create "TaskCard" function with
+8) Setup argument for "TaskCard" as : { task }: Props
+9) Create return function with :
+   1) Create "div" with "className" as : "mb-3 rounded bg-white p-4 shadow dark:bg-dark-secondary dark:text-white"
+   2) Checking "task.attachments" as : task.attachments && task.attachments.length > 0 && ()
+      1) Create "div" tag
+      2) Create "strong" tag with "text" as : Attachments:
+      3) Create "div" with "className" as : "flex flex-wrap"
+      4) Checking "task.attachments" as : task.attachments && task.attachments.length > 0 && ()
+      5) Create "Image" tag with
+         1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
+         2) Setup "alt" as : {task.attachments[0].fileName}
+         3) Setup "width-Height" as : 400 and 200
+         4) Setup "className" as : "rounded-md"
+   3) Create "p" tag for "ID" as : <strong>ID:</strong> {task.id}
+   4) Create "p" tag for "ID" as : <strong>Title:</strong> {task.title}
+   5) Create "p" tag for "Description" as : <strong>Description:</strong>{" "}, {task.description || "No description provided"}
+   6) Create "p" tag for "Status" as : <strong>Status:</strong> {task.status}
+   7) Create "p" tag for "Priority" as : <strong>Priority:</strong> {task.priority}
+   8) Create "p" tag for "Tags" as : <strong>Tags:</strong> {task.tags || "No tags"}
+   9) Create "p" tag for "Start Date" as : <strong>Start Date:</strong>{" "}, {task.startDate ? format(new Date(task.startDate), "P") : "Not set"}
+   10) Create "p" tag for "Due Date" as : <strong>Due Date:</strong>{" "}, {task.dueDate ? format(new Date(task.dueDate), "P") : "Not set"}
+   11) Create "p" tag for "Author" as : <strong>Author:</strong>{" "}, {task.author ? task.author.username : "Unknown"}
+   12) Create "p" tag for "Assignee" as :  <strong>Assignee:</strong>{" "}, {task.assignee ? task.assignee.username : "Unassigned"}
+10) Export default as : TaskCard
 
 
 

@@ -1449,6 +1449,26 @@ Time stamp : 02:46:45
    12) Create "p" tag for "Assignee" as :  <strong>Assignee:</strong>{" "}, {task.assignee ? task.assignee.username : "Unassigned"}
 10) Export default as : TaskCard
 
+#### Setup Frontend : Setup Project - Timeline main
+
+1) Create "TimelineView" folder in /client/src/app/projects
+2) Create {index.tsx} in /client/src/app/projects/TimelineView
+3) Create template : tsrafce
+4) Change function name from "index" to TimelineView
+5) Import tools with
+   1) Import "useAppSelector" from @/app/redux
+   2) Import "useGetTasksQuery" from @/state/api
+   3) Import "DisplayOption, Gantt, ViewMode" from gantt-task-react
+   4) Import "gantt-task-react/dist/index.css"
+   5) Import "React, { useMemo, useState }" from react
+6) Create "Props" parameters with :
+   1) Setup "id" as : string
+   2) Setup "setIsModalNewTaskOpen" as : (isOpen: boolean) => void
+7) Create "TaskTypeItems" as : "task" | "milestone" | "project"
+8) Create "Timeline" function with :
+   1) Setup argument for "Timeline" as : { id, setIsModalNewTaskOpen }: Props
+   2) Create "isDarkmode" as : useAppSelector((state) => state.global.isDarkMode)
 
 
-Time Stamp : 04:15:18
+
+Time Stamp : 04:22:00

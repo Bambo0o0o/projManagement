@@ -1449,7 +1449,7 @@ Time stamp : 02:46:45
    12) Create "p" tag for "Assignee" as :  <strong>Assignee:</strong>{" "}, {task.assignee ? task.assignee.username : "Unassigned"}
 10) Export default as : TaskCard
 
-#### Setup Frontend : Setup Project - Timeline main
+#### Setup Frontend : Setup Project - Timeline main (Complete)
 
 1) Create "TimelineView" folder in /client/src/app/projects
 2) Create {index.tsx} in /client/src/app/projects/TimelineView
@@ -1468,6 +1468,55 @@ Time stamp : 02:46:45
 8) Create "Timeline" function with :
    1) Setup argument for "Timeline" as : { id, setIsModalNewTaskOpen }: Props
    2) Create "isDarkmode" as : useAppSelector((state) => state.global.isDarkMode)
+   3) Create "data:tasks, error, isLoading" as : useGetTasksQuery({ projectId: Number(id) })
+   4) Create "[displayOptions, setDisplayOptions]" as : useState<DisplayOption>({})
+      1) Setup "viewMode" as : ViewMode.Month,
+      2) Setup "local" as : "en-US"
+   5) Create "ganttTasks" as : useMemo(() => {return(tasks?.map()...)}, [tasks])
+      1) Create "tasks?.map" function as : ((task) => ({}))|| []
+      2) Setup "start" as : new Date(task.startDate as string)
+      3) Setup "end" as : new Date(task.dueDate as string)
+      4) Setup "name" as : task.title
+      5) Setup "id" as : `Task-${task.id}`
+      6) Setup "type" as : "task" as TaskTypeItems
+      7) Setup "progress" as : task.points ? (task.points / 10) * 100 : 0
+      8) Setup "isDisable" as : false
+   6) Create "handleViewModeChange" function as : (event: React.ChangeEvent<HTMLSelectElement>)=>{}
+      1) Create "setDisplayOptions" function as : ((prev) => ({}))
+   7) Create if-condition for "isLoading" as : <div>Loading...</div>
+   8) Create if-condition for "error" as : <div>An error occurred while fetching tasks</div>
+9) Create "return" function for "Timeline" with :
+   1) Create "div" with "className" as : "px-4 xl:px-6"
+   2) Create "div" with "className" as : "flex flex-wrap items-center justify-between gap-2 py-5"
+      1) Create "h1" with "className" as : "me-2 text-lg font-bold dark:text-white"
+      2) Create "h1-text" as : Project Tasks Timeline
+      3) Create "div" with "className" as : "relative inline-block w-64"
+         1) Create "select" tag with :
+         2) Setup "className" as : "focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+         3) Setup "value" as : {displayOptions.viewMode}
+         4) Setup "onChange" as : {handleViewModeChange}
+         5) Create "option" with "value" as : {ViewMode.Day}
+         6) Setup "option-value" as : Day
+         7) Create "option" with "value" as : {ViewMode.Week}
+         8) Setup "option-value" as : Week
+         9) Create "option" with "value" as : {ViewMode.Month}
+         10) Setup "option-value" as : Month
+      4) Create "div" with "className" as : "overflow-hidden rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white"
+         1) Create "div" with "className" as : "timeline"
+         2) Create "Gantt" tag with :
+            1) Setup "tasks" as : {ganttTasks}
+            2) Setup "displayOption" as : {...displayOptions}
+            3) Setup "columnWidth" as : {displayOptions.viewMode === ViewMode.Month ? 150 : 100}
+            4) Setup "listCellWidth" as : "100px"
+            5) Setup "barBackgroundColor" as : {isDarkMode ? "#101214" : "#aeb8c2"}
+            6) Setup "barBackgroundSelectedColor" as : {isDarkMode ? "#000" : "#9ba1a6"}
+         3) Create "div" with "className" as : "px-4 pb-5 pt-1"
+         4) Create "button" with : 
+            1) Setup "className" as : "flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+            2) Setup "onClick" function as : {() => setIsModalNewTaskOpen(true)}
+            3) Setup "button-text" as : Add New Task
+10) Export default as : Timeline
+11) Uncomment "TIMELINE STYLING" on {globall.css} file
 
 
 

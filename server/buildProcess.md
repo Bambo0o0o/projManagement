@@ -1518,6 +1518,83 @@ Time stamp : 02:46:45
 10) Export default as : Timeline
 11) Uncomment "TIMELINE STYLING" on {globall.css} file
 
+#### Setup Frontend : Setup Project - Table main 
+
+1) Create "TableView" folder in /client/src/app/projects
+2) Create {index.tsx} in /client/src/app/projects/TableView
+3) Create template : tsrafce
+4) Change function name from "index" to TableView
+5) Import tools with :
+   1) Import "useAppSelector" from @/app/redux
+   2) Import "Header" from @/components/Header
+   3) Import "dataGridClassNames, dataGridSxStyles" from @/lib/utils
+   4) Import "useGetTasksQuery" from @/state/api
+   5) Import "DataGrid, GridColDef" from @mui/x-data-grid
+   6) Import "React" from react
+6) Create "Props" parameters with :
+   1) Setup "id" as : string
+   2) Setup "setIsModalNewTaskOpen" as : (isOpen: boolean) => void
+7) Create "columns" array as : GridColDef[] = [...]
+   1) Create "title" with :
+      1) Setup "field" as : "title"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   2) Create "description" with :
+      1) Setup "field" as : "description"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   3) Create "status" with :
+      1) Setup "field" as : "status"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   4) Create "priority" with :
+      1) Setup "field" as : "priority"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   5) Create "tags" with :
+      1) Setup "field" as : "tags"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   6) Create "startDate" with :
+      1) Setup "field" as : "startDate"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   7) Create "dueDate" with :
+      1) Setup "field" as : "dueDate"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   8) Create "author" with :
+      1) Setup "field" as : "author"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   9) Create "assignee" with :
+      1) Setup "field" as : "assignee"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+8) Create "TableView" function with :
+   1) Setup argument for "TableView" as : { id, setIsModalNewTaskOpen }: Props
+   2) Create "isDarkmode" as : useAppSelector((state) => state.global.isDarkMode)
+   3) Create "data:tasks, error, isLoading" as : useGetTasksQuery({ projectId: Number(id) })
+   4) Create if-condition for "isLoading" as : <div>Loading...</div>
+   5) Create if-condition for "error" as : <div>An error occurred while fetching tasks</div>
+9) Create "return" function for "Timeline" with :
+   1) Create "div" with "className" as : "h-[540px] w-full px-4 pb-8 xl:px-6"
+   2) Create "div" with "className" as : "pt-5"
+      1) Create "Header" tag with :
+      2) Setup "name" as : "Table"
+      3) Setup "buttonComponent" with :
+         1) Setup "button" tag with "className" as : "flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+         2) Setup "onClick" function as : {() => setIsModalNewTaskOpen(true)}
+         3) Setup "button-text" as : Add Task
+      4) Setup "Header-text" as : isSmallText
+   3) Create "DataGrid" tag with :
+      1) Setup "rows" as : {tasks || []}
+      2) Setup "columns" as : {columns}
+      3) Setup "className" as : {dataGridClassNames}
+      4) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
+10) Export default as : TableView
+
+
 
 
 Time Stamp : 04:22:00

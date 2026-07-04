@@ -1542,36 +1542,40 @@ Time stamp : 02:46:45
       3) Setup "width" as : 100
    2) Create "description" with :
       1) Setup "field" as : "description"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Description"
+      3) Setup "width" as : 200
    3) Create "status" with :
       1) Setup "field" as : "status"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Status"
+      3) Setup "renderCell" as : (params) => (<span>..</span>
+         1) Setup "span" with "className" as : "inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800"
+         2) Setup "span-value" as : {params.value}
    4) Create "priority" with :
       1) Setup "field" as : "priority"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Priority"
+      3) Setup "width" as : 75
    5) Create "tags" with :
       1) Setup "field" as : "tags"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Tags"
+      3) Setup "width" as : 130
    6) Create "startDate" with :
       1) Setup "field" as : "startDate"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Start Date"
+      3) Setup "width" as : 130
    7) Create "dueDate" with :
       1) Setup "field" as : "dueDate"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Due Date"
+      3) Setup "width" as : 130
    8) Create "author" with :
       1) Setup "field" as : "author"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Author"
+      3) Setup "width" as : 150
+      4) Setup "renderCell" as : (params) => params.value?.author || "Unknown"
    9) Create "assignee" with :
       1) Setup "field" as : "assignee"
-      2) Setup "headerName" as : "Title"
-      3) Setup "width" as : 100
+      2) Setup "headerName" as : "Assignee"
+      3) Setup "width" as : 150
+      4) Setup "renderCell" as : (params) => params.value?.assignee || "Unassigned"
 8) Create "TableView" function with :
    1) Setup argument for "TableView" as : { id, setIsModalNewTaskOpen }: Props
    2) Create "isDarkmode" as : useAppSelector((state) => state.global.isDarkMode)
@@ -1595,13 +1599,13 @@ Time stamp : 02:46:45
       4) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
 10) Export default as : TableView
 
-##### Setup Frontend : Create Libraly-Utilities for reusable
+##### Setup Frontend : Create Libraly-Utilities for reusable(Complete)
 
 1) Create "lib" folder in /client/src
 2) Create {utils.ts} file in /client/src/lib
 3) Export const "dataGridClassNames" as : "border border-gray-200 bg-white shadow dark:border-stroke-dark dark:bg-dark-secondary dark:text-gray-200"
 4) Export const "dataGridSxStyles" as : (isDarkMode: boolean) => {return{...}}
-   ***Solve "sx" error with "return-function" in "dataGridSxStyles"***
+   ***Solve "sx" error on "TableView" with "return-function" in "dataGridSxStyles"***
    1) Create "MuiDataGrid-columnHeaders" with :
       1) Setup "color" as : `${isDarkMode ? "#e5e7eb" : ""}`
       2) Setup "rol="row">* " with :

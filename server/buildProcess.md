@@ -1600,6 +1600,18 @@ Time stamp : 02:46:45
 1) Create "lib" folder in /client/src
 2) Create {utils.ts} file in /client/src/lib
 3) Export const "dataGridClassNames" as : "border border-gray-200 bg-white shadow dark:border-stroke-dark dark:bg-dark-secondary dark:text-gray-200"
-4) Export const "
+4) Export const "dataGridSxStyles" as : (isDarkMode: boolean) => {return{...}}
+   ***Solve "sx" error with "return-function" in "dataGridSxStyles"***
+   1) Create "MuiDataGrid-columnHeaders" with :
+      1) Setup "color" as : `${isDarkMode ? "#e5e7eb" : ""}`
+      2) Setup "rol="row">* " with :
+         1) Setup "backgroundColor" as : `${isDarkMode ? "#1d1f21" : "white"}`
+         2) Setup "borderColor" as : `${isDarkMode ? "#2d3135" : ""}`
+   2) Create "MuiIconbutton-root" with "color" as : `${isDarkMode ? "#a3a3a3" : ""}`
+   3) Create "MuiTablePagination-root" with "color" as : `${isDarkMode ? "#a3a3a3" : ""}`
+   4) Create "MuiTablePagination-selectIcon" with "color" as : `${isDarkMode ? "#a3a3a3" : ""}`
+   5) Create "MuiDataGrid-cell" with "border" as : "none"
+   6) Create "MuiDataGrid-row" with "borderBottom" as : `1px solid ${isDarkMode ? "#2d3135" : "e5e7eb"}`
+   7) Create "MuiDataGrid-withBorderColor" with "borderColor" as : `${isDarkMode ? "#2d3135" : "e5e7eb"}`
 
 Time Stamp : 04:22:00

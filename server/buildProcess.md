@@ -1518,8 +1518,9 @@ Time stamp : 02:46:45
 10) Export default as : Timeline
 11) Uncomment "TIMELINE STYLING" on {globall.css} file
 
-#### Setup Frontend : Setup Project - Table main 
+#### Setup Frontend : Setup Project - Table main (Complete)
 
+0) Install "x-data-grid" version 7.12.0 : npm i @mui/x-data-grid@7.12.0
 1) Create "TableView" folder in /client/src/app/projects
 2) Create {index.tsx} in /client/src/app/projects/TableView
 3) Create template : tsrafce
@@ -1594,7 +1595,11 @@ Time stamp : 02:46:45
       4) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
 10) Export default as : TableView
 
+##### Setup Frontend : Create Libraly-Utilities for reusable
 
-
+1) Create "lib" folder in /client/src
+2) Create {utils.ts} file in /client/src/lib
+3) Export const "dataGridClassNames" as : "border border-gray-200 bg-white shadow dark:border-stroke-dark dark:bg-dark-secondary dark:text-gray-200"
+4) Export const "
 
 Time Stamp : 04:22:00

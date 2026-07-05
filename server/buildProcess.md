@@ -1125,7 +1125,7 @@ Time stamp : 02:46:45
             1) Setup "className" as : "flex items-center rounded-md bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
             2) Setup "onClick" as : {() => setIsModalNewProjectOpen(true)}
             3) Create "PlusSquare" tag with "className" as : "mr-2 h-5 w-5"
-            4) Setup "button" text as : New Boards
+            4) Setup "button-text" as : New Boards
 
 ##### Setup Frontend : Setup Projects - projectHeader with TABS section(Complete)
 
@@ -1618,4 +1618,46 @@ Time stamp : 02:46:45
    6) Create "MuiDataGrid-row" with "borderBottom" as : `1px solid ${isDarkMode ? "#2d3135" : "e5e7eb"}`
    7) Create "MuiDataGrid-withBorderColor" with "borderColor" as : `${isDarkMode ? "#2d3135" : "e5e7eb"}`
 
-Time Stamp : 04:22:00
+##### Setup Frontend : Create Project Modal for reusable (Complete)
+
+1) Create "Modal" folder in /client/components
+2) Create {index.tsx} file in /client/components/Modal
+3) Create template as : tsrafce
+4) Change function name from "index" to Modal
+5) Import tools with :
+   1) Import "React" from "react"
+   2) Import "ReactDOM" from "react-dom"
+   3) Import " Header" from "../Header"
+   4) Import "{X}" from "lucide-react"
+6) Create "Props" with :
+   1) Setup "children" as : React.ReactNode;
+   2) Setup "isOpen" as : boolean
+   3) Setup "onClose" as : () => void
+   4) Setup "name" as : string
+7) Create "Modal function with
+   1) Create argument for "Modal" function as : { children, isOpen, onClose, name }: Props
+   2) Setup if-condition for "isOpen" as : return null
+   3) Create "return" fucntion with
+      1) Create "ReactDOM.createPortal" function : ReactDOM.createPortal()
+      2) Create "div" with "className" as : "fixed inset-0 z-50 flex h-full w-full items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50 p-4"
+         1) Create "div" with "className" as : "w-full max-w-2xl rounded-lg bg-white p-4 shadow-lg dark:bg-dark-secondary"
+         2) Create "Header" tag with :
+            1) Setup "name" as : {name}
+            2) Setup "buttonComponent" with:
+               1) Create "button" tag with "className" as : "flex h-7 w-7 items-center justify-center rounded-full bg-blue-primary text-white hover:bg-blue-600"
+               2) Create "onClick" as : {onClose}
+               3) Create "button-text" as : <X size={18} />
+            3) Create "Header-text" as : isSmallText
+         3) Create "div-text" as : {children}
+      3) Create return-value for "ReactDOM.createPortal" as : document.body
+8) Export default as : Modal
+
+##### Setup Frontend : Create ModalNewProject
+
+1) Create "ModalNewProject" in /client/src/app/projects
+2) Create {index.tsx} in /client/src/app/projects/ModalNewProject
+3) Create template as : tsrafce
+4) Change function name from "index" to ModalNewProject
+5) Import tools with :
+
+Time Stamp : 04:56:45

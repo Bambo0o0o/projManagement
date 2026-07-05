@@ -9,6 +9,7 @@ import {
   Table,
 } from "lucide-react";
 import React, { useState } from "react";
+import ModalNewProject from "../projects/ModalNewProject";
 
 type Props = { activeTab: string; setActiveTab: (tabName: string) => void };
 
@@ -17,10 +18,10 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
   return (
     <div className="px-4 xl:px-6">
       {/* Modal New Project */}
-      {/* <ModalNewProject
+      <ModalNewProject
         isOpen={isModalNewProjectOpen}
         onClose={() => setIsModalNewProjectOpen(false)}
-      /> */}
+      />
 
       {/* HEADER Section */}
       <div className="pb-6 pt-6 lg:pb-4 lg:pt-8">

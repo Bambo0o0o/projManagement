@@ -1659,5 +1659,19 @@ Time stamp : 02:46:45
 3) Create template as : tsrafce
 4) Change function name from "index" to ModalNewProject
 5) Import tools with :
+   1) Import "Modal" from @/components/Modal
+   2) Import "{useCreateProjectMutation}" from @/state/api
+   3) Import "React, { useState }" from react
+   4) Import "{formatISO}" from date-fns
+6) Create "Props" with :
+   1) Setup "isOpen" as : boolean
+   2) Setup "onClose" as : () => void
+7) Create "ModalNewProject" function with
+   1) Create argument for "ModalNewProject" function as : { isOpen, onClose }: Props
+   2) Create "createProject, { isLoading }" as : useCreateProjectMutation()
+   3) Create "projectName, setProjectName" as : useState("")
+   4) Create "description, setDescription" as : useState("")
+   5) Create "startDate, setStartDate" as : useState("")
+   6) Create "endDate, setEndDate" as : useState("")
 
 Time Stamp : 04:56:45

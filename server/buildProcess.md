@@ -1721,7 +1721,7 @@ Time stamp : 02:46:45
          4) Create "text-action" as : {isLoading ? "Creating..." : "Create Project"}
 9) Export default as : ModalNewProject
 
-##### Setup Frontend : Create ModalNewTask components
+##### Setup Frontend : Create ModalNewTask components (complete)
 
 1) Create "ModalNewTask" in /client/src/components/
 2) Create {index.tsx} in /client/src/components/ModalNewTask
@@ -1783,7 +1783,73 @@ Time stamp : 02:46:45
             3) Setup "placeholder" as : "Title"
             4) Setup "value" as : {title}
             5) Setup "onChange" as : {(e) => setTitle(e.target.value)}
+         4) Create "textarea" with
+            1) Setup "className" as : {inputStyles}
+            2) Setup "placeholder" as : "Description"
+            3) Setup "value" as : {description}
+            4) Setup "onChange" as : {(e) => setDescription(e.target.value)}
+         5) Create "div" with "className" as : "grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2"
+            1) Create "select" tag with :
+               1) Setup "className" as : {selectStyles}
+               2) Setup "value" as : {status}
+               3) Setup "onChange" function as : (e) => setStatus(Status[e.target.value as keyof typeof Status])
+               4) Create "option" with "value=""" as : Select Status
+               5) Create "option" with "value={Status.ToDo}" as : To Do
+               6) Create "option" with "value={Status.WorkInProgress}" as : Work In Progress
+               7) Create "option" with "value={Status.UnderReview}" as : Under Review
+               8) Create "option" with "value={Status.Completed}" as : Completed
+            2) Create "select" tag with :
+               1) Setup "className" as : {selectStyles}
+               2) Setup "value" as : {priority}
+               3) Setup "onChange" function as : (e) => setPriority(Priority[e.target.value as keyof typeof Priority])
+               4) Create "option" with "value=""" as : Select Priority
+               5) Create "option" with "value={Priority.Urgent}" as : Urgent
+               6) Create "option" with "value={Priority.High}" as :High
+               7) Create "option" with "value={Priority.Medium}" as : Medium
+               8) Create "option" with "value={Priority.Low}" as : Low
+               9) Create "option" with "value={Priority.Backlog}" as : Backlog
+         6) Create "input" with :
+            1) Setup "type" as : "text"
+            2) Setup "className" as : {inputStyles}
+            3) Setup "placeholder" as : "Tags (comma separated)"
+            4) Setup "value" as : {tags}
+            5) Setup "onChange" as : {(e) => setTags(e.target.value)}
+         7) Create "div" with "className" as : "grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2"
+            1) Create "input" with :
+               1) Setup "type" as : "date"
+               2) Setup "className" as : {inputStyles}
+               3) Setup "value" as : {startDate}
+               4) Setup "onChange" function as : {(e) => setStartDate(e.target.value)}
+            2) Create "input" with :
+               1) Setup "type" as : "date"
+               2) Setup "className" as : {inputStyles}
+               3) Setup "value" as : {dueDate}
+               4) Setup "onChange" function as : {(e) => setDueDate(e.target.value)}
+         8) Create "input" with :
+            1) Setup "type" as : "text"
+            2) Setup "className" as : {inputStyles}
+            3) Setup "placeholder" as : "Author User ID"
+            4) Setup "value" as : {authorUserId}
+            5) Setup "onChange" function as : {(e) => setAuthorUserId(e.target.value)}
+         9) Create "input" with :
+            1) Setup "type" as : "text"
+            2) Setup "className" as : {inputStyles}
+            3) Setup "placeholder" as : "Assigned User ID"
+            4) Setup "value" as : {assignedUserId}
+            5) Setup "onChange" function as : {(e) => setAssignedUserId(e.target.value)}
+         10) Create "id" as : === null && (<input.../>)
+             1) Setup "type" as : "text"
+             2) Setup "className" as : {inputStyles}
+             3) Setup "placeholder" as : "ProjectId"
+             4) Setup "value" as : {projectId}
+             5) Setup "onChange" function as : {(e) => setProjectId(e.target.value)}
+         11) Create "button" tag with :
+             1) Setup "type" as : "submit"
+             2) Setup "className" as : {`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${!isFormValid() || isLoading ? "cursor-not-allowed opacity-50" : ""}`}
+             3) Setup "disable" as : {!isFormValid() || isLoading}
+         12) Create "status" as : {isLoading ? "Creating..." : "Create Task"}
+9) Export default as : ModalNewTask
 
 
 
-Time Stamp : 05:12:02
+Time Stamp : 05:21:11

@@ -1518,7 +1518,7 @@ Time stamp : 02:46:45
 10) Export default as : Timeline
 11) Uncomment "TIMELINE STYLING" on {globall.css} file
 
-#### Setup Frontend : Setup Project - Table main (Complete)
+#### Setup Frontend : Setup Project - TableView main (Complete)
 
 0) Install "x-data-grid" version 7.12.0 : npm i @mui/x-data-grid@7.12.0
 1) Create "TableView" folder in /client/src/app/projects
@@ -1652,7 +1652,7 @@ Time stamp : 02:46:45
       3) Create return-value for "ReactDOM.createPortal" as : document.body
 8) Export default as : Modal
 
-##### Setup Frontend : Create ModalNewProject
+##### Setup Frontend : Create ModalNewProject (complete)
 
 1) Create "ModalNewProject" in /client/src/app/projects
 2) Create {index.tsx} in /client/src/app/projects/ModalNewProject
@@ -1673,5 +1673,73 @@ Time stamp : 02:46:45
    4) Create "description, setDescription" as : useState("")
    5) Create "startDate, setStartDate" as : useState("")
    6) Create "endDate, setEndDate" as : useState("")
+   7) Create "handleSubmit" with async function as : async () => {}
+      1) Create if-condition for "!projectName || !startDate || !endDate" argument as : return nothing
+      2) Create "formattedStartDate" as : formatISO(new Date(startDate), {representation: "complete"})
+      3) Create "formattedEndDate" as : formatISO(new Date(endDate), {representation: "complete"})
+      4) Create await "createProject" with
+         1) Setup "name" as : projectName
+         2) Setup "description" as : description
+         3) Setup "startDate" as : formattedStartDate
+         4) Setup "endDate" as : formattedEndDate
+   ***Date have to format with "{formatISO}" from date-fns otherwise it will get an error***
+   8) Create "isFormValid" function as : () => {return projectName && description && startDate && endDate}
+   9) Create "inputStyles" as : "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none"
+8) Create "return" function with
+   1) Create "Modal" tag with :
+      1) Create "form" with "className" as : "mt-4 space-y-6"
+      2) Create "onSubmit" function with : {(e) => {}}
+         1) Setup "e" event as : e.preventDefault()
+         2) Setup "e" event as : handleSubmit()
+      3) Create "input" with :
+         1) Setup "type" as : "text"
+         2) Setup "className" as : {inputStyles}
+         3) Setup "placeholder" as : "Project Name"
+         4) Setup "value" as : {projectName}
+         5) Setup "onChange" function as : (e) => setProjectName(e.target.value)
+      4) Create "textarea" with
+         1) Setup "className" as : {inputStyles}
+         2) Setup "placeholder" as : "Description"
+         3) Setup "value" as : {description}
+         4) Setup "onChange" function as : (e) => setDescription(e.target.value)
+      5) Create "div" with "className" as : "grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2"
+         1) Create "input" with :
+            1) Setup "type" as : "date"
+            2) Setup "className" as : {inputStyles}
+            3) Setup "value" as : {startDate}
+            4) Setup "onChange" function as : (e) => setStartDate(e.target.value)
+         2) Create "input" with :
+            1) Setup "type" as : "date"
+            2) Setup "className" as : {inputStyles}
+            3) Setup "value" as : {endDate}
+            4) Setup "onChange" function as : (e) => setEndDate(e.target.value)
+      6) Create "button" with :
+         1) Setup "type" as : "submit"
+         2) Setup "className" as : {`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
+            !isFormValid() || isLoading ? "cursor-not-allowed opacity-50" : "" }`}
+         3) Setup "disable" as : {!isFormValid() || isLoading}
+         4) Create "text-action" as : {isLoading ? "Creating..." : "Create Project"}
+9) Export default as : ModalNewProject
 
-Time Stamp : 04:56:45
+##### Setup Frontend : Create ModalNewTask components
+
+1) Create "ModalNewTask" in /client/src/components/
+2) Create {index.tsx} in /client/src/components/ModalNewTask
+3) Create template as : tsrafce
+4) Change function name from "index" to ModalNewTask
+5) Import tools with :
+   1) Import "Modal" from "@/components/Modal"
+   2) Import "{ Priority, Status, useCreateTaskMutation }" from @/state/api
+   3) Import "React, { useState }" from react
+   4) Import "{ formatISO }" from date-fns
+6) Create "Props" with :
+   1) Setup "isOpen" as : boolean
+   2) Setup "onClose" function as : () => void
+   3) Setup "id?" as : string | null
+7) Create "ModalNewTask" function with
+   1) Create argument for "ModalNewTask" function as : { isOpen, onClose, id = null }: Props
+   2) Create "createTask, { isLoading }" as : useCreateTaskMutation()
+
+
+
+Time Stamp : 05:12:02

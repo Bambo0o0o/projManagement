@@ -1,16 +1,13 @@
-import React from 'react'
+import React from "react";
 
 type Props = {
-    
-}
+  isOpen: boolean;
+  onClose: () => void;
+  id?: string | null;
+};
 
-const ModelNewTask
- = (props: Props) => {
-  return (
-    <div>ModelNewTask
+const ModelNewTask = (props: Props) => {
+  return <div>ModelNewTask</div>;
+};
 
-    </div>
-  )
-}
-
-export default ModelNewTask
+export default ModelNewTask;

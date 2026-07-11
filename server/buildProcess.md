@@ -1739,6 +1739,50 @@ Time stamp : 02:46:45
 7) Create "ModalNewTask" function with
    1) Create argument for "ModalNewTask" function as : { isOpen, onClose, id = null }: Props
    2) Create "createTask, { isLoading }" as : useCreateTaskMutation()
+   3) Create "title, setTitle" as : useState("")
+   4) Create "description, setDescription" as : useState("")
+   5) Create "status, setStatus" as : useState<Status>(Status.ToDo)
+   6) Create "priority, setPriority" as : useState<Priority>(Priority.Backlog)
+   7) Create "tags, setTags" as : useState("")
+   8) Create "startDate, setStartDate" as : useState("")
+   9) Create "dueDate, setDueDate" as :  useState("")
+   10) Create "authorUserId, setAuthorUserId" as : useState("")
+   11) Create "assignedUserId, setAssignedUserId" as : useState("")
+   12) Create "projectId, setProjectId" as : useState("")
+   13) Create "handleSubmit" with "async" function : async () => {...}
+       1) Create "if-conditon" with argument as : !title || !authorUserId || !(id !== null || projectId)
+       2) Create return-value for "if-conditon" as : return
+       3) Create "formattedStartDate" as : formatISO(new Date(startDate), {representation: "complete"})
+       4) Create "formattedDueDate" as : formatISO(new Date(dueDate), {representation: "complete"})
+       5) Create "await-function" for "createTask" with :
+          1) Setup "title" as : title
+          2) Setup "description" as : description
+          3) Setup "status" as : status
+          4) Setup "priority" as : priority
+          5) Setup "tags" as : tags
+          6) Setup "startDate" as : formattedStartDate
+          7) Setup "dueDate" as : formattedDueDate
+          8) Setup "authorUserId" as : parseInt(authorUserId)
+          9) Setup "assignedUserId" as : parseInt(assignedUserId)
+          10) Setup "projectId" as : id !== null ? Number(id) : Number(projectId)
+   14) Create "isFormValid" function as : () => {return...}
+       1) Setup "return-value" as : title && authorUserId && !(id !== null || projectId)
+   15) Create "selectStyles" as : "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none"
+   16) Create "inputStyles" as :"w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none"
+8) Create "return-function" with
+   1) Create "Modal" tag with
+      1) Setup "isOpen" as : {isOpen}
+      2) Setup "onClose" as : {onClose}
+      3) Setup "name" as : "Create New Task"
+      4) Create "form" tag with :
+         1) Setup "className" as : "mt-4 space-y-6"
+         2) Setup "onSubmit" function as : {(e) => {e.preventDefault(); handleSubmit();}}
+         3) Create "input" tag with :
+            1) Setup "type" as : "text"
+            2) Setup "className" as : {inputStyles}
+            3) Setup "placeholder" as : "Title"
+            4) Setup "value" as : {title}
+            5) Setup "onChange" as : {(e) => setTitle(e.target.value)}
 
 
 

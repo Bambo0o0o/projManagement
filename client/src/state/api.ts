@@ -1,4 +1,4 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Project Interface
 export interface Project {
@@ -63,14 +63,22 @@ export interface Task {
   attachments?: Attachment[];
 }
 
+// SEARCH interface
+export interface SearchResults {
+  tasks?: Task[];
+  projects?: Project[];
+  users?: User[];
+}
+
 // SETUP APIs Section
 export const api = createApi({
-  baseQuery: fetchBaseQuery({baseUrl:process.env.NEXT_PUBLIC_API_BASE_URL}),
-  reducerPath:"api",
-  tagTypes:["Projects", "Tasks",],
-  // Used "tagTypes" for "providesTags"
-  endpoints:(build)=>({
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
 
+
+  reducerPath: "api",
+  tagTypes: ["Projects", "Tasks"],
+  // Used "tagTypes" for "providesTags"
+  endpoints: (build) => ({
     // GET Project API
     getProjects: build.query<Project[], void>({
       query: () => "projects",
@@ -84,7 +92,7 @@ export const api = createApi({
         body: project,
       }),
       invalidatesTags: ["Projects"],
-    }), 
+    }),
     // GET Task API
     getTasks: build.query<Task[], { projectId: number }>({
       query: ({ projectId }) => `tasks?projectId=${projectId}`,
@@ -113,6 +121,10 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
     }),
+    // CREATE Search API
+    search: build.query<SearchResults, string>({
+      query: (query) => `search?query=${query}`,
+    }),
   }),
 });
 
@@ -122,6 +134,7 @@ export const {
   useGetTasksQuery,
   useCreateTaskMutation,
   useUpdateTaskStatusMutation,
+  useSearchQuery,
 } = api;
 
 // Complete Code

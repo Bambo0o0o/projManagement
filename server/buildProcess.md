@@ -218,7 +218,7 @@ git push -u origin main
 7) Export "setIsSidebarCollapsed, setIsDarkMode" as : globalSlice.actions
 8) Export default as : globalSlice.reducer
 
-### Setup Frontend : Setup API
+### Setup Frontend : Setup API (Complete)
 
 1) Create {api.ts} file in  /client/src/state
 2) Import "createApi, fetchBaseQuery" from @reduxjs/toolkit/query/react
@@ -274,7 +274,7 @@ git push -u origin main
     1) Setup "tasks?" as : Task[]
     2) Setup "projects?" as : Project[]
     3) Setup "users?" as : User[]
-11) Export "SearchResults" interface with
+11) Export "Team" interface with
     1) Setup "teamId" as : number
     2) Setup "teamName" as : string
     3) Setup "productOwnerUserId?" as : number
@@ -1951,4 +1951,15 @@ Time stamp : 02:46:45
 2) Uncomment on : Import searchRoutes from ./routes/searchRoutes
 3) Uncomment on : app.use("/search", searchRoutes)
 
-Time Stamp : 05:21:11
+### Setup Frontend : Setup Search API and Interface
+
+1) Go to {api.ts} in /client/src/state
+2) Uncomment "search-interface"
+3) Uncomment "search-API"
+4) Uncomment "useSearchQuery" from "export" api
+
+#### Setup Frontend : Create Search page
+
+
+
+Time Stamp : 05:49:19

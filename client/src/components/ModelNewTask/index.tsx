@@ -1,7 +1,8 @@
+import Modal from "@/components/Modal";
 import { Priority, Status, useCreateTaskMutation } from "@/state/api";
 import { formatISO } from "date-fns";
 import React, { useState } from "react";
-import Modal from "@/components/Modal";
+
 
 type Props = {
   isOpen: boolean;
@@ -55,7 +56,9 @@ const ModelNewTask = ({ isOpen, onClose, id = null }: Props) => {
 
   const inputStyles =
     "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
-  return (
+  
+  
+    return (
     <Modal isOpen={isOpen} onClose={onClose} name="Create New Task">
       <form
         className="mt-4 space-y-6"

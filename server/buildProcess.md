@@ -1910,5 +1910,40 @@ Time stamp : 02:46:45
          7) Setup "projectProgressSelectedColor" as : {isDarkMode ? "#000" : "#9ba1a6"}
 9) Export default as : Timeline
 
+### Setup Backend : Setup Search-Controller (Complete)
+
+1) Create {searchController.ts} in /server/src/controllers
+2) Import tools with :
+   1) Import "Request, Response" from express
+   2) Import "PrismaClient" from @prisma/client
+3) Create "prisma" as : new PrismaClient()
+4) Create async function for "searcH" with
+   1) Create "search" function format as : async (): Promise<void> => {}
+   2) Create "request, response" as : (req: Request, res: Response): Promise<void>
+   3) Create "{query}" as : req.query
+   4) Create "try-catch()" function with :
+      1) Create "tasks" as : await prisma.task.findMany({})
+         1) Setup "where" as : {or : [..]}
+         2) Setup "or" as : { title: { contains: query as string } }, { description: { contains: query as string } },
+      2) Create "projects" as : await prisma.project.findMany({})
+         1) Setup "where" as : {or : [..]}
+         2) Setup "or" as : { name: { contains: query as string } }, { description: { contains: query as string } },
+      3) Create "users" as : await prisma.user.findMany({})
+         1) Setup "where" as : {or : [..]}
+         2) Setup "or" as : { username: { contains: query as string } }
+   5) Create "catch-error" as : (error: any) { res.}
+      1) Setup "response-error" code as : .status(500)
+      2) Setup "response-error" message as : .json({ message: `Error performing search: ${error.message}` })}
+
+### Setup Backend : Setup Search-Route (Complete)
+
+1) Create {searchRoutes.ts} in /server/src/routes
+2) Import tools with :
+   1) Import "Router" from express
+   2) Import "search" from ../controllers/searchController
+3) Create "router" as : Router()
+4) Create "router-root" for "search" as : router.get("/", search)
+5) Export default as : router
+
 
 Time Stamp : 05:21:11

@@ -1721,11 +1721,12 @@ Time stamp : 02:46:45
          4) Create "text-action" as : {isLoading ? "Creating..." : "Create Project"}
 9) Export default as : ModalNewProject
 
-##### Setup Frontend : Create ModalNewTask components (complete)
+##### Setup Frontend : Create ModalNewTask components (not complete yet)
 
 1) Create "ModalNewTask" in /client/src/components/
 2) Create {index.tsx} in /client/src/components/ModalNewTask
 3) Create template as : tsrafce
+   ***Or just copy code from "TimelineView" and modify some of part***
 4) Change function name from "index" to ModalNewTask
 5) Import tools with :
    1) Import "Modal" from "@/components/Modal"
@@ -1848,8 +1849,65 @@ Time stamp : 02:46:45
              2) Setup "className" as : {`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${!isFormValid() || isLoading ? "cursor-not-allowed opacity-50" : ""}`}
              3) Setup "disable" as : {!isFormValid() || isLoading}
          12) Create "status" as : {isLoading ? "Creating..." : "Create Task"}
-9) Export default as : ModalNewTask
+9)  Export default as : ModalNewTask
 
+#### Setup Frontend : Create TimeLine page (Complete)
+
+1) Create "timeline" folder in /client/src/app
+2) Create {page.tsx} in /client/src/app/timeline
+3) Create template as : tsrafce
+4) Change function name from "index" to Timeline
+5) Import tools with :
+   1) Import "useAppSelector" from @/app/redux
+   2) Import "Header" from @/components/Header
+   3) Import "useGetProjectsQuery" from @/state/api
+   4) Import "DisplayOption, Gantt, ViewMode" from gantt-task-react
+   5) Import "gantt-task-react/dist/index.css"
+   6) Import "React, { useMemo, useState }" from react
+6) Create "type-TaskTypeItems" as : "task" | "milestone" | "project"
+7) Create "Timeline" function with
+   1) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
+   2) Create "data: projects, isLoading, isError" as : useGetProjectsQuery()
+   3) Create "displayOptions, setDisplayOptions" as : useState<DisplayOption>({})
+      1) Setup "viewMode" as : ViewMode.Month
+      2) Setup "locale" as : "en-US"
+   4) Create "ganttTasks" as "useMemo()" funciton with : (() => {return()}, [projects])
+      1) Create "return" with "projects?.map((project)=>({..})) || []"
+         1) Setup "start" as : new Date(project.startDate as string)
+         2) Setup "end" as : new Date(project.endDate as string)
+         3) Setup "name" as : project.name
+         4) Setup "id" as : `Project-${project.id}`
+         5) Setup "type" as: "project" as TaskTypeItems
+         6) Setup "procress" as : 50
+         7) Setup "isDisabled" as : false
+   5) Create "handleViewModeChange" function with :
+      1) Create argument for "handleViewModeChange" as : event: React.ChangeEvent<HTMLSelectElement>
+      2) Create "setDisplayOptions" function as : (prev) => ({...prev,viewMode: event.target.value as ViewMode,})
+   6) Create if-condition for "isLoading" as : <div>Loading...</div>
+   7) Create if-condition for "isError || !projects" as : return <div>An error occurred while fetching projects</div>
+8) Create "return" function with
+   1) Create "div" with "className" as : "max-w-full p-8"
+   2) Create "header" tag with "className" as : "mb-4 flex items-center justify-between"
+      1) Create "Header" tag with "name" as : "Projects Timeline"
+      2) Create "div" with "className" as : "relative inline-block w-64"
+      3) Create "select" tag with :
+         1) Setup "className" as : "focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+         2) Setup "value" as : {displayOptions.viewMode}
+         3) Setup "onChange" as : {handleViewModeChange}
+         4) Create "option" with "value={ViewMode.Day}" as : Day
+         5) Create "option" with "value={ViewMode.Week}" as : Week
+         6) Create "option" with "value={ViewMode.Month}" as : Month
+   3) Create "div" with "className" as : "overflow-hidden rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white"
+      1) Create "div" with "className" as : "timeline"
+      2) Create "Gantt" tag with
+         1) Setup "tasks" as : tasks={ganttTasks}
+         2) Setup "displayOptions" as : {...displayOptions}
+         3) Setup "columnWidth" as : {displayOptions.viewMode === ViewMode.Month ? 150 : 100}
+         4) Setup "listCellWidth" as : "100px"
+         5) Setup "projectBackgroundColor" as : {isDarkMode ? "#101214" : "#1f2937"}
+         6) Setup "projectProgressColor" as : {isDarkMode ? "#1f2937" : "#aeb8c2"}
+         7) Setup "projectProgressSelectedColor" as : {isDarkMode ? "#000" : "#9ba1a6"}
+9) Export default as : Timeline
 
 
 Time Stamp : 05:21:11

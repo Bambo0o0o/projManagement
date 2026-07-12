@@ -1945,5 +1945,10 @@ Time stamp : 02:46:45
 4) Create "router-root" for "search" as : router.get("/", search)
 5) Export default as : router
 
+## Setup Backend : Adding Server-Route for SEARCH
+
+1) Go to {index.ts} in /server/src
+2) Uncomment on : Import searchRoutes from ./routes/searchRoutes
+3) Uncomment on : app.use("/search", searchRoutes)
 
 Time Stamp : 05:21:11

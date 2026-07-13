@@ -1958,8 +1958,43 @@ Time stamp : 02:46:45
 3) Uncomment "search-API"
 4) Uncomment "useSearchQuery" from "export" api
 
-#### Setup Frontend : Create Search page
+#### Setup Frontend : Create Search page (Complete)
 
-
+1) Create "search" folder in /client/src/app directory
+2) Create {page.tsx} in /client/src/app/search directory
+3) Create "use client" on top of file to specify : this is main page
+4) Import tools with :
+   1) Import "Header" from @/components/Header
+   2) Import "ProjectCard" from @/components/ProjectCard
+   3) Import "TaskCard" from @/components/TaskCard
+   4) Import "UserCard" from @/components/UserCard
+   5) Import "useSearchQuery" from @/state/api
+   6) Import "debounce" from lodash
+   7) Import "React, { useEffect, useState }" from react
+5) Create "Search" function with :
+   1) Create "[searchTerm, setSearchTerm]" as : useState("")
+   2) Create functions with argument "data: searchResults, isLoading, isError," as : useSearchQuery(searchTerm, {skip: searchTerm.length < 3,})
+   3) Create "handleSearch" with "debounce" function as : debounce((event: React.ChangeEvent<HTMLInputElement>) => {setSearchTerm(event.target.value);},500)
+   4) Create "useEffect" function as : () => {return handleSearch.cancel;}, [handleSearch.cancel])
+6) Create "return" function with :
+   1) Create "div" with "className" as : "p-8"
+      1) Create "Header" tag with "name" as : "Search"
+      2) Create "div" with "input" as :
+         1) Setup "type" as : "text"
+         2) Setup "placeholder" as : "Search..."
+         3) Setup "className" as : "w-1/2 rounded border p-3 shadow"
+         4) Setup "onChange" as : {handleSearch}
+      3) Create "div" with "className" as : "p-5"
+      4) Create "isLoading" with "paragraph" as : Loading...
+      5) Create "isError" with "paragraph" as : Error occurred while fetching search results.
+      6) Create "!isLoading && !isError && searchResults && div()" tag with :
+         1) Create "searchResults.tasks " check with : searchResults.tasks?.length > 0 && && (<h2>Tasks</h2>)
+            1) Create "searchResults.tasks?.map" function as : (task) => (<TaskCard key={task.id} task={task} />)
+         2) Create "searchResults.projects" check with : searchResults.projects?.length > 0 && (<h2>Projects</h2>)
+            1) Create "searchResults.projects?.map" funciton as : (project) => (<ProjectCard key={project.id} project={project} />)
+         3) Create "searchResults.users" check with : searchResults.users?.length > 0 && (<h2>Users</h2>)
+            1) Create "searchResults.users?.map" function as : (user) => ( <UserCard key={user.userId} user={user} />)
+7) Export default as : Search
+      
 
 Time Stamp : 05:49:19

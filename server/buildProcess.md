@@ -1960,6 +1960,8 @@ Time stamp : 02:46:45
 
 #### Setup Frontend : Create Search page (Complete)
 
+***Install more tool "lodash" : npm i lodash@4.17.21***
+
 1) Create "search" folder in /client/src/app directory
 2) Create {page.tsx} in /client/src/app/search directory
 3) Create "use client" on top of file to specify : this is main page

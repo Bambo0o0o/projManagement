@@ -2019,7 +2019,31 @@ Time stamp : 02:46:45
    5) Create "paragraph" tag as : End Date: {project.endDate}
 9) Export default as : ProjectCard
 
+#### Setup Frontend : Setup components - UserCard
 
+1) Create "UserCard" folder in /client/src/components
+2) Create {index.tsx} in  /client/src/components/UserCard
+3) Create template : tsrafce
+4) Change function name from "index" to UserCard
+5) Import tools with :
+   1) Import "User" from @/state/api
+   2) Import "Image" from next/image
+   3) Import "React" from react
+6) Create "Props" with :
+   1) Setup "user" as : User
+7) Create "UserCard" function with :
+   1) Create argument for "UserCard" function as : { user }: Props
+8) Create "return" function with
+   1) Create "div" with "className" as : "flex items-center rounded border p-4 shadow"
+   2) Create "user.profilePictureUrl" as "Image" tag with :
+      1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/p1.jpeg`}
+      2) Setup "alt" as : "profile picture"
+      3) Setup "width-height" as : 32, 32
+      4) Create "className" as : "rounded-full"
+   3) Create "div" tag with :
+      1) Create "h3" tag as : {user.username}
+      2) Create "paragraph" tag as : {user.email}
+9) Export default as : UserCard
 
 
 Time Stamp : 05:49:19

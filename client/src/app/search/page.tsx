@@ -1,6 +1,7 @@
 "use client"
 
 import Header from "@/components/Header";
+import TaskCard from "@/components/TaskCard";
 // import ProjectCard from "@/components/ProjectCard";
 // import TaskCard from "@/components/TaskCard";
 // import UserCard from "@/components/UserCard";
@@ -48,13 +49,14 @@ const Search = () => {
         {isError && <p>Error occurred while fetching search results.</p>}
         {!isLoading && !isError && searchResults && (
           <div>
+            {/* Tasks search handling */}
             {searchResults.tasks && searchResults.tasks?.length > 0 && (
               <h2>Tasks</h2>
             )}
-            {/* {searchResults.tasks?.map((task) => (
+            {searchResults.tasks?.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
-
+            {/* Projects search handling */}
             {searchResults.projects && searchResults.projects?.length > 0 && (
               <h2>Projects</h2>
             )}
@@ -62,12 +64,14 @@ const Search = () => {
               <ProjectCard key={project.id} project={project} />
             ))}
 
+            {/* Users search handling */}
             {searchResults.users && searchResults.users?.length > 0 && (
               <h2>Users</h2>
             )}
             {searchResults.users?.map((user) => (
               <UserCard key={user.userId} user={user} />
-            ))} */}
+            ))}
+            
           </div>
         )}
       </div>

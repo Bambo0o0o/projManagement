@@ -1997,6 +1997,29 @@ Time stamp : 02:46:45
          3) Create "searchResults.users" check with : searchResults.users?.length > 0 && (<h2>Users</h2>)
             1) Create "searchResults.users?.map" function as : (user) => ( <UserCard key={user.userId} user={user} />)
 7) Export default as : Search
-      
+
+#### Setup Frontend : Setup components - ProjectCard 
+
+1) Create "ProjectCard" folder in /client/src/components
+2) Create {index.tsx} in  /client/src/components/ProjectCard
+3) Create template : tsrafce
+4) Change function name from "index" to ProjectCard
+5) Import tools with :
+   1) Import "Project" from @/state/api
+   2) Import "React" from react
+6) Create "Props" with :
+   1) Setup "project" as : Project
+7) Create "ProjectCard" function with : 
+   1) Create argument for "ProjectCard" function as : { project }: Props
+8) Create "return" function with
+   1) Create "div" with "className" as : "rounded border p-4 shadow"
+   2) Create "h3" tag as : {project.name}
+   3) Create "paragraph" tag as : {project.description}
+   4) Create "paragraph" tag as : Start Date: {project.startDate}
+   5) Create "paragraph" tag as : End Date: {project.endDate}
+9) Export default as : ProjectCard
+
+
+
 
 Time Stamp : 05:49:19

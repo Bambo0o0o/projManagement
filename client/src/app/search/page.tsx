@@ -3,7 +3,7 @@
 import Header from "@/components/Header";
 import TaskCard from "@/components/TaskCard";
 import ProjectCard from "@/components/ProjectCard";
-// import UserCard from "@/components/UserCard";
+import UserCard from "@/components/UserCard";
 import { useSearchQuery } from "@/state/api";
 import { debounce } from "lodash";
 import React, { useEffect, useState } from "react";

@@ -1998,7 +1998,7 @@ Time stamp : 02:46:45
             1) Create "searchResults.users?.map" function as : (user) => ( <UserCard key={user.userId} user={user} />)
 7) Export default as : Search
 
-#### Setup Frontend : Setup components - ProjectCard 
+#### Setup Frontend : Setup components - ProjectCard (Complete)
 
 1) Create "ProjectCard" folder in /client/src/components
 2) Create {index.tsx} in  /client/src/components/ProjectCard
@@ -2019,7 +2019,7 @@ Time stamp : 02:46:45
    5) Create "paragraph" tag as : End Date: {project.endDate}
 9) Export default as : ProjectCard
 
-#### Setup Frontend : Setup components - UserCard
+#### Setup Frontend : Setup components - UserCard (Complete)
 
 1) Create "UserCard" folder in /client/src/components
 2) Create {index.tsx} in  /client/src/components/UserCard
@@ -2045,5 +2045,13 @@ Time stamp : 02:46:45
       2) Create "paragraph" tag as : {user.email}
 9) Export default as : UserCard
 
+### Setup Frontend : Setup Setting menu
 
-Time Stamp : 05:49:19
+1) Create "settings" folder in /client/src/app
+2) Create {page.tsx} in /client/src/app/settings
+3) Create template : tsrafce
+4) Change function name from "index" to Settings
+5) Import tools with :
+   1) 
+
+Time Stamp : 05:58:14

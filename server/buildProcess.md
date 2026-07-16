@@ -2045,13 +2045,39 @@ Time stamp : 02:46:45
       2) Create "paragraph" tag as : {user.email}
 9) Export default as : UserCard
 
-### Setup Frontend : Setup Setting menu
+### Setup Frontend : Setup Setting page (Complete)
 
 1) Create "settings" folder in /client/src/app
 2) Create {page.tsx} in /client/src/app/settings
 3) Create template : tsrafce
 4) Change function name from "index" to Settings
 5) Import tools with :
-   1) 
+   1) Import "Header" from @/components/Header
+   2) Import "React" from react
+6) Create "Settings" function with :
+   1) Create "userSettings" with :
+      1) Setup "username" as : "johndoe"
+      2) Setup "email" as : "john.doe@example.com"
+      3) Setup "teamName" as : "Development Team"
+      4) Setup "roleName" as : "Developer"
+   2) Create "labelStyles" as : "Developer""block text-sm font-medium dark:text-white"
+   3) Create "textStyles " as : "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:text-white"
+7) Create "return" function for "Settings" with :
+   1) Create "div" with "className" as : "p-8"
+      1) Create "Header" tag with "name" as : "Settings"
+      2) Create "div" with "className" as : "space-y-4"
+         1) Create "div" with :
+            1) Create "label" tag with "className" as :{labelStyles}>Username
+            2) Create "div" with "className" as : {textStyles}>{userSettings.username}
+         2) Create "div" with :
+            1) Create "label" tag with "className" as :{labelStyles}>Email
+            2) Create "div" with "className" as : {textStyles}>{userSettings.email}
+         3) Create "div" with :
+            1) Create "label" tag with "className" as :{labelStyles}>Team
+            2) Create "div" with "className" as : {textStyles}>{userSettings.teamName}
+         4) Create "div" with :
+            1) Create "label" tag with "className" as :{labelStyles}>Role
+            2) Create "div" with "className" as : {textStyles}>{userSettings.roleName}
+8) Export default as : Settings
 
 Time Stamp : 05:58:14

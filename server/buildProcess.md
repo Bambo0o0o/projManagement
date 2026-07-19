@@ -818,7 +818,7 @@ git push -u origin main
 1) Install "main-backend" tools as : npm i express body-parser cors dotenv helmet morgan
 2) Install "dependency" tools as : npm i -D rimraf concurrently nodemon @types/cors @types/express @types/morgan @types/node
 
-### Setup Backend : Setup tools for server(Complete)
+### Setup Backend : Setup tools as "index.ts" for server(Complete)
 
 1) Create "src" folder in /server directory
 2) Create {index.ts}  file in /server/src directory
@@ -1516,7 +1516,7 @@ Time stamp : 02:46:45
             2) Setup "onClick" function as : {() => setIsModalNewTaskOpen(true)}
             3) Setup "button-text" as : Add New Task
 10) Export default as : Timeline
-11) Uncomment "TIMELINE STYLING" on {globall.css} file
+11) Uncomment "TIMELINE STYLING" on {global.css} file
 
 #### Setup Frontend : Setup Project - TableView main (Complete)
 
@@ -2045,7 +2045,7 @@ Time stamp : 02:46:45
       2) Create "paragraph" tag as : {user.email}
 9) Export default as : UserCard
 
-### Setup Frontend : Setup Setting page (Complete)
+#### Setup Frontend : Setup Setting page (Complete)
 
 1) Create "settings" folder in /client/src/app
 2) Create {page.tsx} in /client/src/app/settings
@@ -2080,4 +2080,79 @@ Time stamp : 02:46:45
             2) Create "div" with "className" as : {textStyles}>{userSettings.roleName}
 8) Export default as : Settings
 
-Time Stamp : 05:58:14
+### Setup Backend : Setup userController page (Complete)
+
+1) Create {userController.ts} in /server/src/controllers directory
+2) Import controllers tools
+   1) Import "Request and Response" from express
+   2) Import "PrismaClient" from @prisma/client
+   3) Create "prisma" as : new PrismaClient()
+3) Create "users" function as : getUsers, getUsers, postUser, getUserTasks
+4) Create "getUsers" function with :
+   1) Create "argument" as : async (req: Request, res: Response): Promise<void>
+   2) Create "try" function with :
+      1) Setup "users" as : await prisma.user.findMany()
+      2) Setup "response" as : res.json(users)
+   3) Create "catch" function with :
+      1) Setup "argument" as : error:any
+      2) Setup "response" as : res.status(500)
+      3) Setup "response" as : res.json({ message: `Error retrieving users: ${error.message}` })
+5) Create "getUser" function with :
+   1) Create "argument" as : async (req: Request, res: Response): Promise<void>
+   2) Create "cognitoId" as : req.params
+   3) Create "try" function with :
+      1) Setup "users" as :await prisma.user.findUnique({})
+         1) Setup "where" as : {cognitoId: cognitoId}
+      2) Setup "response" as : res.json(user)
+   4) Create "catch" function with :
+      1) Setup "argument" as : error:any
+      2) Setup "response" as : res.status(500)
+      3) Setup "response" as : res.json({ message: `Error retrieving user: ${error.message}` })
+6) Create "postUser" function with :
+   1) Create "argument" as : async (req: Request, res: Response)
+   2) Create "try" function with :
+      1) Create "req.body" with :
+         1) Setup "username" as : username
+         2) Setup "cognitoId" as : cognitoId
+         3) Setup "profilePictureUrl" as : "i1.jpg"
+         4) Setup "teamId" as : 1
+      2) Create "newUser" as : await prisma.user.create({})
+         1) Setup "data" as : username, cognitoId, profilePictureUrl, teamId,
+      3) Create "res.json" as : { message: "User Created Successfully", newUser }
+   3) Create "catch" function with :
+      1) Setup "argument" as : error:any
+      2) Setup "response" as : res.status(500)
+      3) Setup "response" as : res.json({ message: `Error retrieving users: ${error.message}` })
+
+### Setup Backend : Setup userRoute page
+
+1) Import tools with :
+   1) Import "Router" from express
+   2) Import "getUser, getUsers, postUser" from ../controllers/userController
+2) Create "router" as : Router()
+3) Create "get" router "getUsers" as : router.get("/", getUsers)
+4) Create "post" router "postUser" as : router.post("/", postUser)
+5) Create "get" router for "cognitoId" as : router.get("/:cognitoId", getUser)
+6) Export default as : router
+
+### Setup Backend : Checking setup userRoutes on "index.ts"
+
+1) Checking "import-userRoutes" from ./routes/userRoutes"
+2) Checking "app.use-users" as : app.use("/users", userRoutes);
+
+### Setup Frontend : Checking setup Users on "api.ts"
+
+1) Checking added "Users" to "tagTypes"
+2) Checking "getUsers" as : build.query<User[], void>
+3) Checking added "useGetUsersQuery" to Export const
+
+#### Setup Frontend : Setup Users page
+
+1) Create "users" folder in /client/src/app
+2) Create {page.tsx} in /client/src/app/users
+3) Create template : tsrafce
+4) Change function name from "index" to Users
+5) Create "use client" on top of file
+6) Import tools with :
+
+Time Stamp : 06:02:14

@@ -70,13 +70,18 @@ export interface SearchResults {
   users?: User[];
 }
 
+
+
+
 // SETUP APIs Section
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
 
 
+
+
   reducerPath: "api",
-  tagTypes: ["Projects", "Tasks"],
+  tagTypes: ["Projects", "Tasks", "Users"],
   // Used "tagTypes" for "providesTags"
   endpoints: (build) => ({
     // GET Project API
@@ -121,10 +126,18 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
     }),
+    // CREATE User API
+    getUsers: build.query<User[], void>({
+      query: () => "users",
+      providesTags: ["Users"],
+    }),
+
     // CREATE Search API
     search: build.query<SearchResults, string>({
       query: (query) => `search?query=${query}`,
     }),
+    
+
   }),
 });
 
@@ -135,6 +148,7 @@ export const {
   useCreateTaskMutation,
   useUpdateTaskStatusMutation,
   useSearchQuery,
+  useGetUsersQuery,
 } = api;
 
 // Complete Code

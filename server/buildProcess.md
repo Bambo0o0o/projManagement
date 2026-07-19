@@ -2146,7 +2146,7 @@ Time stamp : 02:46:45
 2) Checking "getUsers" as : build.query<User[], void>
 3) Checking added "useGetUsersQuery" to Export const
 
-#### Setup Frontend : Setup Users page
+#### Setup Frontend : Setup Users page (complete)
 
 1) Create "users" folder in /client/src/app
 2) Create {page.tsx} in /client/src/app/users
@@ -2154,5 +2154,55 @@ Time stamp : 02:46:45
 4) Change function name from "index" to Users
 5) Create "use client" on top of file
 6) Import tools with :
+   1) Import "useGetUsersQuery" from "@/state/api"
+   2) Import "React" from "react"
+   3) Import "useAppSelector" from "../redux"
+   4) Import "Header" from "@/components/Header"
+   5) Import "DataGrid, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, from "@mui/x-data-grid"
+   6) Import "Image" from "next/image"
+   7) Import "dataGridClassNames, dataGridSxStyles" from "@/lib/utils"
+7) Create "CustomToolbar" function with : 
+   1) Create "GridToolbarContainer" with "className" as : "toolbar flex gap-2"
+   2) Create "GridToolbarFilterButton" and "GridToolbarExport"
+8) Create "columns" as : GridColDef[] = []
+   1) Create "userID" field :
+      1) Setup "field" as : "userId"
+      2) Setup "headerName" as : "ID"
+      3) Setup "width" as : 100
+   2) Create "Username" field :
+      1) Setup "field" as : "username"
+      2) Setup "headerName" as : "Username"
+      3) Setup "width" as : 150
+   3) Create ""Profile Picture"" field :
+      1) Setup "field" as : "profilePictureUrl"
+      2) Setup "headerName" as : "Profile Picture"
+      3) Setup "width" as : 100
+      4) Setup "renderCell" as : (params) => ()
+         1) Create "div" with "className" as : "flex h-full w-full items-center justify-center"
+         2) Create "div" with "className" as : "h-9 w-9"
+         3) Create "Image" tag with :
+            1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${params.value}`}
+            2) Setup "alt" as : {params.row.username}
+            3) Setup "width" as : {100}
+            4) Setup "height" as : {50}
+            5) Setup "className" as : "h-full rounded-full object-cover"
+9) Create "Users" function as : Users = () => {}
+   1) Create "{ data: users, isLoading, isError }" as : useGetUsersQuery()
+   2) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
+   3) Create if-condition for "isLoading" then return : <div>Loading...</div>
+   4) Create if-condition for "isError || !users" them return : <div>Error fetching users</div>
+10) Create "return" function for "User" with :
+    1) Create "div" with "className" as : "flex w-full flex-col p-8"
+    2) Create "Header" tag with "name" as : "Users"
+    3) Create "div" with "style" as : {{ height: 650, width: "100%" }}
+    4) Create "DataGrid" with :
+       1) Setup "rows" as : {users || []}
+       2) Setup "columns" as : {columns}
+       3) Setup "getRowId" as : {(row) => row.userId}
+       4) Setup "pagination" as : pagination
+       5) Setup "Slots" as : {{toolbar: CustomToolbar,}}
+       6) Setup "className" as : {dataGridClassNames}
+       7) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
+11) Export default as : Users
 
-Time Stamp : 06:02:14
+Time Stamp : 06:09:07

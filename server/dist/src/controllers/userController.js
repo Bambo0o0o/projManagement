@@ -27,12 +27,12 @@ exports.getUsers = getUsers;
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { cognitoId } = req.params;
     try {
-        const user = yield prisma.user.findUnique({
-            where: {
-                cognitoId: cognitoId,
-            },
-        });
-        res.json(user);
+        // const user = await prisma.user.findUnique({
+        //   where: {
+        //     cognitoId: cognitoId,
+        //   },
+        // });
+        // res.json(user);
     }
     catch (error) {
         res

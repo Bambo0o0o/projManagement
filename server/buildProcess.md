@@ -2187,7 +2187,7 @@ Time stamp : 02:46:45
             3) Setup "width" as : {100}
             4) Setup "height" as : {50}
             5) Setup "className" as : "h-full rounded-full object-cover"
-9)  Create "Users" function as : Users = () => {}
+9) Create "Users" function as : Users = () => {}
    1) Create "{ data: users, isLoading, isError }" as : useGetUsersQuery()
    2) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
    3) Create if-condition for "isLoading" then return : <div>Loading...</div>
@@ -2205,5 +2205,16 @@ Time stamp : 02:46:45
        6) Setup "className" as : {dataGridClassNames}
        7) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
 11) Export default as : Users
+
+### Setup Backend : Setup Teams routes and controllers
+
+#### Setup Backend : Setup "teamController"
+
+1) Create {teamCOntroller.ts} in /server/src/controllers
+2) Import tools with
+   1) Import "Request, Response" from express
+   2) Import "PrismaClient" from @prisma/client
+
+
 
 Time Stamp : 06:09:07

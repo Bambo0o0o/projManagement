@@ -2135,12 +2135,12 @@ Time stamp : 02:46:45
 5) Create "get" router for "cognitoId" as : router.get("/:cognitoId", getUser)
 6) Export default as : router
 
-### Setup Backend : Checking setup userRoutes on "index.ts"
+### Setup Backend : Checking setup userRoutes on "index.ts" file
 
 1) Checking "import-userRoutes" from ./routes/userRoutes"
 2) Checking "app.use-users" as : app.use("/users", userRoutes);
 
-### Setup Frontend : Checking setup Users on "api.ts"
+### Setup Frontend : Checking setup Users on "api.ts" file
 
 1) Checking added "Users" to "tagTypes"
 2) Checking "getUsers" as : build.query<User[], void>
@@ -2182,11 +2182,12 @@ Time stamp : 02:46:45
          2) Create "div" with "className" as : "h-9 w-9"
          3) Create "Image" tag with :
             1) Setup "src" as : {`https://pm-s3-images.s3.us-east-2.amazonaws.com/${params.value}`}
+            ***Local file : src="/logo.png"***
             2) Setup "alt" as : {params.row.username}
             3) Setup "width" as : {100}
             4) Setup "height" as : {50}
             5) Setup "className" as : "h-full rounded-full object-cover"
-9) Create "Users" function as : Users = () => {}
+9)  Create "Users" function as : Users = () => {}
    1) Create "{ data: users, isLoading, isError }" as : useGetUsersQuery()
    2) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
    3) Create if-condition for "isLoading" then return : <div>Loading...</div>

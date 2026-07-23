@@ -2135,7 +2135,7 @@ Time stamp : 02:46:45
 5) Create "get" router for "cognitoId" as : router.get("/:cognitoId", getUser)
 6) Export default as : router
 
-### Setup Backend : Checking setup userRoutes on "index.ts" file
+#### Setup Backend : Checking setup userRoutes on "index.ts" file
 
 1) Checking "import-userRoutes" from ./routes/userRoutes"
 2) Checking "app.use-users" as : app.use("/users", userRoutes);
@@ -2211,7 +2211,7 @@ Time stamp : 02:46:45
 #### Setup Backend : Setup "teamController" (complete)
 
 1) Create {teamController.ts} in /server/src/controllers
-2) Import tools with
+2) Import tools with :
    1) Import "Request, Response" from express
    2) Import "PrismaClient" from @prisma/client
 3) Create "prisma" as : new PrismaClient()
@@ -2238,5 +2238,19 @@ Time stamp : 02:46:45
       2) Setup "error" status as : res.status(500)
       3) Setup "error" message as : res.json({ message: `Error retrieving teams: ${error.message}` })
 
+#### Setup Backend : Setup "teamRoutes" (Complete)
+
+1) Create {teamRoutes.ts} in /server/src/routes
+2) Import tools with :
+   1) Import "Router" from "express"
+   2) Import "getTeams" from "../controllers/teamController"
+3) Create "router" function as : Router()
+4) Create "getTeams" router as : router.get("/", getTeams)
+5) Export default as : router
+
+#### Setup Backend : Checking setup teamRoutes on "index.ts" file
+
+1) Checking "import-teamRoutes" from ./routes/teamRoutes"
+2) Checking "app.use-teams" as : app.use("/teams", teamRoutes);
 
 Time Stamp : 06:17:43

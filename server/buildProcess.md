@@ -2208,13 +2208,35 @@ Time stamp : 02:46:45
 
 ### Setup Backend : Setup Teams routes and controllers
 
-#### Setup Backend : Setup "teamController"
+#### Setup Backend : Setup "teamController" (complete)
 
-1) Create {teamCOntroller.ts} in /server/src/controllers
+1) Create {teamController.ts} in /server/src/controllers
 2) Import tools with
    1) Import "Request, Response" from express
    2) Import "PrismaClient" from @prisma/client
+3) Create "prisma" as : new PrismaClient()
+4) Create "getTeams" function as : async():Promise<void> => {}
+   1) Create "getTeams" argument as : req: Request, res: Response
+   2) Create "try" function with :
+      1) Create "teams" as : await prisma.team.findMany()
+      2) Create "teamsWithUsernames" as : await Promise.all()
+         1) Create "teams.map" function as : async () => {}
+         2) Create "teams.map" argument as : (team: any)
+            1) Create "productOwner" as :  await prisma.user.findUnique({})
+               1) Setup "where" as : { userId: team.productOwnerUserId! }
+               2) Setup "select" as : { username: true }
+            2) Create "projectManager" as : await prisma.user.findUnique({})
+               1) Setup "where" as : { userId: team.projectManagerUserId! }
+               2) Setup "select" as : { username: true }
+            3) Create "return" value with :
+               1) Setup "team" as : ...team
+               2) Setup "productOwnerUsername" as : productOwner?.username
+               3) Setup "projectManagerUsername" as : projectManager?.username 
+      3) Create "res.json" argument as : teamsWithUsernames
+   3) Create "catch-error" function with :
+      1) Create "error" argument as : error: any
+      2) Setup "error" status as : res.status(500)
+      3) Setup "error" message as : res.json({ message: `Error retrieving teams: ${error.message}` })
 
 
-
-Time Stamp : 06:09:07
+Time Stamp : 06:17:43

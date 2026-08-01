@@ -2301,6 +2301,19 @@ Time stamp : 02:46:45
 10) Create "Teams" funciton with
     1) Create "data: teams, isLoading, isError" as : useGetTeamsQuery()
     2) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
-    3) 
+    3) Create if-condition for "isLoading" then return : <div>Loading...</div>
+    4) Create if-condition for "isError || !teams" them return : <div>Error fetching teams</div>
+11) Create "return" funciton with
+    1) Create "div" with "className" as : "flex w-full flex-col p-8"
+    2) Create "Header" with "Name" as : "Teams"
+    3) Create "div" with "style" as : height: 650, width: "100%"
+    4) Create "DataGrid" with
+       1) Setup "rows" as : {teams || []}
+       2) Setup "columns" as : {columns}
+       3) Setup "pagination" as : pagination
+       4) Setup "slots" as : "toolbar: CustomToolbar"
+       5) Setup "className" as : dataGridClassNames
+       6) Setup "sx" as : dataGridSxStyles(isDarkMode)
+12) Export default as : Teams
 
 Time Stamp : 06:22:43

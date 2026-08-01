@@ -2262,7 +2262,7 @@ Time stamp : 02:46:45
 4) Checking "tagTypes" added : Teams
 5) Checking export : useGetTeamsQuery
 
-#### Setup Frontend : Setup Teams page
+#### Setup Frontend : Setup Teams page(Complete)
 
 1) Create "teams" folder in /client/src/app
 2) Create {page.tsx} in /client/src/app/teams
@@ -2315,5 +2315,15 @@ Time stamp : 02:46:45
        5) Setup "className" as : dataGridClassNames
        6) Setup "sx" as : dataGridSxStyles(isDarkMode)
 12) Export default as : Teams
+
+#### Setup Frontend : Setup Home page with simple
+
+1) Create "home" in folder in /client/src/app
+2) Create {page.tsx} in folder in /client/src/app/home
+3) Create template : tsrafce
+4) Change function name from "index" to HomePage
+5) Create "use client" on top of file
+6) Remove "type Props" and "props" argument
+7) Import tools with :
 
 Time Stamp : 06:22:43

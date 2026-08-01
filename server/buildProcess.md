@@ -2250,7 +2250,57 @@ Time stamp : 02:46:45
 
 #### Setup Backend : Checking setup teamRoutes on "index.ts" file
 
-1) Checking "import-teamRoutes" from ./routes/teamRoutes"
-2) Checking "app.use-teams" as : app.use("/teams", teamRoutes);
+1) Checking {index.ts} file in /server/src directory
+2) Checking "import-teamRoutes" from ./routes/teamRoutes"
+3) Checking "app.use-teams" as : app.use("/teams", teamRoutes);
 
-Time Stamp : 06:17:43
+### Setup Frontend : Checking setup Teams on "api.ts" file
+
+1) Go to {api.ts} in /client/state
+2) Checking "team-interface" setup
+3) Checking "getTeams-build.query" setup
+4) Checking "tagTypes" added : Teams
+5) Checking export : useGetTeamsQuery
+
+#### Setup Frontend : Setup Teams page
+
+1) Create "teams" folder in /client/src/app
+2) Create {page.tsx} in /client/src/app/teams
+3) Create template : tsrafce
+4) Change function name from "index" to Teams
+5) Create "use client" on top of file
+6) Remove "type Props" and "props" argument
+7) Import tools with :
+   1) Import "useGetTeamsQuery" from @/state/api
+   2) Import "React" from react
+   3) Import "useAppSelector" from ../redux
+   4) Import "Header" from @/components/Header
+   5) Import "DataGrid, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, from "@mui/x-data-grid"
+   6) Import "dataGridClassNames, dataGridSxStyles" from "@/lib/utils"
+8) Create "CustomToolbar" function with :
+   1) Create "GridToolbarContainer" with "className" as : "toolbar flex gap-2"
+   2) Create "GridToolbarFilterButton" tag
+   3) Create "GridToolbarExport" tag
+9) Create "columns: GridColDef[]" with :
+   1) Create field "id" with :
+      1) Setup "field" as : "id"
+      2) Setup "headerName" as : "Team ID"
+      3) Setup "width" as : 100
+   2) Create field "teamName" with :
+      1) Setup "field" as : "teamName"
+      2) Setup "headerName" as : "Team Name"
+      3) Setup "width" as : 200
+   3) Create field "productOwnerUsername" with :
+      1) Setup "field" as : "productOwnerUsername"
+      2) Setup "headerName" as : "Product Owner"
+      3) Setup "width" as : 200
+   4) Create field "projectManagerUsername" with :
+      1) Setup "field" as : "projectManagerUsername"
+      2) Setup "headerName" as : "Project Manager"
+      3) Setup "width" as : 200
+10) Create "Teams" funciton with
+    1) Create "data: teams, isLoading, isError" as : useGetTeamsQuery()
+    2) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
+    3) 
+
+Time Stamp : 06:22:43

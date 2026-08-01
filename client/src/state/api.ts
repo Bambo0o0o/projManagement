@@ -70,7 +70,13 @@ export interface SearchResults {
   users?: User[];
 }
 
-
+// TEAM interface
+export interface Team {
+  teamId: number;
+  teamName: string;
+  productOwnerUserId?: number;
+  projectManagerUserId?: number;
+}
 
 
 // SETUP APIs Section
@@ -81,7 +87,7 @@ export const api = createApi({
 
 
   reducerPath: "api",
-  tagTypes: ["Projects", "Tasks", "Users"],
+  tagTypes: ["Projects", "Tasks", "Users", "Teams"],
   // Used "tagTypes" for "providesTags"
   endpoints: (build) => ({
     // GET Project API
@@ -131,6 +137,11 @@ export const api = createApi({
       query: () => "users",
       providesTags: ["Users"],
     }),
+    // CREATE Team API
+    getTeams: build.query<Team[], void>({
+      query: () => "teams",
+      providesTags: ["Teams"],
+    }),
 
     // CREATE Search API
     search: build.query<SearchResults, string>({
@@ -149,6 +160,7 @@ export const {
   useUpdateTaskStatusMutation,
   useSearchQuery,
   useGetUsersQuery,
+  useGetTeamsQuery,
 } = api;
 
 // Complete Code

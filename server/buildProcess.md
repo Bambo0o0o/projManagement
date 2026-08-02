@@ -2447,4 +2447,9 @@ Time stamp : 02:46:45
    2) Import "HomePage" from ./home/page
    *** Multi line comment (Block comment) : shift + alt + a***
 
-Time Stamp : 06:28:16
+#### Setup Backend : Setup taskController - GETUSERTASK(Recheck)
+
+1) Go to {taskController.ts} in /server/src/controllers
+2) Checking "getUserTasks" function was created
+
+Time Stamp : 06:49:52

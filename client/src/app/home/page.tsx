@@ -1,15 +1,15 @@
 "use client";
-// import React from 'react'
+import React from 'react'
 
-// type Props = {}
+type Props = {}
 
-// const HomePage = (props: Props) => {
-//   return (
-//     <div>HomePage</div>
-//   )
-// }
+const HomePage = (props: Props) => {
+  return (
+    <div>HomePage</div>
+  )
+}
 
-// export default HomePage
+export default HomePage
 
 
 

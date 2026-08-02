@@ -2325,5 +2325,104 @@ Time stamp : 02:46:45
 5) Create "use client" on top of file
 6) Remove "type Props" and "props" argument
 7) Import tools with :
+   1) Import "Priority, Project, Task, useGetProjectsQuery, useGetTasksQuery from @/state/api
+   2) Import "React" from react
+   3) Import "useAppSelector" from ../redux
+   4) Import "DataGrid, GridColDef" from @mui/x-data-grid
+   5) Import "Header" from @/components/Header
+   6) Import "Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis" from recharts
+   7) Import "dataGridClassNames, dataGridSxStyles" from @/lib/utils
+8) Create "taskColumns: GridColDef[]" array with 
+   1) Create field "title" with :
+      1) Setup "field" as : "title"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 200
+   2) Create field "status" with :
+      1) Setup "field" as : "status"
+      2) Setup "headerName" as : "Status"
+      3) Setup "width" as : 150
+   3) Create field "priority" with :
+      1) Setup "field" as : "priority"
+      2) Setup "headerName" as : "Priority"
+      3) Setup "width" as : 150
+   4) Create field "dueDate" with :
+      1) Setup "field" as : "dueDate"
+      2) Setup "headerName" as : "Due Date"
+      3) Setup "width" as : 150
+9) Create "COLORS" array as : ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
+10) Create "HomePage" function as :
+    1) Create "data: tasks, isLoading: tasksLoading, isError: tasksError" as : useGetTasksQuery({ projectId: parseInt("1") })
+    2) Create "data: projects, isLoading: isProjectsLoading" as : useGetProjectsQuery()
+    3) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
+    4) Create if-condition for "tasksLoading || isProjectsLoading" then return : <div>Loading...</div>
+    5) Create if-condition for "tasksError || !tasks || !projects" them return : <div>Error fetching data</div>
+    6) Create "priorityCount" as : tasks.reduce(..)
+       1) Create "acc: Record<string, number>, task: Task" as : ()=>{}
+       2) Setup "priority" as : task
+       3) Setup "acc[priority as Priority]" as : (acc[priority as Priority] || 0) + 1
+       4) Setup "return" value as : acc
+       5) Setup "empty-value" as : {}
+    7) Create "taskDistribution" function as : Object.keys(priorityCount).map((key) => ({}))
+       1) Setup "name" as : key
+       2) Setup "count" as : priorityCount[key]
+    8) Create "statusCount" as : projects.reduce(..)
+       1) Create "acc: Record<string, number>, project: Project" as : ()=>{}
+       2) Setup "status" as : project.endDate ? "Completed" : "Active"
+       3) Setup "acc[status]" as : (acc[status] || 0) + 1
+       4) Setup "return" value as : acc
+       5) Setup "empty-value" as : {}
+    9) Create "projectStatus" function as : Object.keys(statusCount).map((key) => ({}))
+       1) Setup "name" as : key
+       2) Setup "count" as : statusCount[key]
+    10) Create "chartColors" for "isDarkMode and isLightMode"
+        1) Setup for "isDarkMode" with
+           1) Setup "bar" as : "#8884d8"
+           2) Setup "barGrid" as : "#303030"
+           3) Setup "pieFill" as : "#4A90E2"
+           4) Setup "text" as : "#FFFFFF"
+        2) Setup for "isLightMode" with
+           1) Setup "bar" as : "#8884d8"
+           2) Setup "barGrid" as : "#E0E0E0"
+           3) Setup "pieFill" as : "#82ca9d"
+           4) Setup "text" as : "#000000"
+11) Create "return" function with :
+    1) Create "div" with "className" as : "container h-full w-[100%] bg-gray-100 bg-transparent p-8"
+    2) Create "Header" tag with "name" as : "Project Management Dashboard"
+    3) Create "div" with "className" as : "grid grid-cols-1 gap-4 md:grid-cols-2"
+    4) Create "div" with "className" as : "rounded-lg bg-white p-4 shadow dark:bg-dark-secondary"
+       1) Create "h3" tag with "className" as : "mb-4 text-lg font-semibold dark:text-white"
+       2) Create "h3-text" as : Task Priority Distribution
+       3) Create "ResponsiveContainer" tag with : width="100%" height={300}
+       4) Create "BarChart" with "data" as : {taskDistribution}
+       5) Create "CartesianGrid" with :
+          1) Setup "strokeDasharray" as : "3 3"
+          2) Setup "stroke" as : {chartColors.barGrid}
+       6) Create "XAxis" with :
+          1) Setup "dataKey" as : "name"
+          2) Setup "stroke" as : {chartColors.text}
+       7) Create "YAxis" with :
+          1) Setup "stroke" as : {chartColors.text}
+       8) Create "Tooltip" with "contentStyle" as :  width: "min-content", height: "min-content",
+       9) Create "Legend" as : Legend
+       10) Create "Bar" with :
+           1) Setup "dataKey" as : "count"
+           2) Setup "fill" as : {chartColors.bar}
+    5) Create "div" with "className" as : "rounded-lg bg-white p-4 shadow dark:bg-dark-secondary"
+       1) Create "h3" tag with "className" as : "mb-4 text-lg font-semibold dark:text-white"
+       2) Create "h3-text" as : Project Status
+    6) Create "ResponsiveContainer" tag with : width="100%" height={300}
+    7) Create "PieChart" with :
+       1) Create "Pie" with :
+          1) Setup "dataKey" as : "count"
+          2) Setup "data" as : {projectStatus}
+          3) Setup "fill" as : "#82ca9d"
+          4) Setup "label" as : label
+       2) Create "projectStatus.map" funciton with :
+          1) Setup argument as : (entry, index)
+          2) Setup "Cell-key" as : {`cell-${index}`}
+          3) Setup "fill" as : {COLORS[index % COLORS.length]}
+       3) Create "Tooltip" as :  Tooltip
+       4) Create "Legend" as : Legend
+    8) Create "div" with "className" as : "rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2"
 
 Time Stamp : 06:22:43

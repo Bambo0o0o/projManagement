@@ -2464,6 +2464,18 @@ Time stamp : 02:46:45
 2) Checking "getTasksByUser" was created
 3) Checking "useGetTasksByUserQuery" was exported
 
+#### Setup Frontend : Setup Priority page
+
+1) Create "priority" folder in /client/src/app
+2) Create "reusablePriorityPage" folder in /client/src/app/priority
+3) Create {index.tsx} file in /client/src/app/priority/reusablePriorityPage
+4) Create template : tsrafce
+5) Change function name from "index" to ReusablePriorityPage
+6) Create "use client" on top of file
+7) Create "type Props" with : priority: Priority
+8) Import tools with :
+   1) 
+
 
 
 Time Stamp : 06:49:52

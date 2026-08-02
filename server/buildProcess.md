@@ -143,7 +143,7 @@ git push -u origin main
 
 1) Setup Dashboard page
 
-### Setup Frontend : page.tsx
+### Setup Frontend : Setup HomePage
 
 1) Go to {page.tsx} in /src/app
 2) Remove alls inside "main" tag
@@ -2316,7 +2316,7 @@ Time stamp : 02:46:45
        6) Setup "sx" as : dataGridSxStyles(isDarkMode)
 12) Export default as : Teams
 
-#### Setup Frontend : Setup Home page with simple
+#### Setup Frontend : Setup Home page with simple (Complete)
 
 1) Create "home" in folder in /client/src/app
 2) Create {page.tsx} in folder in /client/src/app/home
@@ -2352,6 +2352,7 @@ Time stamp : 02:46:45
 9) Create "COLORS" array as : ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
 10) Create "HomePage" function as :
     1) Create "data: tasks, isLoading: tasksLoading, isError: tasksError" as : useGetTasksQuery({ projectId: parseInt("1") })
+    *** "1" is project number we can change manually or adding function to be better functionality***
     2) Create "data: projects, isLoading: isProjectsLoading" as : useGetProjectsQuery()
     3) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
     4) Create if-condition for "tasksLoading || isProjectsLoading" then return : <div>Loading...</div>
@@ -2371,7 +2372,7 @@ Time stamp : 02:46:45
        3) Setup "acc[status]" as : (acc[status] || 0) + 1
        4) Setup "return" value as : acc
        5) Setup "empty-value" as : {}
-    9) Create "projectStatus" function as : Object.keys(statusCount).map((key) => ({}))
+    9)  Create "projectStatus" function as : Object.keys(statusCount).map((key) => ({}))
        1) Setup "name" as : key
        2) Setup "count" as : statusCount[key]
     10) Create "chartColors" for "isDarkMode and isLightMode"
@@ -2424,5 +2425,26 @@ Time stamp : 02:46:45
        3) Create "Tooltip" as :  Tooltip
        4) Create "Legend" as : Legend
     8) Create "div" with "className" as : "rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2"
+    9) Create "h3" with "className" as : "mb-4 text-lg font-semibold dark:text-white"
+    10) Create "h3-text" as : Your Tasks
+    11) Create "div" with "style" as : { height: 400, width: "100%" }
+    12) Create "DataGrid" with :
+        1) Setup "rows" as : {tasks}
+        2) Setup "columns" as : {taskColumns}
+        3) Setup "checkboxSelection" as : checkboxSelection
+        4) Setup "loading" as : {tasksLoading}
+        5) Setup "getRowClassName" as : {() => "data-grid-row"}
+        6) Setup "getCellClassName" as : {() => "data-grid-cell"}
+        7) Setup "className" as : {dataGridClassNames}
+        8) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
+12) Export default as : HomePage
 
-Time Stamp : 06:22:43
+### Setup Frontend : Setup HomePage-cont (Complete)
+
+1) Go to {page.tsx} in /client/src/app
+2) Modify "return" function with :
+   1) Changing "main" tag with "className" to : HomePage route
+   2) Import "HomePage" from ./home/page
+   *** Multi line comment (Block comment) : shift + alt + a***
+
+Time Stamp : 06:28:16

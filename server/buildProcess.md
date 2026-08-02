@@ -2447,9 +2447,23 @@ Time stamp : 02:46:45
    2) Import "HomePage" from ./home/page
    *** Multi line comment (Block comment) : shift + alt + a***
 
-#### Setup Backend : Setup taskController - GETUSERTASK(Recheck)
+#### Setup Backend : Setup taskController - GetUserTask(Recheck)
 
 1) Go to {taskController.ts} in /server/src/controllers
 2) Checking "getUserTasks" function was created
+
+#### Setup Backend : Setup taskRoutes - GetUserTask(Recheck)
+
+1) Go to {taskRoutes.ts} in /server/src/routes
+2) Checking "getUserTasks" was imported
+3) Checking "getUserTasks" routes was created
+
+#### Setup Frontend : Setup API-Body(Recheck)
+
+1) Go to {api.ts} in /client/src/state
+2) Checking "getTasksByUser" was created
+3) Checking "useGetTasksByUserQuery" was exported
+
+
 
 Time Stamp : 06:49:52

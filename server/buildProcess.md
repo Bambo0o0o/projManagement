@@ -2191,7 +2191,7 @@ Time stamp : 02:46:45
    1) Create "{ data: users, isLoading, isError }" as : useGetUsersQuery()
    2) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
    3) Create if-condition for "isLoading" then return : <div>Loading...</div>
-   4) Create if-condition for "isError || !users" them return : <div>Error fetching users</div>
+   4) Create if-condition for "isError || !users" then return : <div>Error fetching users</div>
 10) Create "return" function for "User" with :
     1) Create "div" with "className" as : "flex w-full flex-col p-8"
     2) Create "Header" tag with "name" as : "Users"
@@ -2464,7 +2464,7 @@ Time stamp : 02:46:45
 2) Checking "getTasksByUser" was created
 3) Checking "useGetTasksByUserQuery" was exported
 
-#### Setup Frontend : Setup Priority page
+#### Setup Frontend : Setup Priority-reusable
 
 1) Create "priority" folder in /client/src/app
 2) Create "reusablePriorityPage" folder in /client/src/app/priority
@@ -2474,7 +2474,67 @@ Time stamp : 02:46:45
 6) Create "use client" on top of file
 7) Create "type Props" with : priority: Priority
 8) Import tools with :
-   1) 
+   1) Import "useAppSelector" from @/app/redux
+   2) Import "Header" from @/components/Header
+   3) Import "ModalNewTask" from @/components/ModalNewTask
+   4) Import "TaskCard" from @/components/TaskCard
+   5) Import "dataGridClassNames, dataGridSxStyles" from @/lib/utils
+   6) Import "Priority, Task, useGetAuthUserQuery, useGetTasksByUserQuery" from @/state/api
+   7) Import "DataGrid, GridColDef" from @mui/x-data-grid
+   8) Import "React, { useState }" from react
+9) Create "columns: GridColDef[]" with :
+   1) Create field "title" with :
+      1) Setup "field" as : "title"
+      2) Setup "headerName" as : "Title"
+      3) Setup "width" as : 100
+   2) Create field "description" with :
+      1) Setup "field" as : "description"
+      2) Setup "headerName" as : "Description"
+      3) Setup "width" as : 200
+   3) Create field "status" with :
+      1) Setup "field" as : "status"
+      2) Setup "headerName" as : "Status"
+      3) Setup "width" as : 130
+      4) Setup "renderCell" function as : (params) => (..)
+         1) Create "span" with "className" as : "inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800"
+         2) Create "span-value" as : {params.value}
+   4) Create field "priority" with :
+      1) Setup "field" as : "priority"
+      2) Setup "headerName" as : "Priority"
+      3) Setup "width" as : 75
+   5) Create field "tags" with :
+      1) Setup "field" as : "tags"
+      2) Setup "headerName" as : "Tags"
+      3) Setup "width" as : 130
+   6) Create field "startDate" with :
+      1) Setup "field" as : "startDate"
+      2) Setup "headerName" as : "Start Date"
+      3) Setup "width" as : 130
+   7) Create field "dueDate" with :
+      1) Setup "field" as : "dueDate"
+      2) Setup "headerName" as : "Due Date"
+      3) Setup "width" as : 130
+   8) Create field "author" with :
+      1) Setup "field" as : "author"
+      2) Setup "headerName" as : "Author"
+      3) Setup "width" as : 150
+      4) Setup "renderCell" function as : (params) => params.value.username || "Unknown"
+   9) Create field "assignee" with :
+      1) Setup "field" as : "assignee"
+      2) Setup "headerName" as : "Assignee"
+      3) Setup "width" as : 150
+      4) Setup "renderCell" function as : (params) => params.value.username || "Unassigned"
+10) Create "ReusablePriorityPage" function with argument as : { priority }: Props
+    1) Create "view, setView" as : useState("list")
+    2) Create "isModalNewTaskOpen, setIsModalNewTaskOpen" as : useState(false)
+    3) Create "data: currentUser" as : useGetAuthUserQuery({})
+    4) Create "userId" as : urrentUser?.userDetails?.userId ?? null
+    5) Create "data:tasks, isLoading, isError: isTasksError" as : useGetTasksByUserQuery(userId || 0, {skip: userId === null,})
+    6) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
+    7) Create "filteredTasks" as : tasks?.filter((task: Task) => task.priority === priority,)
+    8) Create if-condition for "isTasksError || !tasks" argument then return : <div>Error fetching tasks</div>
+11) Create "return" function with :
+    1) 
 
 
 

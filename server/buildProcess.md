@@ -2578,6 +2578,9 @@ Time stamp : 02:46:45
 3) Checking import "fetchAuthSession, getCurrentUser" from aws-amplify/auth
 4) Checking "getAuthUser" was created
 5) Checking "useGetAuthUserQuery" was exported
+6) Checking "ModalNewTask" was completed
+
+
 
 
 Time Stamp : 06:49:52

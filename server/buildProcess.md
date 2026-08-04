@@ -2534,8 +2534,50 @@ Time stamp : 02:46:45
     7) Create "filteredTasks" as : tasks?.filter((task: Task) => task.priority === priority,)
     8) Create if-condition for "isTasksError || !tasks" argument then return : <div>Error fetching tasks</div>
 11) Create "return" function with :
-    1) 
+    1) Create "div" with "className" as : "m-5 p-4"
+    2) Create "ModalNewTask" tag with :
+       1) Setup "isOpen" as : {isModalNewTaskOpen}
+       2) Setup "onClose" as : {() => setIsModalNewTaskOpen(false)}
+    3) Create "Header" tag with :
+       1) Setup "Name" as : "Priority Page"
+       2) Setup "buttonComponent" with :
+          1) Create "button" tag with "className" as : "mr-3 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          2) Create "button" tag with "onClick" as : {() => setIsModalNewTaskOpen(true)}
+          3) Create "button-text" as : Add Task
+    4) Create "div" with "className" as : "mb-4 flex justify-start"
+       1) Create "button" tag with "className" as : {`px-4 py-2 ${view === "list" ? "bg-gray-300" : "bg-white"} rounded-l`}
+       2) Create "button" tag with "onClick" as : {() => setView("list")}
+       3) Create "button-text" as : List
+       4) Create "button" tag with "className" as : {`px-4 py-2 ${view === "table" ? "bg-gray-300" : "bg-white"} rounded-l`}
+       5) Create "button" tag with "onClick" as : {() => setView("table")}
+       6) Create "button-text" as : Table
+    5) Create "isLoading" ternary function with :
+       1) Create "isLoading-text" as : Loading tasks...
+       2) Create "isLoading" for "view === "list"" with :
+          1) Create "div" with "className" as : "grid grid-cols-1 gap-4"
+          2) Create "filteredTasks?.map" function with :
+             1) Setup "argument" as : (task: Task)
+             2) Setup "TaskCard-key" as : {task.id}
+             3) Setup "TaskCard-task" as : {task}
+       3) Create "isLoading" for "view === "table"" with :
+          1) Create "filteredTasks" with :
+          2) Create "div" with "className" as : "z-0 w-full"
+          3) Create "DataGrid" with :
+             1) Setup "rows" as : {filteredTasks}
+             2) Setup "columns" as : {columns}
+             3) Setup "checkboxSelection" as : checkboxSelection
+             4) Setup "getRowId" as : {(row) => row.id}
+             5) Setup "className" as : {dataGridClassNames}
+             6) Setup "sx" as : {dataGridSxStyles(isDarkMode)}
+12) Export default as : ReusablePriorityPage
 
+#### Setup Frontend : Setup API-Body(Recheck-getAuthUser)
+
+1) Go to {api.ts} in /client/src/state
+2) Install tools-chains package : npm i @aws-amplify/ui-react@6.2.0 aws-amplify@6.5.1
+3) Checking import "fetchAuthSession, getCurrentUser" from aws-amplify/auth
+4) Checking "getAuthUser" was created
+5) Checking "useGetAuthUserQuery" was exported
 
 
 Time Stamp : 06:49:52

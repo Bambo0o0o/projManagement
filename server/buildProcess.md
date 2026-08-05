@@ -2609,4 +2609,19 @@ Time stamp : 02:46:45
    1) Create "ReusablePriorityPage" with "priority" as : {Priority.high}
 8) Export defualt as : Urgent
 
+#### Setup Frontend : Setup Priority- (Complete)
+
+1) Create "high" folder in /client/src/app/priority
+2) Create {page.tsx} file in /client/src/app/priority/high
+3) Create template : tsrafce
+4) Change function name from "page" to "Urgent"
+5) Remove "type Props" and "props" argument
+6) Import tools with :
+   1) Import "React" from react
+   2) Import "ReusablePriorityPage" from ../reusablePriorityPage
+   3) Import "{ Priority }" from @/state/api
+7) Create "return" function with :
+   1) Create "ReusablePriorityPage" with "priority" as : {Priority.high}
+8) Export defualt as : Urgent
+
 Time Stamp : 06:49:52

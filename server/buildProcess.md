@@ -1728,17 +1728,16 @@ Time stamp : 02:46:45
 3) Create template as : tsrafce
    ***Or just copy code from "TimelineView" and modify some of part***
 4) Change function name from "index" to ModalNewTask
-5) Create "use client" on top of file to specify : this is main page
-6) Import tools with :
+5) Import tools with :
    1) Import "Modal" from "@/components/Modal"
    2) Import "{ Priority, Status, useCreateTaskMutation }" from @/state/api
    3) Import "React, { useState }" from react
    4) Import "{ formatISO }" from date-fns
-7) Create "Props" with :
+6) Create "Props" with :
    1) Setup "isOpen" as : boolean
    2) Setup "onClose" function as : () => void
    3) Setup "id?" as : string | null
-8) Create "ModalNewTask" function with
+7) Create "ModalNewTask" function with
    1) Create argument for "ModalNewTask" function as : { isOpen, onClose, id = null }: Props
    2) Create "createTask, { isLoading }" as : useCreateTaskMutation()
    3) Create "title, setTitle" as : useState("")
@@ -1771,7 +1770,7 @@ Time stamp : 02:46:45
        1) Setup "return-value" as : title && authorUserId && !(id !== null || projectId)
    15) Create "selectStyles" as : "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none"
    16) Create "inputStyles" as :"w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none"
-9) Create "return-function" with
+8) Create "return-function" with
    1) Create "Modal" tag with
       1) Setup "isOpen" as : {isOpen}
       2) Setup "onClose" as : {onClose}
@@ -1850,7 +1849,7 @@ Time stamp : 02:46:45
              2) Setup "className" as : {`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${!isFormValid() || isLoading ? "cursor-not-allowed opacity-50" : ""}`}
              3) Setup "disable" as : {!isFormValid() || isLoading}
          12) Create "status" as : {isLoading ? "Creating..." : "Create Task"}
-10) Export default as : ModalNewTask
+9) Export default as : ModalNewTask
 
 #### Setup Frontend : Create TimeLine page (Complete)
 
@@ -2372,7 +2371,7 @@ Time stamp : 02:46:45
        3) Setup "acc[status]" as : (acc[status] || 0) + 1
        4) Setup "return" value as : acc
        5) Setup "empty-value" as : {}
-    9)  Create "projectStatus" function as : Object.keys(statusCount).map((key) => ({}))
+    9) Create "projectStatus" function as : Object.keys(statusCount).map((key) => ({}))
        1) Setup "name" as : key
        2) Setup "count" as : statusCount[key]
     10) Create "chartColors" for "isDarkMode and isLightMode"
@@ -2578,9 +2577,36 @@ Time stamp : 02:46:45
 3) Checking import "fetchAuthSession, getCurrentUser" from aws-amplify/auth
 4) Checking "getAuthUser" was created
 5) Checking "useGetAuthUserQuery" was exported
-6) Checking "ModalNewTask" was completed
+6) Checking "ModalNewTask" was completed(Completed)
 
+#### Setup Frontend : Setup Priority-backlog (Complete)
 
+1) Create "backlog" folder in /client/src/app/priority
+2) Create {page.tsx} file in /client/src/app/priority/backlog
+3) Create template : tsrafce
+4) Change function name from "page" to "Urgent"
+5) Remove "type Props" and "props" argument
+6) Import tools with :
+   1) Import "React" from react
+   2) Import "ReusablePriorityPage" from ../reusablePriorityPage
+   3) Import "{ Priority }" from @/state/api
+7) Create "return" function with :
+   1) Create "ReusablePriorityPage" with "priority" as : {Priority.Backlog}
+8) Export defualt as : Urgent
 
+#### Setup Frontend : Setup Priority-high (Complete)
+
+1) Create "high" folder in /client/src/app/priority
+2) Create {page.tsx} file in /client/src/app/priority/high
+3) Create template : tsrafce
+4) Change function name from "page" to "Urgent"
+5) Remove "type Props" and "props" argument
+6) Import tools with :
+   1) Import "React" from react
+   2) Import "ReusablePriorityPage" from ../reusablePriorityPage
+   3) Import "{ Priority }" from @/state/api
+7) Create "return" function with :
+   1) Create "ReusablePriorityPage" with "priority" as : {Priority.high}
+8) Export defualt as : Urgent
 
 Time Stamp : 06:49:52

@@ -1721,7 +1721,7 @@ Time stamp : 02:46:45
          4) Create "text-action" as : {isLoading ? "Creating..." : "Create Project"}
 9) Export default as : ModalNewProject
 
-##### Setup Frontend : Create ModalNewTask components (not complete yet)
+##### Setup Frontend : Create ModalNewTask components (Complete)
 
 1) Create "ModalNewTask" in /client/src/components/
 2) Create {index.tsx} in /client/src/components/ModalNewTask
@@ -2463,7 +2463,7 @@ Time stamp : 02:46:45
 2) Checking "getTasksByUser" API was created(under getTask)
 3) Checking "useGetTasksByUserQuery" was exported
 
-#### Setup Frontend : Setup Priority-reusable
+#### Setup Frontend : Setup Priority-Reusable-Page
 
 1) Create "priority" folder in /client/src/app
 2) Create "reusablePriorityPage" folder in /client/src/app/priority
@@ -2532,6 +2532,8 @@ Time stamp : 02:46:45
     6) Create "isDarkMode" as : useAppSelector((state) => state.global.isDarkMode)
     7) Create "filteredTasks" as : tasks?.filter((task: Task) => task.priority === priority,)
     8) Create if-condition for "isTasksError || !tasks" argument then return : <div>Error fetching tasks</div>
+
+***Setup this after complete setup ModalNewTask***
 11) Create "return" function with :
     1) Create "div" with "className" as : "m-5 p-4"
     2) Create "ModalNewTask" tag with :

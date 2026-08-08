@@ -144,7 +144,7 @@ const ModelNewTask = ({ isOpen, onClose, id = null }: Props) => {
           onChange={(e) => setAssignedUserId(e.target.value)}
         />
         
-        {/* Video not complete here!!!!!!!! */}
+        {/* Finaliaze statement*/}
         {id === null && (
           <input
             type="text"

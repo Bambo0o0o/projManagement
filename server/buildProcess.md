@@ -2579,7 +2579,22 @@ Time stamp : 02:46:45
 3) Checking import "fetchAuthSession, getCurrentUser" from aws-amplify/auth
 4) Checking "getAuthUser" was created
 5) Checking "useGetAuthUserQuery" was exported
-6) Checking "ModalNewTask" was completed(Completed)
+6) Checking "ModalNewTask" was completed
+
+#### Setup Frontend : Setup Priority-urgent (Complete)
+
+1) Create "urgent" folder in /client/src/app/priority
+2) Create {page.tsx} file in /client/src/app/priority/urgent
+3) Create template : tsrafce
+4) Change function name from "page" to "Urgent"
+5) Remove "type Props" and "props" argument
+6) Import tools with :
+   1) Import "React" from react
+   2) Import "ReusablePriorityPage" from ../reusablePriorityPage
+   3) Import "{ Priority }" from @/state/api
+7) Create "return" function with :
+   1) Create "ReusablePriorityPage" with "priority" as : {Priority.urgent}
+8) Export defualt as : Urgent
 
 #### Setup Frontend : Setup Priority-backlog (Complete)
 
@@ -2641,20 +2656,7 @@ Time stamp : 02:46:45
    1) Create "ReusablePriorityPage" with "priority" as : {Priority.medium}
 8) Export defualt as : Urgent
 
-#### Setup Frontend : Setup Priority-urgent (Complete)
 
-1) Create "urgent" folder in /client/src/app/priority
-2) Create {page.tsx} file in /client/src/app/priority/urgent
-3) Create template : tsrafce
-4) Change function name from "page" to "Urgent"
-5) Remove "type Props" and "props" argument
-6) Import tools with :
-   1) Import "React" from react
-   2) Import "ReusablePriorityPage" from ../reusablePriorityPage
-   3) Import "{ Priority }" from @/state/api
-7) Create "return" function with :
-   1) Create "ReusablePriorityPage" with "priority" as : {Priority.urgent}
-8) Export defualt as : Urgent
 
 
 

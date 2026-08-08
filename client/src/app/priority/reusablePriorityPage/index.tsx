@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/app/redux";
 import Header from "@/components/Header";
-import ModalNewTask from "@/components/ModelNewTask";
+import ModalNewTask from "@/components/ModalNewTask";
 import TaskCard from "@/components/TaskCard";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 import { Priority, Task, useGetAuthUserQuery, useGetTasksByUserQuery } from "@/state/api";
@@ -107,6 +107,7 @@ const ReusablePriorityPage = ({ priority }: Props) => {
           </button>
         }
       />
+      {/* Setup : Urgent Task before this */}
       <div className="mb-4 flex justify-start">
         <button
           className={`px-4 py-2 ${

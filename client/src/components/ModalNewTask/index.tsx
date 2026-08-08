@@ -8,7 +8,7 @@ type Props = {
   id?: string | null;
 };
 
-const ModelNewTask = ({ isOpen, onClose, id = null }: Props) => {
+const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
   const [createTask, { isLoading }] = useCreateTaskMutation();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -169,7 +169,7 @@ const ModelNewTask = ({ isOpen, onClose, id = null }: Props) => {
   );
 };
 
-export default ModelNewTask;
+export default ModalNewTask;
 
 // Complete code
 // import Modal from "@/components/Modal";

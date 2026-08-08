@@ -87,7 +87,8 @@ const ReusablePriorityPage = ({ priority }: Props) => {
     (task: Task) => task.priority === priority,
   );
 
-  if (isTasksError || !tasks) return <div>Error fetching tasks</div>;
+  // When no task or has any error Priority will not show : WHY not show when I following but comment it show
+  // if (isTasksError || !tasks) return <div>Error fetching tasks</div>;
 
 
   return (

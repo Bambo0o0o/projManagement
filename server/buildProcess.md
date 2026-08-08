@@ -2460,7 +2460,7 @@ Time stamp : 02:46:45
 #### Setup Frontend : Setup API-Body(Recheck)
 
 1) Go to {api.ts} in /client/src/state
-2) Checking "getTasksByUser" was created
+2) Checking "getTasksByUser" API was created(under getTask)
 3) Checking "useGetTasksByUserQuery" was exported
 
 #### Setup Frontend : Setup Priority-reusable

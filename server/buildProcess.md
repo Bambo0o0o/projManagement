@@ -2662,8 +2662,55 @@ Time stamp : 02:46:45
    1) Create "ReusablePriorityPage" with "priority" as : {Priority.medium}
 8) Export defualt as : Urgent
 
+### Recheck TableView "Assignee and Author" to be see correct TableView
+
+1) Go to {index.tdx} file in /client/src/app/projects/TableView
+2) Checking "GridColDef" for "Assignee and Author" on renderCell :
+   1) Checking "Author" will be : (params) => params.value?.author || "Unknown"
+   2) Checking "Assignee" will be : (params) => params.value?.assignee || "Unassigned"
+
+## Preparing package to Deploy on AWS(Might be failed have to payment)
+
+1) Push all package to GitHub
+2) Go to root project directory : D:\WorkSpace\MERN\Me simple app\projectManagement\projManagement
+3) Go to "server" and "client" directory and remove : .gitignore
+4) Go to "client" directory and remove ".git" hidden folder by : rmdir /s /q .git
+5) On root directory "projManagement" folder adding : .gitignore
+6) In {.gitignore} file write : 
+   1) client/node_modules
+   2) server/node_modules
+   3) client/dist/
+   4) server/dist/
+   5) client/.env
+   6) server/.env
+   7) client/.next/
+   ***Create ".gitignore" to be make centelize git repository on parent/root directory which don't seperate git repository on each childs folder as "client/server"***
+7) Initialize git-repository On root directory "projManagement" : git init
+8) Adding alls on git-repository as : git add .
+9) Comment repository state as : git commit -m "Initialize commit"
+10) Go to GitHub and
+    1) Create "new-repository" on plus-symbole
+    2) Create "name" after owner's git as : owner/projManagement
+    3) Keep others option to be : defaults
+    4) Click : creating repository
+11) Back to command prompt upload alls connect to repository as => git remote add origin https://github.com/owner/projManagement
+12) Upload alls : git push origin master
+13) Back to GitHub : refresh page
+14) Will see repository with : files uploaded
+15) Go to "server" directory create file {ecosystem.config.js} to : PM Module
+    1) Create "module.exports" as : module.exports = {app:[]}
+    2) Create "app" as :
+       1) Setup "name" as : "projManagement",
+       2) Setup "script" as : "npm"
+       3) Setup "args" as : "run dev"
+       4) Setup "env" as : {NODE_ENV: "development"}
+16) Go to {index.tsx} file in /server/src
+    1) Change SERVER section to be :
+    2) Create "Number" to "port" for scanning empty port with ready to used as :  Number(process.env.PORT) || 3000;
+    3) Create "default-IP Address" on "app.listen" as : app.listen(port, "0.0.0.0", () => {...})
+17) Go to terminal the adding alls to GitHub : git add .
+18) Comment changing on git as : git commit -m "Server modification"
+19) Upload alls to git as : git push origin master
 
 
-
-
-Time Stamp : 07:12:30  : Cannot show task priority and cannot create task now
+Time Stamp : 07:14:30  : Mostly complete except authentication

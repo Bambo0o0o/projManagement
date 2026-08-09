@@ -144,7 +144,7 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
           onChange={(e) => setAssignedUserId(e.target.value)}
         />
         
-        {/* Finaliaze statement*/}
+        {/* Statement to handling userId*/}
         {id === null && (
           <input
             type="text"

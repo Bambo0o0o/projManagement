@@ -2712,5 +2712,8 @@ Time stamp : 02:46:45
 18) Comment changing on git as : git commit -m "Server modification"
 19) Upload alls to git as : git push origin master
 
+## Uploading to AWS :
 
-Time Stamp : 07:14:30  : Mostly complete except authentication
+07:14:30  : Mostly complete except authentication
+
+Time Stamp : 07:21:32
